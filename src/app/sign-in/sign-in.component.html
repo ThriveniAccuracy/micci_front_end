@@ -1,0 +1,72 @@
+<div class="card">
+    <!-- style="height: 100vh;" -->
+  <div class="container" >
+    <div class="card-body" style="box-shadow: 0 0 10px 0 rgba(100, 100, 100, 0.26);">
+    <div class="image text-left">
+        <!-- <img class="img-responsive" height="90"  width="150" src="../../assets/cma.jpeg"/>       -->
+        <img class="img-responsive" height="100px" src="../../assets/logo.png"/>  
+    </div>
+    <ngx-spinner
+            bdOpacity = 0.9
+            bdColor = "rgba(0,0,0,0.5)"
+            size = "medium"
+            color = "#0e9948"
+            type = "ball-8bits"
+            [fullScreen] = "true"
+            >
+            <p style="color: white" > Loading... </p>
+          </ngx-spinner>   
+
+          
+  <h1 class="text-center" style="font-weight: 800; color: blue;"><svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-person-check-fill" viewBox="0 0 16 16">
+    <path fill-rule="evenodd" d="M15.854 5.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L12.5 7.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
+    <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+  </svg> Sign In &nbsp; 
+ </h1>
+  <form [formGroup]="signIn" (ngSubmit)="signInForm(signIn)">
+    <div class="form-group col-sm-8 mx-auto">
+      <label>Email<span class="text-danger">&nbsp;*</span></label>
+      
+        <input type="text" class="form-control" formControlName="email" placeholder="Email" name="email" required/>
+        
+      <div *ngIf="f.email.invalid && (f.email.dirty || f.email.touched)">
+        <p *ngIf="f.email.errors.required" class="text-danger">
+          Email is necessary
+        </p>
+        <p *ngIf="f.email.errors.email" class="text-danger">
+          Email must be a valid email address
+        </p>
+    </div>
+
+</div>
+
+ <div class="form-group col-sm-8 mx-auto">
+  <label>Password<span class="text-danger">&nbsp;*</span></label>
+    <input type="password" class="form-control" formControlName="password" name="password" placeholder="Password" required/>
+    <div *ngIf="f.password.invalid && (f.password.dirty || f.password.touched)">
+      <p *ngIf="f.password.errors.required" class="text-danger">
+        Password is necessary
+      </p>
+      <p *ngIf="f.password.errors.minlength" class="text-danger">
+        Password must be atleast 6 characters          </p>
+  </div>
+</div> 
+
+  <div class="form-group text-center pt-4">
+       <!-- <button type="submit" class="btn btn-primary" 
+      [disabled]="!signIn.valid" routerLink="/app-profile">Sign In</button>    -->
+       <button type="submit" class="btn" style="width: 20vh;"
+      [disabled]="!signIn.valid" [ngClass]="signIn.valid ? 'btn-success' : 'btn-warning'" >Sign In</button>   
+
+      <!-- <button type="submit" style="margin-left: 50px;" routerLink="/app-applicant" class="btn btn-secondary">Cancel</button> -->
+  </div>
+
+  <div class="form-group" class="text-center" style="margin-top: 40px;">
+    <h6>Haven't Sign Up,
+      <a routerLink="/app-signUp">CLICK HERE</a></h6>
+    <a routerLink="/app-password">Forgot Password?</a>
+  </div>
+          </form>
+        </div>
+    </div>
+</div>

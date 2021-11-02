@@ -1,0 +1,708 @@
+<a class="btn btn-primary" d aria-expanded="false" routerLink="/admin-landing">Go To landing Page</a>
+<ngx-spinner
+            bdOpacity = 0.9
+            bdColor = "rgba(0,0,0,0.5)"
+            size = "medium"
+            color = "#0e9948"
+            type = "ball-8bits"
+            [fullScreen] = "true"
+            >
+            <p style="color: white" > Loading... </p>
+          </ngx-spinner>  
+<div class="accordion" id="accordionExample">
+    
+      <div class="card-header" id="headingOne">
+        <h2 class="mb-0">
+          <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            Member details
+          </button>
+        </h2>
+      </div>
+  
+      <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+        
+            
+  <div style=" background-image: linear-gradient(#031163,#1978a5,#05716c,#1fbfb8);">
+    <div class="container" > 
+        <div class="card">
+          <div class="card-body mx-auto">      
+        
+           
+                <!-- <img class="img-responsive col-lg-4" width="100%" src="https://www.shinjiru.com.my/wp-content/themes/sj_child/assets/img/clients/micci.jpg"/> -->
+                
+                                    <!-- <img class="img-responsive" height="63" width="150" src="../../assets/cma.jpeg"/> -->
+
+                    <h2 style="text-align: center;">Member Details </h2>
+                
+                    
+                    <form class="form-horizontal" [formGroup]="memberForm"
+                    (ngSubmit)="submitMemberForm(memberForm)" > 
+                <div class="form-group row col-md-10 mx-auto" >
+                            
+                                
+                                <div class="col-md-5">
+            
+                                    <label><b>Title :</b></label>
+                            <input type="text" class="form-control" placeholder="Title">
+                        
+                    </div>
+                    <div class="col-md-5">
+            
+                        <label ><b>Rep/Phone :</b></label>
+                                <input type="text" class="form-control " placeholder="Rep/Phone">
+            
+                              </div>
+                            </div>
+                
+                    
+                        <div class="form-group col-md-10 mx-auto">
+                        
+                                <label><b>First (Given) Name :</b></label>
+                                <input class="form-control" formControlName="firstName" placeholder="First Name" type="text">
+                            </div>
+                        
+        
+                        <div class="form-group col-md-10 mx-auto">
+                            
+                                <label ><b>Last (Family) Name :</b></label>
+                                <input class="form-control" formControlName="lastName" placeholder="Last Name " type="text">
+                            </div>
+                        
+                        <div class="form-group col-md-10 mx-auto">
+                        
+                                <label><b>Designation :</b></label>
+                                <input class="form-control" placeholder="Designation" type="text">
+                            </div>
+                        
+    
+                        <div class="form-group col-md-10 mx-auto">
+                        
+                                <label><b>Phone :</b></label>
+                                <input class="form-control" placeholder="Phone" type="text">
+                            </div>
+                        
+    
+                        <div class="form-group col-md-10 mx-auto">
+                        
+                                <label><b>Mobile :</b></label>
+                                <input class="form-control" formControlName="mobile" placeholder="Mobile" type="text">
+                            </div>
+                        
+    
+                        <div class="form-group col-md-10 mx-auto">
+                            
+                                <label ><b>Facimile :</b></label>
+                                <input class="form-control" formControlName="companyFax" placeholder="Facimile" type="text">
+                            </div>
+                    
+          
+                        <div class="form-group col-md-10 mx-auto">
+                            
+                                <label><b>Personal Email : </b></label>
+                                <input class="form-control" formControlName="eMail" placeholder="Email " type="text">
+                        
+                        </div>
+    
+                        <div class="form-group col-md-10 mx-auto">
+                            
+                                <label><b>Branch :</b></label>
+                                <input class="form-control" formControlName="branch" placeholder="Branch" type="text">
+                        
+                        </div>
+    
+          
+                        <div class="form-group col-md-10 mx-auto">
+                            
+                                <label> <b>Number of Years :</b></label>
+                                <input class="form-control" formControlName="number_of_years" placeholder="Number of Years "type="text">
+                            
+                        </div>
+    
+          
+                        <div class="form-group col-md-10 mx-auto">
+                            
+                                <label><b>Amount :</b></label>
+                                <input class="form-control" formControlName="amount" placeholder="Amount" type="text">
+                            
+                        </div>
+    
+          
+                        <div class="form-group col-md-10 mx-auto">
+                            
+                                <label><b>Payment Status :</b> </label>
+                                <!-- <input class="form-control" formControlName="payment_status" placeholder="Payment Status" type="text"> -->
+                                <select class="form-control" formControlName="payment_status">
+                                  <option value="Paid"> Paid </option>
+                                  <option value="Unpaid">Unpaid </option>
+                                  
+                                </select>
+                        </div>
+  
+    
+        <!-- <div class="form-row col-md-10 mx-auto">
+            <div class="col-sm-4">
+                <label><b>Group 1 :</b></label>
+                <input type="text" class="form-control">
+            </div>
+            <div class="col-sm-4">
+                <label ><b>Group 2 :</b></label>
+                <input type="text" class="form-control" >
+            </div>
+            <div class="col-sm-4">
+                <label><b>Group 3 :</b></label>
+                <input type="text" class="form-control">
+            </div>
+        </div>
+    
+    <br>
+    <br>
+    <h3> Related Contacts </h3>
+    <br>
+      -->
+     <!-- <div class="form-row col-md-10 mx-auto">
+        <div class="col-sm-6">
+            <label><b>Name :</b></label>
+            <input type="text" class="form-control" placeholder="Name ">
+        </div>
+        <div class="col-sm-6">
+            <label ><b>Company :</b></label>
+            <input type="text" class="form-control" placeholder="Company">
+        </div>
+        </div>
+        <div class="form-row col-md-10 mx-auto">
+        <div class="col-sm-4">
+            <label><b>City :</b></label>
+            <input type="text" class="form-control" placeholder="City">
+        </div>
+        <div class="col-sm-4">
+            <label><b>State :</b></label>
+            <input type="text" class="form-control" placeholder="State">
+        </div>
+        <div class="col-sm-4">
+            <label><b>Zip/Pincode :</b></label>
+            <input type="text" class="form-control" placeholder="Pincode">
+        </div>
+    </div> -->
+    
+     <div class="form-row col-sm-10 mx-auto">
+        <div class="col-sm-6">
+            
+                <label><b>Approval Date:</b></label>
+                <!-- <input type="text" formControlName="approval_date" class="form-control"> -->
+                <input type="text"
+                placeholder="Date"
+                class="form-control" formControlName="approval_date"
+                bsDatepicker required>
+        </div>
+        <!-- <div class="col-sm-6">
+            
+                <label for="name"><b>Date :</b></label>
+                <input type="text" class="form-control">
+            </div>-->
+        </div> 
+    
+        <div class="form-row col-md-10 mx-auto">
+            <div class="col-sm-6">
+                <label><b>Modified by :</b></label>
+                <input type="text" formControlName="modifioed_by" class="form-control">
+            </div>
+            
+           
+        </div>
+        <div class="form-row col-md-10 mx-auto">
+          
+          <div class="col-sm-6">
+              <label ><b>Date of Joining :</b></label>
+              <!-- <input type="text" class="form-control" formControlName="created_date"> -->
+              <input type="text"
+              placeholder="Date"
+              class="form-control" formControlName="created_date"
+              bsDatepicker required>
+          </div>
+         
+      </div>
+    <br>
+    <br>
+    
+    
+        <div style="text-align: center;">
+            
+                <button type="submit" class="btn btn-primary"> Edit </button>
+                <button type="button" style="margin-left: 50px;" class="btn btn-primary"> Save Changes</button>
+            
+        </div>
+            
+        
+        </form>
+    
+        </div>
+        
+        </div>
+        </div>
+    
+    </div>
+    
+    
+    
+        </div>
+      
+    
+    
+      <div class="card-header" id="headingTwo">
+        <h2 class="mb-0">
+          <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+            e-Membership Review Form			
+
+          </button>
+        </h2>
+      </div>
+      <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+        <div style=" background-image: linear-gradient(#031163,#1978a5,#05716c,#1fbfb8);">
+            <div class="container " > 
+                <div class="card">
+                  <div class="card-body mx-auto">      
+                
+                      <!-- <img class="img-responsive" height="63" width="150" src="../../assets/cma.jpeg"/> -->
+
+                        <!-- <img class="img-responsive col-lg-4" width="100%" src="https://www.shinjiru.com.my/wp-content/themes/sj_child/assets/img/clients/micci.jpg"/> -->
+                        <br>
+                        <br>
+                        <br>
+                        <p style="text-align: center;"><b>e-Membership Form</b> </p>
+                        <form [formGroup]="viewMembershipForm">
+                        <div class="form-group col-md-8 mx-auto" >
+                            <label><b>Company Name </b></label>
+                            <input type="text" formControlName="companyName" readonly class="form-control" placeholder="Company Name">
+                        </div>
+                    
+            
+                        <div class="form-group col-md-8 mx-auto">
+                            <label><b>Trade Name </b></label>
+                            <input type="text" formControlName="tradeName" readonly class="form-control" placeholder="Trade Name">
+                        </div>
+                        
+                        
+                        <br>
+                        <br>
+                        <div class="form-group col-md-8 mx-auto">
+                            <p><b>Business Address :</b><span class="text-danger">*</span></p>
+                            <label><b>Address 1:</b></label>
+                            <input type="text" formControlName="address1" readonly class="form-control">
+                        </div>
+            
+                        <div class="form-group col-md-8 mx-auto">
+                            <label><b>Address 2:</b></label>
+                            <input type="text" formControlName="address2" readonly class="form-control">
+                        </div>
+            
+                        <div class="container mx-auto col-sm-8">
+                          <table class="table table-bordered">
+                              <thead>
+                            <tr>
+                              <th scope="col"> City</th>
+                              <th scope="col"> Post code </th>
+                              <th scope="col"> State </th>
+                              <th scope="col"> Country </th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                          <tr>
+                          <td ><input type="text" class="form-control" readonly formControlName="city"/></td>
+                          <td><input type="text" class="form-control" readonly formControlName="postcode"/></td>
+                          <td><input type="text" class="form-control" readonly formControlName="state"/></td>
+                          <td><input type="text" class="form-control" readonly formControlName="country"/></td>
+                          
+                          </tr>
+                          
+                          </tbody>
+                        </table>
+                        </div>
+            
+             
+             <div class="form-group col-md-8 mx-auto" >
+              <label><b>Country :</b></label>&nbsp;
+                <!-- <select id="myList" class="form-control" formControlName="country" readonly name="element" (change)="changeCountry($event.target.value)" style="border: 1px solid black;">
+                  <option value="+91">India</option>
+                  <option value="+60 ">Malaysia</option>
+                  <option value="+44">UK</option>
+                </select> -->
+                <input type="text" class="form-control" readonly formControlName="country" />
+
+            </div>
+            
+            
+            <div class="form-group col-sm-8 mx-auto">
+              <label><b>Company Tel: </b><span class="text-danger">*</span></label>&nbsp;
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">{{addon}}</span>
+                  </div>
+                  <input type="text" class="form-control" readonly formControlName="company_tel" placeholder="Mobile Number" required/>
+                </div>
+                </div>
+            
+            
+                <div class="form-group col-sm-8 mx-auto">
+                  <label><b>Company Fax: </b></label>&nbsp;
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon2">{{addon}}</span>
+                      </div>
+                      <input type="text" class="form-control" readonly formControlName="company_fax" placeholder="Mobile Number"  required/>
+                    </div>
+                    </div>
+            <!--  
+             <div class="form-group col-md-8">
+                <label>Country<span class="text-danger">*</span></label>&nbsp;
+                  <select id="myList" class="form-control" name="element" (change)="changeCountry($event.target.value)">
+                    <option>....</option>
+                    <option value="+91">India</option>
+                    <option value="+60 ">Malaysia</option>
+                    <option value="+44">UK</option>
+                  </select>
+              </div>
+            </div> -->
+            
+            
+            <div class="form-group col-md-8 mx-auto" >
+                <label><b>Company Website </b></label>
+                <input type="text" class="form-control" readonly formControlName="company_website" placeholder="Company Website">
+            </div>
+            
+            <div class="form-group col-md-8 mx-auto" >
+                
+            <p><b>Mailing Address (If different from Business Address)</b> </p>
+                <label><b>Address 1 </b></label>
+                <input type="text" class="form-control" readonly formControlName="ma_address1" >
+            </div>
+            
+            <div class="form-group col-md-8 mx-auto" >
+                <label><b>Address 2</b></label>
+                <input type="text" class="form-control" readonly formControlName="ma_address2" >
+            </div>
+            
+            <div class="container mx-auto col-sm-8">
+            <table class="table table-bordered">
+                <thead>
+               <tr>
+                 <th scope="col"> City</th>
+                 <th scope="col"> Post code </th>
+                 <th scope="col"> State </th>
+                 <th scope="col"> Country </th>
+               </tr>
+             </thead>
+             <tbody>
+             <tr>
+                           <td ><input type="text" class="form-control" readonly formControlName="ma_city"/></td>
+                          <td><input type="text" class="form-control" readonly formControlName="ma_pincode"/></td>
+                          <td><input type="text" class="form-control" readonly formControlName="ma_state"/></td>
+                          <td><input type="text" class="form-control" readonly formControlName="ma_country"/></td>
+                          
+             </tr>
+             
+             </tbody>
+             </table>
+            </div>
+             
+             <div class="form-group col-sm-8 mx-auto">
+              <label><b> Type Of Company : </b></label>&nbsp;
+                <select  id = "myList" class="form-control" readonly formControlName="type_of_company" name="element" (change)="typeOthers($event.target.value)" style="border: 1px solid black;">
+                  <option value="Public Limited">Public Limited</option>
+                  <option value="Private Limited">Private Limited</option>
+                  <option value="Partnership">Partnership</option>
+                  <option value="Sole partnership">Sole Partnership</option>
+                  <option value="Associatio of society">Association of society</option>
+                  <option value="Others">Others</option>
+                </select>
+            </div>
+                                 
+            <div class="form-group col-sm-8 mx-auto" *ngIf="otherInput">
+              <label>Others<span class="text-danger">*</span></label>
+              <input type="text" class="form-control" name="others" />
+            </div> 
+            
+            
+            <div class="form-group col-sm-8 mx-auto">
+              <input type="text"
+                      placeholder="Date"
+                      class="form-control" 
+                readonly formControlName="c_r_date">
+              </div>
+            
+            
+            
+            
+            <div class="form-group col-md-8 mx-auto" >
+                <label><b>Company/Business Registration Number<span class="text-danger">*</span></b></label>
+                <input type="text" readonly formControlName="c_r_number" class="form-control">
+            </div>
+            
+            <div class="form-group col-md-8 mx-auto" >
+                <label><b>New Company Registration Number(Malaysia Only)</b></label>
+                <input type="text" readonly formControlName="n_c_r_number" class="form-control">
+            </div>
+            
+            <div class="form-group col-sm-8 mx-auto">
+              <label><b>Upload SSM Company Profile<span class="text-danger">*</span>
+                  <br>Include Your Company Stamp & Signature</b> </label>&nbsp;&nbsp;&nbsp;
+              <!-- <input type="file" (change)="onFileSelected1($event)"> -->
+                  <button class="btn btn-primary ml-5" (click)="viewSsm()">View</button>
+            </div>
+            
+            
+            <div class="form-group col-sm-8 mx-auto">
+              <label><b>Upload your Business Card Scan 
+                  </b> </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <!-- <input type="file" (change)="onFileSelected1($event)"> -->
+              <button class="btn btn-primary ml-5" (click)="viewBusinessCard()">View</button>
+                        </div>
+            
+            
+            
+            
+            
+            
+            <div class="form-group col-md-8 mx-auto" >
+            
+              
+                <label><b>Authorized Capital (RM) or equialent if Foreign owned</b></label>
+                <br>
+                <textarea name="txtArea" readonly formControlName="a_capital" cols="83" rows="3" placeholder="As reported with the Companies Commission of Malaysia  "></textarea>
+            </div>
+            
+            <div class="form-group col-md-8 mx-auto" >
+                <label><b>Issued Capital (RM) or equialent if Foreign owned</b></label>
+                <textarea name="txtArea" readonly formControlName="i_capital" cols="83" rows="3" placeholder="As reported with the Companies Commission of Malaysia  "></textarea>
+            </div>
+            
+            <div class="form-group col-md-8 mx-auto" >
+                <label><b>Number of Full-time employees</b></label>
+                <input type="text" readonly formControlName="n_of_full_t_employees" class="form-control">
+            </div>
+            
+            <div class="form-group col-md-8 mx-auto" >
+                <label><b>Your membership category</b></label>
+                <input type="text" readonly formControlName="y_m_category" class="form-control" >
+            </div>            
+            
+            <div class="form-group col-md-8 mx-auto" >
+                <label><b> Description of Principal Business Activities</b></label>
+                <input type="text" class="form-control" readonly formControlName="d_o_principal_b_activities">
+            </div>   
+            
+            <div class="form-group col-sm-8 mx-auto">
+              <label><b> Business Sector :</b><span class="text-danger">*</span></label>&nbsp;
+                <!-- <select  class="form-control" formControlName="business_sector"  readonly (change)="typeOthers($event.target.value)" style="border: 1px solid black;">
+                  <option value="Public Limited"> Agriculture </option>
+                  <option value="Manufacturing">Manufacturing </option>
+                  <option value="Partnership">Mining </option>
+                  <option value="Sole partnership">Services </option>
+             
+                </select> -->
+                <input type="text" class="form-control" readonly formControlName="business_sector" />
+
+            </div>
+            
+            
+            <div class="form-group col-sm-8 mx-auto">
+              <label><b> Business Sub - Sector :</b><span class="text-danger">*</span></label>&nbsp;
+                <!-- <select class="form-control" formControlName="business_sub_sector" readonly (change)="typeOthers($event.target.value)" style="border: 1px solid black;">
+                  <option value="Accountancy/Financial">Accountancy/Financial</option>
+                  <option value="Agriculture/Plantations">Agriculture/Plantations </option>
+                  <option value="Automotive">Automotive </option>
+                  <option value="Banking/Insurace">Banking/Insurace</option>
+                  <option value="Consultancy/Business services">Consultancy/Business services</option>
+                  <option value="Chemicals/Minerals">Chemicals/Minerals</option>
+                  <option value="Construction/Engineering">Construction/Engineering</option>
+                  <option value="Education/Training">Education/Training</option>
+                  <option value="Electrical/Electronics">Electrical/Electronics</option>
+                  <option value="Energy/Utilities">Energy/Utilities</option>
+                  <option value="Food/Beverages">Food/Beverages</option>
+                  <option value="Hotels/Tourism">Hotels/Tourism</option>
+                  <option value="ICT/Communications">ICT/Communications</option>
+                  <option value="Legacy">Legacy</option>
+                  <option value="Machinery/Equipment">Machinery/Equipment</option>
+                  <option value="Media/Advertising">Media/Advertising</option>
+                  <option value="Metal Manufacturers">Metal Manufacturers</option>
+                  <option value="Non-Metallic Manufacturers">Non-Metallic Manufacturers</option>
+                  <option value="Oil/Gas/petrochemicals">Oil/Gas/petrochemicals</option>
+                  <option value="Pharmaceuticals/Medical">Pharmaceuticals/Medical</option>
+                  <option value="Property/Real Estates">Property/Real Estates</option>
+                  <option value="Retail/Wholesale">Retail/Wholesale</option>
+                  <option value="Rubber/Wood products">Rubber/Wood products</option>
+                  <option value="Textile/Garments">Textile/Garments</option>
+                  <option value="Trading (Import/Export)">Trading (Import/Export)</option>
+                  <option value="Transport">Transport</option>
+                  <option value="Others">Others</option>
+                </select> -->
+                <input type="text" class="form-control" readonly formControlName="business_sub_sector" />
+
+            </div>
+                          
+            <div class="form-group col-sm-8 mx-auto" *ngIf="otherInput">
+              <label><b>Others</b><span class="text-danger">*</span></label>
+              <input type="text" class="form-control"  name="others" />
+            </div> 
+                  
+            <div class="col-md-8 mx-auto" >
+            <p><b>List of shareholders/Partners/Directors holding more than 5% equity by nationality & equity holding : </b></p>
+            </div>
+              
+            <!-- <div class="form-group col-md-8 mx-auto" >
+                <label><b>Name:</b></label>
+                <input type="text" class="form-control" placeholder="Name" >
+            </div>
+            
+              
+            <div class="form-group col-md-8 mx-auto" >
+                <label><b>Nationality (If Foreginers or incorporated overseas)</b></label>
+                <input type="text" class="form-control" >
+            </div>
+             
+            <div class="form-group col-md-8 mx-auto" >
+                <label><b>Percentage (%) Equity Holding - above 5%</b></label>
+                <input type="text" class="form-control" >
+            </div> -->
+            <div class="text-right" style="margin-right: 200px;">
+            <button type="button" class="btn btn-primary "  data-toggle="modal" data-target="#exampleModal">
+              SHOW MORE
+            </button>
+            </div>
+            
+          
+            
+            <div class="form-group col-md-8 mx-auto" >
+                <p><b>Proposed By:</b></p>
+                <label><b>Name:</b></label>
+                <input type="text" class="form-control" formControlName="proposed_by" readonly placeholder="(Company Name of Member)">
+            </div>
+            <div class="form-group col-md-8 mx-auto" >
+                <p><b>Seconded By:</b></p>
+                <label><b>Name:</b></label>
+                <input type="text" class="form-control" formControlName="seconded_by" readonly placeholder="(Company Name of Member )">
+            </div>
+            
+      
+            <div class="col-md-8 mx-auto" >
+              <p><b> Names and Title Cheif Executive in Malaysia (Primary Contact) : </b></p>
+              </div>
+                     
+           <div class="text-right" style="margin-right: 200px;">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal1">
+              SHOW MORE
+            </button>
+            </div>
+            </form>
+            
+          
+                  
+            </div>
+            </div>
+            </div>
+            </div>
+            
+      </div>
+    
+    
+  </div> 
+
+
+
+
+      
+      <!-- DETAILS -->
+            
+      <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModal1Title" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModal1LongTitle"><b><u>PrimaryContacts</u></b> </h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form class="form-horizontal">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped table-highlight">
+                        <thead>
+                            <th>First Name</th>
+                            <th>Middle Name</th>
+                            <th>Last Name</th>
+                            <th>Designation</th>
+                            <th>Email</th>
+                            <th>Mobile Number</th>
+                            <th>Company Tel</th>
+                            
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let list of primaryContactList">
+                                <td><input type="text" class="form-control" readonly value="{{list.first_name}}"/></td>
+                                <td><input type="text" class="form-control" readonly value="{{list.middle_name}}"/></td>
+                                <td><input type="text" class="form-control" readonly value="{{list.last_name}}"/></td>
+                               
+                                <td><input type="text" class="form-control" readonly value="{{list.designation}}"/></td>
+                                <td><input type="text" class="form-control" readonly value="{{list.email}}"/></td>
+                                <td><input type="text" class="form-control" readonly value="{{list.mobile_no}}"/></td>
+                                <td><input type="text" class="form-control" readonly value="{{list.company_tell}}"/></td>
+                                
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </form>
+              
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+              <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- List of shareholders MODAL -->
+      
+      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel"> <b><u>LIST</u></b></h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+            
+      <p><b>List of Shareholders/Partners/Directors Holding More Than 5% Equity By Nationality & Equity Holding</b></p>
+      <form class="form-horizontal">
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped table-highlight">
+                <thead>
+                    <th>Name</th>
+                    <th>Nationality</th>
+                    <th>Percentage(%)</th>
+                    
+                </thead>
+                <tbody>
+                    <tr *ngFor="let list of shareholderList">
+                        <td><input type="text" class="form-control" readonly value="{{list.name}}"/></td>
+                        <td><input type="text" class="form-control" readonly value="{{list.nationality}}"/></td>
+                        <td><input type="text" class="form-control" readonly value="{{list.percentage}}"/></td>
+                       
+                        
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </form>
+      
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        
+            </div>
+          </div>
+        </div>
+      </div>
+      

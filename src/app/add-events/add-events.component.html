@@ -1,0 +1,488 @@
+<app-admin-nav></app-admin-nav>
+
+<ngx-spinner bdOpacity=0.9 bdColor="rgba(0,0,0,0.5)" size="medium" color="#0e9948" type="ball-8bits"
+    [fullScreen]="true">
+    <p style="color: white"> Loading... </p>
+</ngx-spinner>
+<!-- <form [formGroup]="switchButton" (ngSubmit)="onSubmit(switchButton)">
+
+
+    <div class="col-12">
+
+        <div class="row">
+            <div class='col-md-2'>
+                <label>Switch1</label>
+            </div>
+            <div class='col-md-10'>
+                
+                <label class="c-switch-lg c-switch-3d c-switch-label c-switch-success">
+                    <input type="checkbox" class="c-switch-input" formControlName="switch1" checked>
+                    <span class="c-switch-slider" data-checked="true" data-unchecked="false"></span>
+                  </label>
+                 
+            </div>
+        </div>
+        <div class="row">
+            <div class='col-md-2'>
+                <label>Switch2</label>
+            </div>
+            <div class='col-md-10'>
+                <label class="c-switch-lg c-switch-3d c-switch-label c-switch-success">
+                    <input type="checkbox" class="c-switch-input" formControlName="switch2" checked>
+                    <span class="c-switch-slider" data-checked="true" data-unchecked="false"></span>
+                  </label>
+            </div>
+        </div>
+        <div class="row">
+            <div class='col-md-2'>
+                <label>Switch3</label>
+            </div>
+            <div class="col-md-10">
+                <label class="c-switch-lg c-switch-3d c-switch-label c-switch-success">
+                    <input type="checkbox" class="c-switch-input" formControlName="switch3" checked>
+                    <span class="c-switch-slider" data-checked="true" data-unchecked="false"></span>
+                  </label>
+            </div>
+        </div>
+    </div>
+
+    <button type="submit">submit</button>
+</form> -->
+<div class="container">
+    <div class="card mt-3">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-md-6">
+                    <h4>Events</h4>
+                </div>
+                <div class="col-md-6">
+                    <div class="float-right">
+                        <button class="btn btn-primary" (click)="showAddModal()">Add Event</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+
+            <div class="row" style="margin: 10px;">
+                <div class="col">
+                    <label for="validationCustom01">Event Name (or) Venue Name</label>
+                    <input type="text" class="form-control" [(ngModel)]="membership_id_f" placeholder="Enter Event Name (or) Venue Name for Search"  required> 
+        
+                </div>
+                <!-- <div class="col">
+                    <label for="validationCustom01">Company Name</label>
+                    <input type="text" class="form-control" [(ngModel)]="company_name_f" required> 
+        
+                </div> -->
+                <!-- <div class="col">
+                        <label>Filter by status</label>
+                        <select class="form-control" (click)="applyFilter($event.target.value)" type="text">
+                          <option value="null">All</option>
+                          <option value="Pending">Pending</option>
+                          <option value="Send to Manager">Send to Manager</option>
+                          <option value="Approved">Approved By Manager/Approver</option>
+                          <option value="Rejected">Rejected By Manager/Approver</option>
+                  
+                        </select>
+                </div> -->
+              <!-- <button type="button" class="btn btn-success ml-3" (click)="showModal()">
+                Search
+                </button>
+                <button type="button" class="btn btn-danger ml-3" (click)="getMemberships()" *ngIf="filterClearBtn">
+                  Clear
+                  </button> -->
+            </div>
+            <br>
+
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Event Name</th>
+                        <th>Description</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Venue</th>
+                        <th style="width: 10%;">Action</th>
+                    </tr>
+                </thead>
+                <tbody *ngFor="let item of viewList | grdFilter : { event_title: membership_id_f, venue: membership_id_f }">
+                    <tr>
+                        <td>{{item.event_title}}</td>
+                        <td>{{item.event_description}}</td>
+                        <td>{{item.start_date | date:'d/M/yyyy HH:mm:ss'}}</td>
+                        <td>{{item.end_date | date:'d/M/yyyy HH:mm:ss'}}</td>
+                        <td>{{item.venue}}</td>
+                        <td style="width: 10%;">
+                            <button class="btn btn-sm btn-primary"
+                                (click)="getDataPatch(item); showUpdateModal()"><i class="fa fa-edit" aria-hidden="true"></i></button>
+                            <button class="btn btn-sm btn-danger ml-2" (click)="deleteEventOnRow(item.event_title)"><i class="fa fa-remove" aria-hidden="true"></i></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+</div>
+
+<br><br><br>
+
+
+
+<!-- ADD MODAL START -->
+
+
+
+<div class="backdrop" [ngStyle]="{'display':sigdisplay}"></div>
+<!-- Button trigger modal -->
+<!-- Modal -->
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':sigdisplay}" style="overflow-y: scroll;">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Event</h5>
+                <button type="button" class="close" (click)="hideAddModal()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <form (submit)="onEventsSubmit()">
+                <div class="modal-body">
+                    <div class="row">
+                        <span class="col-md-6">
+                            <div class="form-group ml-3">
+
+                                <label><b>Event Name: </b></label>
+                                <input type="text" name="Event_title" [(ngModel)]="form.Event_title" class="form-control"
+                                    (keyup)="checkExistTitle($event)" required>
+                                <span *ngIf="loadSpin" class="spinner">
+                                    <i class="fa fa-spinner fa-spin" aria-hidden="true"></i>
+                                </span>
+                                <div *ngIf="f.Event_title.invalid && (f.Event_title.dirty || f.Event_title.touched)">
+                                    <p *ngIf="f.Event_title.errors.required" class="text-danger">
+                                        Event name required
+                                    </p>
+                                </div>
+                                <span *ngIf="isAlreadyExistTitle" class="text-danger">{{errorMsg}}</span>
+                            </div>
+
+                        </span>
+
+                        <span class="col-md-6">
+                            <div class="form-group mr-3">
+
+                                <label><b>Event Description: </b></label>
+                                <textarea type="text" name="Event_description" [(ngModel)]="form.Event_description" class="form-control"></textarea>
+                                <div *ngIf="f.Event_description.invalid && (f.Event_description.dirty || f.Event_description.touched)">
+                                    <p *ngIf="f.Event_description.errors.required" class="text-danger">
+                                        Description required
+                                    </p>
+                                </div>
+                            </div>
+                        </span>
+                    </div>
+
+                    <div class="row">
+
+
+                        <span class="col-md-6">
+                            <div class="input-wrapper form-group ml-3">
+                                <label><b>Start Date:</b></label><br>
+                                <input type="text" placeholder="Start Date"
+                                    class="col-lg-12 form-control" [(ngModel)]="form.Start_date" 
+                                    name="Start_date" bsDatepicker required>
+                                <!-- <input name="Start_date" [(ngModel)]="form.Start_date" [owlDateTimeTrigger]="dtPicker2"
+                                    [owlDateTime]="dtPicker2" [min]="minDate" class="col-lg-12 form-control">
+                                <owl-date-time #dtPicker2></owl-date-time> -->
+                            </div>
+                        </span>
+
+                        <span class="col-md-6">
+                            <div class="input-wrapper form-group mr-3">
+                                <label><b>End Date:</b></label><br>
+                                <input type="text" placeholder="End Date"
+                                    class="col-lg-12 form-control" [(ngModel)]="form.End_date" 
+                                    name="End_date" bsDatepicker required>
+                                <!-- <input name="End_date" [(ngModel)]="form.End_date" [owlDateTimeTrigger]="dtPicker3"
+                                    [owlDateTime]="dtPicker3" [min]="minDate" class="col-lg-12 form-control">
+                                <owl-date-time #dtPicker3></owl-date-time> -->
+                            </div>
+                        </span>
+
+                    </div>
+
+                    <div class="row">
+                        <span class="col-md-6">
+                            <div class="form-group ml-3">
+
+                                <label><b>Venue</b></label>
+                                <input type="text" name="Venue" [(ngModel)]="form.Venue" class="form-control">
+                                <div *ngIf="f.Venue.invalid && (f.Venue.dirty || f.Venue.touched)">
+                                    <p *ngIf="f.Venue.errors.required" class="text-danger">
+                                        Venue details required
+                                    </p>
+                                </div>
+                            </div>
+                        </span>
+                        <span class="col-md-6">
+                            <div class="form-group mr-3">
+
+                                <label><b>Tickets Available</b></label>
+                                <input type="number" name="tickets_available" [(ngModel)]="form.tickets_available" class="form-control">
+                                <div
+                                    *ngIf="f.tickets_available.invalid && (f.tickets_available.dirty || f.tickets_available.touched)">
+                                    <p *ngIf="f.tickets_available.errors.required" class="text-danger">
+                                        Available tickets
+                                    </p>
+                                </div>
+                            </div>
+                        </span>
+                    </div>
+
+                    <div class="row">
+                    <span class="col-md-6">
+                    <div class="form-group ml-3">
+
+                        <label><b>Price</b></label>
+                        <input type="number" name="Price" [(ngModel)]="form.Price" class="form-control">
+                        <div *ngIf="f.Price.invalid && (f.Price.dirty || f.Price.touched)">
+                            <p *ngIf="f.Price.errors.required" class="text-danger">
+                                Price details required
+                            </p>
+                        </div>
+                    </div>
+                    </span>
+
+                    <span class="col-md-6">
+                        <div class="form-group mr-3">
+                        <label for=""><b>Meeting Link:</b></label>
+                        <textarea type="text" class="form-control" readonly>https://whereby.com/accuracy/Mohan</textarea>
+                        </div>
+                    </span>
+                    
+                    </div>
+
+                    <div class="row">
+                        <span class="col-md-6">
+                            <!-- <div class="form-group mr-3 mt-5">
+                                <label class='col-md-4'><b>Upload file:</b></label>
+                                <span><label ><input #uploadFile name="upload_pic" (change)="( form.upload_pic = uploadFile.files)" type="file" hidden><i class="fa fa-upload" aria-hidden="true"></i></label></span>
+                            </div> -->
+                             <div class="form-group mr-3">
+                                <label class='col-md-4'><b>Upload file:</b></label>
+                                <input
+                                    #uploadFileAdd 
+                                    name="upload_pic" (change)="( form.upload_pic = uploadFileAdd.files);onFileChangeAdd($event)"
+                                    id="file" 
+                                    type="file" 
+                                    class="form-control"
+                                    >
+                            </div>
+                        <!--
+                        <span>
+                            <img [src]="imageSrc" *ngIf="imageSrc" style="height: 100px; width:350px">
+                        </span> -->
+                        <!-- <label class='col-md-4'><b>Upload file:</b></label>
+                        <span><label ><input #uploadFileAdd name="upload_pic" (change)="( form.upload_pic = uploadFileAdd.files);onFileChangeAdd($event)" type="file" hidden><i class="fa fa-upload" aria-hidden="true"></i></label></span> -->
+                    </span>
+                        <img [src]="imageSrcAdd" *ngIf="imageSrcAdd" style="height: 100px; width:350px">
+                
+                    </div>
+                </div>
+                <!-- <div class="ml-3 mb-3">
+        <button type="submit" class="btn btn-success" (click)="hideAddModal()" [disabled]="!events.valid">submit</button>
+        </div>     -->
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary"
+                        [disabled]="!events.valid || isAlreadyExistTitle">Submit</button>
+                    <button type="button" class="btn btn-danger" (click)="hideAddModal()">Close</button>
+                </div>
+            </form>
+
+
+        </div>
+    </div>
+</div>
+
+<!--END START Modal -->
+
+<div class="backdrop" [ngStyle]="{'display':sigdisplay2}"></div>
+<!-- Button trigger modal -->
+<!-- Modal -->
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':sigdisplay2}" style="overflow-y: scroll;">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Update Event</h5>
+                <button type="button" class="close" (click)="hideUpdateModal()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <form #UpdateEvents="ngForm" (submit)="onUpdateEventsSubmit(UpdateEvents)">
+                <div class="modal-body">
+                    <input type="hidden" name="Event_id" [(ngModel)]="updateform.Event_id" class="form-control" required readonly>
+                    <div class="row">
+
+                        <span class="col-md-6">
+                            <div class="form-group mr-3">
+
+                                <label><b>Event Name: </b></label>
+                                <input type="text" name="Event_title" [(ngModel)]="updateform.Event_title" class="form-control" required>
+                            </div>
+                        </span>
+
+                        <span class="col-md-6">
+                            <div class="form-group ml-3">
+
+                                <label><b>Event Description: </b></label>
+                                <input type="text" name="Event_description" [(ngModel)]="updateform.Event_description" class="form-control">
+                            </div>
+                        </span>
+
+                    </div>
+
+                    <div class="row">
+
+                        <span class="col-md-6">
+
+                            <div class="input-wrapper form-group mr-3">
+                                <label><b>Start Date:</b></label><br>
+                                <input type="text" placeholder="Start Date"
+                                    class="col-lg-12 form-control" [(ngModel)]="updateform.Start_date" 
+                                    name="Start_date" bsDatepicker required>
+                                <!-- <input name="Start_date" [(ngModel)]="updateform.Start_date" [owlDateTimeTrigger]="dtPicker4"
+                                    [owlDateTime]="dtPicker4" class="col-lg-12 form-control">
+                                <owl-date-time #dtPicker4></owl-date-time> -->
+                            </div>
+                        </span>
+
+                        <span class="col-md-6">
+
+                            <div class="input-wrapper form-group ml-3">
+                                <label><b>End Date:</b></label><br>
+                                <input type="text" placeholder="End Date"
+                                    class="col-lg-12 form-control" [(ngModel)]="updateform.End_date" 
+                                    name="End_date" bsDatepicker required>
+                                <!-- <input name="End_date" [(ngModel)]="updateform.End_date" [owlDateTimeTrigger]="dtPicker5"
+                                    [owlDateTime]="dtPicker5" class="col-lg-12 form-control">
+                                <owl-date-time #dtPicker5></owl-date-time> -->
+                            </div>
+                        </span>
+
+                    </div>
+
+                    <div class="row">
+
+                        <span class="col-md-6">
+                            <div class="form-group mr-3">
+
+                                <label><b>Venue</b></label>
+                                <input type="text" name="Venue" [(ngModel)]="updateform.Venue" class="form-control">
+
+                            </div>
+                        </span>
+                        <span class="col-md-6">
+                            <div class="form-group ml-3">
+
+                                <label><b>Tickets Available</b></label>
+                                <input type="text" name="tickets_available" [(ngModel)]="updateform.tickets_available" class="form-control">
+                            </div>
+                        </span>
+                    </div>
+
+                    <div class="row">
+
+                        <span class="col-md-6">
+                            <div class="form-group mr-3">
+
+                                <label><b>Price</b></label>
+                                <input type="number" name="Price" [(ngModel)]="updateform.Price" class="form-control">
+
+                            </div>
+                        </span>
+                        <span class="col-md-6">
+                            <div class="form-group mr-3">
+                                <label class='col-md-4'><b>Upload file:</b></label>
+                                <input 
+                                    #uploadFile
+                                    name="upload_pic" [(ngModel)]="upload_pic" (change)="( updateform.upload_pic = uploadFile.files);onFileChange($event)"
+                                    id="file" 
+                                    type="file" 
+                                    class="form-control"
+                                    >
+                            </div>
+                            <!--
+                            <img [src]="imageSrc" *ngIf="imageSrc" style="height: 100px; width:350px"> -->
+                            <!-- <label class='col-md-4'><b>Upload file:</b></label>
+                        <span><label ><input #uploadFile name="upload_pic" (change)="( updateform.upload_pic = uploadFile.files);onFileChange($event)" type="file" hidden><i class="fa fa-upload" aria-hidden="true"></i></label></span> -->
+                        <img [src]="imageSrc" *ngIf="imageSrc" style="height: 100px; width:350px">
+                        </span>
+                    </div>
+                    
+                </div>
+               
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Update</button>
+                    <button type="button" class="btn btn-danger" (click)="hideUpdateModal()">Close</button>
+                </div>
+
+            </form>
+
+
+        </div>
+    </div>
+</div>
+<!--END START Modal -->
+
+
+
+<!-- Delete Modal Start -->
+<!-- 
+<div class="backdrop" [ngStyle]="{'display':sigdisplay2}"></div>
+  <div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':sigdisplay3}">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Delete Event</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+       
+                  
+                    
+           
+    </div>
+   </div>
+</div>
+</div>  -->
+<!-- Delete  End -->
+<div class="backdrop" [ngStyle]="{'display':sigdisplay3}"></div>
+
+<div class="modal" [ngStyle]="{'display':sigdisplay3}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Delete Event</h5>
+                <button type="button" class="close" (click)="hideDeleteModal()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form [formGroup]="deleteEvent" (ngSubmit)="onSubmitDelete(deleteEvent)">
+                <div class="modal-body">
+                    <input type="hidden" formControlName="eventTitle" class="form-control" required>
+                    <h5>Are you sure want to delete this event ?</h5>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" (click)="hideDeleteModal()">No</button>
+                    <button type="submit" class="btn btn-danger">Yes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

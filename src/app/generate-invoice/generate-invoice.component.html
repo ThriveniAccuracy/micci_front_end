@@ -1,0 +1,213 @@
+<ngx-spinner
+  bdOpacity = 0.9
+  bdColor = "rgba(0,0,0,0.5)"
+  size = "medium"
+  color = "#0e9948"
+  type = "ball-8bits"
+  [fullScreen] = "true"
+  >
+  <p style="color: white" > Loading... </p>
+</ngx-spinner>
+<div class="card">
+   <!-- <div id="downloadView"> -->
+    <div class="row pl-5 pt-5" style="width: 100%;"></div>
+    <div id="downloadView">
+        <div class="container col-sm-offset-7">
+            <div class="card-body">
+                <form [formGroup]="invoiceFormGroup" (ngSubmit)="onSubmitGenerateInvoice(invoiceFormGroup)">
+                    <div class="mx-auto text-center">
+                        <div class="image" style="text-align: center;">
+                            <!-- <img class="img-responsive" height="63" width="150" src="../../assets/cma.jpeg" style="margin-bottom: 16px;"/> -->
+                            <img class="img-responsive" height="100" src="https://www.shinjiru.com.my/wp-content/themes/sj_child/assets/img/clients/micci.jpg"/>
+                        </div>     
+                        <h4>MALAYSIAN INTERNATIONAL CHAMBER OF COMMERCE AND INDUSTRY (16841-V)</h4>
+                        <h4>DEWAN PERNIAGAAN DAN PERINDUSTRIAN ANTARABANGSA MALAYSIA</h4> 
+                        <!-- <h4>SINGAPORE OVERSEAS CENTER OF COST ACCOUNTANT</h4> -->
+                        <!-- <p>1 Sophia Road, Peace centre, #05-22, Singapore 229149</p> -->
+                        <!-- <p>{{addressData}}</p> -->
+
+                        <br><br><br>
+                        <!-- <div *ngFor="let item of dataList"> -->
+                        <div class="form-row col-md-12 mx-auto">  
+                                
+                            <div class="form-group col-md-6 text-left">
+                                <h5>Bill To:</h5>
+                                <br>
+                                <p>Address1: {{address1}}<br>
+                                    Address2: {{address2}}<br>
+                                    State: {{state}}<br>
+                                    City: {{city}}<br>
+                                    Pincode: {{pincode}}
+                                </p>
+                            </div><br>
+                            <div class="form-group col-md-6 text-right">
+                                <h5>Invoice</h5>
+                                <br>
+                                <p>Invoice No<span>:</span> {{invoiceNo}}</p>
+                                <p>Date<span>:</span> {{currentdate | date:'d-M-y'}}</p>
+                                <p>Terms<span>:</span> C.O.D/Online</p>
+                                <p>PO No<span>:</span> {{currentyear}}-{{nextyear}}</p>
+                                
+                            </div>
+                
+                        </div>       
+                        <!-- </div> -->
+                        <br>
+                        <div class="row">
+                            <div class="col">
+                                <b>Attention: </b> {{memberName}}
+                            </div>
+                            <div class="col">
+                                <b>Phone: </b> {{memberPhone}}
+                            </div>
+                            <div class="col">
+                                <b>Fax: </b> {{memberFax}}
+                            </div>
+
+                        </div>
+                        <br>
+        
+        
+                        <div class="text-center">
+                            <table class="table" style="width:100%;margin-bottom: 0px;">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Description</th>
+                                        <th scope="col">Amount(SG)</th>
+                                    </tr>
+                                </thead>
+                                <tbody >
+                                    <!-- *ngFor="let item of dataList" -->
+                                    <tr>
+                                        <td style="text-align: left;">
+                                            <input class="form-control" name="tdd1" formControlName="tdd1" [(ngModel)]="tdd1" placeholder="Subscription Details">
+                                        
+                                        </td>
+                                        <td style="text-align: center;">
+                                            <input class="form-control" type="number" name="tda1" formControlName="tda1" [(ngModel)]="tda1" placeholder="Subscription Fee">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: left;">
+                                            <input class="form-control" name="tdd3" formControlName="tdd3" [(ngModel)]="tdd3" placeholder="Other Details">
+                                        </td>
+                                        <td style="text-align: center;">
+                                            <input class="form-control" type="number" name="tda3" formControlName="tda3" [(ngModel)]="tda3" placeholder="Other Fee">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: left;">
+                                            <input class="form-control" name="tdd2" formControlName="tdd2" [(ngModel)]="tdd2" placeholder="Discount Details">
+                                        </td>
+                                        <td style="text-align: center;">
+                                            <input class="form-control" type="number" name="tda2" formControlName="tda2" [(ngModel)]="tda2" placeholder="Discount Fee">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+        
+    
+                        <div class="form-row col-md-12">
+                            <div class="form-group col-md-7" style="text-align: left;"> 
+                                <br>
+                                <span style="text-decoration: underline;">Cheques Should be made payable to:</span><br><br>
+                                <div>
+                                    "MALAYSIAN INTERNATIONAL CHAMBER OF COMMERCE AND INDUSTRY" or<br>
+                                    "MICCI"
+                                </div>
+                            
+                            </div>
+                            <div class="form-group col-md-5">
+                                
+                                <table class="table table-hover">
+                                    <tbody>
+                                        <tr>
+                                            <td>Total</td>
+                                            <td>{{tda1*1  + tda3*1 - tda2*1}}</td>
+                                        </tr>
+                                        <!-- <tr>
+                                            <td>Amount Paid</td>
+                                            <td>00</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Balance</td>
+                                            <td>{{tda1*1   + tda2*1 + tda3*1}}</td>
+                                        </tr> -->
+                                    </tbody>
+                                </table>
+                                
+                            </div>
+                        </div>
+
+                        <div style="text-align: left;">
+
+                            <span style="text-decoration: underline;text-align: left;">For Direct Remittance:</span><br><br>
+                        </div>
+                        <div class="row">
+                            <div class="col-2" style="text-align: left;">
+                                <div>
+                                    Account Name :<br>
+                                    Co. Reg.No :<br>
+                                    Bank :<br> 
+                                    Branch :<br>        
+                                    Account No :<br>
+                                    Swift Code :
+                                </div>
+
+                            </div>
+
+                            <div class="col" style="text-align: left;">
+                                <div>
+                                    Malaysian International Chamber of Commerce and Industry<br>
+                                    016841-v<br>
+                                    Alliance Bank Malaysia Berhad<br>
+                                    Unit A-OG-02, Block A, Plaza Mont'Kiara, 50480 KL<br>
+                                    14194-0-01-001737-8<br>
+                                    MFBBMYKL
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div>
+                            <p style="text-align: left;"><u></u><br><br>
+                                    
+                                After Payment has been made, Please notify our office by fax or by
+                                <br><br> 
+                                email to:<br>
+                                <a routerLink="#">finance@micci.com</a> 
+                                <br><br><br>
+                                E. & O.E
+                                <br><br>
+                                This is a computer print-out and no signature is required
+                            </p>
+                            <br><br>
+                                
+                            <div class="text-center" >
+                                <p style="font-size: 16px;">C-8-8, 8th Floor, C, Plaza MontKiara, 2 Jalan Kiara, 50480 Kuala Lumpur, Malaysia.<br>
+                                    Tel: 03-6201 7708 Fax: 03-6201 7705 Email: micci@micci.com Website: www.micci.com.
+                                </p>
+                                <!-- <p>{{addressData}}</p> -->
+
+                            </div>
+                            
+                            
+                        </div>
+
+                        <div class="form-group text-center pt-4">
+                            <button class="btn btn-success" type="submit" onclick *ngIf="application_status != 'Approved Invoice'">Send for Approval</button>  
+                            <button class="btn btn-success" type="submit" onclick *ngIf="application_status === 'Approved Invoice'">Send to Applicant</button>    
+
+                            <button style="margin-left: 50px;" routerLink="/admin-landing" class="btn btn-secondary">Cancel</button>
+                        </div>
+    
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br><br><br>

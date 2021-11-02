@@ -1,0 +1,112 @@
+<app-applicant></app-applicant>
+
+<ngx-spinner
+bdOpacity = 0.9
+bdColor = "rgba(0,0,0,0.5)"
+size = "medium"
+color = "#0e9948"
+type = "ball-8bits"
+[fullScreen] = "true"
+>
+<p style="color: white" > Loading... </p>
+</ngx-spinner> 
+
+<div class="container mx-auto">
+    <!-- <div class="image" style="text-align: right;">
+        <img class="img-responsive" src="https://www.shinjiru.com.my/wp-content/themes/sj_child/assets/img/clients/micci.jpg"/>
+    </div> -->
+    <h3 style="text-align: center;">Invoice</h3>     
+<br>
+<!-- <button class="btn btn-sm btn-primary">Request Invoice</button> -->
+<div class="row" style="padding-left:44px;padding-right: 44px;">
+    <div class="col">
+        <label for="validationCustom01">Invoice Number</label>
+        <input type="text" class="form-control" [(ngModel)]="membership_id_f" placeholder="Enter Invoice Number for Search"  required> 
+
+    </div>
+    <!-- <div class="col">
+        <label for="validationCustom01">Company Name</label>
+        <input type="text" class="form-control" [(ngModel)]="company_name_f" required> 
+
+    </div> -->
+    <div class="col">
+            <label>Filter by Payment Status</label>
+            <select class="form-control" (click)="applyFilter($event.target.value)" type="text">
+              <option value="null">All</option>
+              <option value="Pending">Pending</option>
+              <option value="Paid">Paid</option>
+            </select>
+    </div>
+</div>
+<br>
+
+<table class="table table-bordered">
+                    <thead>
+                   <tr style="text-align: center;">
+                     <th scope="col"> Invoice Number </th>
+                     <th scope="col"> Issued Date </th>
+                     <th scope="col"> Amount </th>
+                     <th scope="col"> Payment date </th>
+                     <th scope="col"> Payment status </th>
+                     <th scope="col"> View </th>
+                     <th scope="col"> Payment</th>
+                     <th scope="col"> Upload Receipt</th>
+                    
+                   </tr>
+                 </thead>
+                 <tbody *ngFor="let list of dataList | grdFilter : { invoice_no: membership_id_f}">
+                 <tr style="text-align: center;">
+                 <td >{{list.invoice_no}}</td>
+                 <td>{{list.creation_date | date:'y-M-d'}}</td>
+                 <td>{{list.total_amount}}</td>
+                 <td>{{list.receipt_date| date:'y-M-d'}}</td>
+                 <td>{{list.payment_status}}</td>
+                 <td style="text-align: center;" ><a [routerLink]="['/invoice', list.invoice_no || 'all']"> <i class="fa fa-eye" aria-hidden="true"></i></a></td>
+                 <td style="text-align: center;">
+                    <button class="btn btn-sm btn-primary" (click)="Pay(list)">Pay</button>
+                </td>
+                <td>
+                    <a data-toggle="modal"
+                    data-target="#exampleModalapprove" (click)="showUploadModal(list)"> <i class="fa fa-upload" aria-hidden="true"></i></a>
+                </td>
+                 
+                 </tr>
+                 
+                 </tbody>
+                 </table>
+  
+</div>
+
+<div class="backdrop" [ngStyle]="{'display':sigdisplay3}"></div>
+
+<div class="modal fade" id="exampleModalapprove" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true" [ngStyle]="{'display':sigdisplay3}">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: #39fc;">
+        <h5 class="modal-title" id="exampleModalLabel" style="color: white"><b>Approve Applicant</b></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="hideuploadRModal()">
+          <span aria-hidden="true" style="color: white;">&times;</span>
+        </button>
+      </div>
+      <form [formGroup]="uploadReceipt" (ngSubmit)="onSubmitUpload(uploadReceipt)">
+        <div class="modal-body">
+            <h5>Upload your payment Receipt</h5>
+            <br>
+            <input type="text" formControlName="userId" placeholder="User Id" class="form-control" hidden required/>
+            <input type="text" formControlName="invoiceNo" placeholder="Invoice No" class="form-control" hidden required/>
+            <input type="text" formControlName="receiptNo" placeholder="Receipt No" class="form-control" required/>
+        <br>
+        <label>Upload Receipt</label>
+        <br>
+            <input type="file" formControlName="uploadDoc" (change)="onSelectFile($event)" required>
+       
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-info"> Upload</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close" (click)="hideuploadRModal()">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

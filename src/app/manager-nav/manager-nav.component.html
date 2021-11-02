@@ -1,0 +1,91 @@
+
+<div class="card">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-header">
+          <a class="navbar-brand" href="#">
+              <img class="img-responsive text-left" height="90"  width="150" src="https://www.shinjiru.com.my/wp-content/themes/sj_child/assets/img/clients/micci.jpg"/>
+              <!-- <img class="img-responsive text-left" height="90"  width="150" src="../../assets/cma.jpeg"/> -->
+            </a>
+      </div>
+    <div class="nav justify-content-end" id="navbarResponsive">
+
+        <li class="nav-item dropdown"> 
+            <a class="nav-link" data-toggle="dropdown" href="" routerLink="/manager-dashboard" role="button" aria-haspopup="true" aria-expanded="false"><strong>Dashboard</strong></a>
+      
+        </li>
+
+    
+      <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><strong>Membership </strong></a>
+      <div class="dropdown-menu">
+         
+          <a class="dropdown-item" routerLink="/admin-landing"><strong>Details</strong></a>
+          <a class="dropdown-item" routerLink="/admin-membership-certificate"><strong>Certificate</strong></a>
+          <a class="dropdown-item" routerLink="/admin-feedback"><strong>Feedback</strong></a>
+      </div>
+    </li>
+     
+    <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><strong>Accounts</strong></a>
+      <div class="dropdown-menu">
+    
+          <a class="dropdown-item" routerLink="/admin-renewal"><strong>Renewal</strong></a>
+          <a class="dropdown-item" routerLink="/admin-invoice"><strong>Invoice</strong></a>
+          <a class="dropdown-item" routerLink="/admin-receipt"><strong>Receipt</strong></a>
+          <a class="dropdown-item" routerLink="/account-statement"><strong> Statement of Account</strong></a>
+          <!-- <a class="dropdown-item" routerLink="#"><strong> Renewal Ageging Report</strong></a> -->
+          <!-- <a class="dropdown-item" routerLink="#"><strong> Invoice Ageging Report</strong></a> -->
+    
+          <!-- <a class="dropdown-item" routerLink="#"><strong>Statement Of Account</strong></a> -->
+      </div>
+    </li>
+
+    <li class="nav-item dropdown"> 
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><strong>Events</strong></a>
+            <div class="dropdown-menu">
+        
+                <a class="dropdown-item" routerLink="/events"><strong>Events</strong></a>
+                <a class="dropdown-item" routerLink="/booked-events"><strong>Booked Events</strong></a>
+                <!-- <a class="dropdown-item" routerLink="/meetings"><strong>Meetings</strong></a> -->
+            </div>
+    </li>
+
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><strong>Insights</strong></a>
+            <div class="dropdown-menu" style="left: -81px;">
+        
+                <a class="dropdown-item" href="https://app.powerbi.com/view?r=eyJrIjoiZmQxMTk0ODgtOGViNS00Y2Q2LWE0MTMtM2VjY2FhOGZiOGY2IiwidCI6IjNlZDNiN2MwLTBlNDktNDk0NS1iZGY3LWNhMTRjZjYzYmM1MyJ9"><strong>Overview</strong></a>
+                <a class="dropdown-item" href="https://app.powerbi.com/view?r=eyJrIjoiNWE2ZDE3Y2MtYWM0NS00ZDU0LTg0NzctYjNiZWU2MTgwMjMyIiwidCI6IjNlZDNiN2MwLTBlNDktNDk0NS1iZGY3LWNhMTRjZjYzYmM1MyJ9"><strong>Ageing Report</strong></a>
+                <a class="dropdown-item" href="https://app.powerbi.com/view?r=eyJrIjoiNzBmMDAzNmEtZTA1Ni00YmVmLTg1NTAtNTkwM2Y1ZGExNTU3IiwidCI6IjNlZDNiN2MwLTBlNDktNDk0NS1iZGY3LWNhMTRjZjYzYmM1MyJ9"><strong>Invoice Paid</strong></a>
+                <a class="dropdown-item" href="https://app.powerbi.com/view?r=eyJrIjoiN2E2MDVmMmMtNmVhMS00YWMzLWEyZDUtZmQ5MmNmOGJmYjIyIiwidCI6IjNlZDNiN2MwLTBlNDktNDk0NS1iZGY3LWNhMTRjZjYzYmM1MyJ9"><strong>Demographics </strong></a>
+                <a class="dropdown-item" href="https://app.powerbi.com/view?r=eyJrIjoiZjFkNjUwZjUtZTAyNy00MzIyLWI2YmYtOTA2YzY5NmFhNDM5IiwidCI6IjNlZDNiN2MwLTBlNDktNDk0NS1iZGY3LWNhMTRjZjYzYmM1MyJ9"><strong>Invoice Outstanding</strong></a>
+
+            </div>
+        </li>
+    <!-- <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><strong>Demographic</strong></a>
+        <div class="dropdown-menu">
+    
+            <a class="dropdown-item" routerLink="#"><strong>Overview</strong></a>
+            <a class="dropdown-item" routerLink="#"><strong>Category</strong></a>
+            <a class="dropdown-item" routerLink="#"><strong>Branch</strong></a>
+            <a class="dropdown-item" routerLink="#"><strong> Type of Company</strong></a>
+            <a class="dropdown-item" routerLink="#"><strong> Business Sector</strong></a>
+            <a class="dropdown-item" routerLink="#"><strong> Business Seb-Sector</strong></a>
+    
+        
+        </div>
+    </li> -->
+    
+    <li class="nav-item dropdown">
+        <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" (click)="logout()"><strong>Sign Out</strong></a>
+        <div class="dropdown-menu">
+            <!-- <a class="dropdown-item" routerLink="/admin-signin" ><strong>Admin </strong></a> -->
+
+        </div>
+    </li>
+    </div>
+    </nav>   
+    </div>
+    
+    

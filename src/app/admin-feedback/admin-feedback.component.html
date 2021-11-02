@@ -1,0 +1,83 @@
+<app-admin-nav></app-admin-nav>
+
+  <div class="card">
+    <ngx-spinner
+    bdOpacity = 0.9
+    bdColor = "rgba(0,0,0,0.5)"
+    size = "medium"
+    color = "#0e9948"
+    type = "ball-8bits"
+    [fullScreen] = "true"
+    >
+    <p style="color: white" > Loading... </p>
+  </ngx-spinner> 
+    <div class="container">
+      <div class="card-body mx-auto">
+    
+      <!-- <img class="img-responsive col-lg-4" width="100%" src="https://www.shinjiru.com.my/wp-content/themes/sj_child/assets/img/clients/micci.jpg"/>   -->
+     
+    <h3 ><b>Feedback </b></h3>
+    <!-- <br> -->
+    <div class="row" style="margin: 16px;">
+        <div class="col">
+            <label for="validationCustom01">Applicant Name (or) Company Name</label>
+            <input type="text" class="form-control" [(ngModel)]="membership_id_f"  placeholder="Enter Applicant Name (or) Company Name for Search"  required> 
+
+        </div>
+        <!-- <div class="col">
+            <label for="validationCustom01">Company Name</label>
+            <input type="text" class="form-control" [(ngModel)]="company_name_f" required> 
+
+        </div> -->
+        <!-- <div class="col">
+                <label>Filter by status</label>
+                <select class="form-control" (click)="applyFilter($event.target.value)" type="text">
+                  <option value="null">All</option>
+                  <option value="Pending">Pending</option>
+                  <option value="Send to Manager">Send to Manager</option>
+                  <option value="Approved">Approved By Manager/Approver</option>
+                  <option value="Rejected">Rejected By Manager/Approver</option>
+          
+                </select>
+        </div> -->
+      <!-- <button type="button" class="btn btn-success ml-3" (click)="showModal()">
+        Search
+        </button>
+        <button type="button" class="btn btn-danger ml-3" (click)="getMemberships()" *ngIf="filterClearBtn">
+          Clear
+          </button> -->
+    </div>
+    <br>
+
+      <table class="table table-bordered">
+       <thead>
+      <tr>
+        <th scope="col"> First Name </th>
+        <th scope="col"> Middle Name </th>
+        <th scope="col"> Last Name </th>
+        <th scope="col"> Company Name </th>
+        <th scope="col"> Comment </th>
+        <th scope="col"> Date </th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of feedbackList | grdFilter : { first_name: membership_id_f, middle_name: membership_id_f, last_name: membership_id_f, company_name: membership_id_f }">
+
+    <td>{{item.first_name}}</td>
+    <td>{{item.middle_name}}</td>
+    <td>{{item.last_name}}</td>
+    <td>{{item.company_name}}</td>
+    <td>{{item.comment}}</td>
+    <td>{{item.date | date:'d-M-y'}}</td>
+    </tr>
+    </tbody>
+    </table>
+    
+    </div>
+    </div>
+      </div>
+    
+    
+    
+    
+    

@@ -1,0 +1,46 @@
+<app-applicant></app-applicant>
+
+<ngx-spinner
+bdOpacity = 0.9
+bdColor = "rgba(0,0,0,0.5)"
+size = "medium"
+color = "#0e9948"
+type = "ball-8bits"
+[fullScreen] = "true"
+>
+<p style="color: white" > Loading... </p>
+</ngx-spinner> 
+
+<div class="container mx-auto">
+    <!-- <div class="image" style="text-align: right;">
+        <img class="img-responsive" src="https://www.shinjiru.com.my/wp-content/themes/sj_child/assets/img/clients/micci.jpg"/>
+    </div> -->
+    <h3 style="text-align: center;">Receipt</h3>     
+<br><br>
+<!-- <button class="btn btn-sm btn-primary">Request Receipt</button> -->
+<br><br>
+<table class="table table-bordered">
+                    <thead>
+                   <tr style="text-align: center;">
+                     <th scope="col"> Receipt Number </th>
+                     <th scope="col"> Issued Date </th>
+                     <th scope="col"> Amount </th>
+                     <th scope="col"> View </th>
+                     <!-- <th scope="col"> Download</th> -->
+                    
+                   </tr>
+                 </thead>
+                 <tbody *ngFor="let item of receiptList">
+                 <tr style="text-align: center;">
+                 <td >{{item.receipt_no}}</td>
+                 <td>{{item.receipt_date | date:'y-M-d'}}</td>
+                 <td>{{item.total_amount}}</td>
+                 <td style="text-align: center;"><a [routerLink]="['/receipt', item.receipt_no || 'all']"><i class="fa fa-eye" aria-hidden="true"></i></a></td>
+                 <!-- <td style="text-align: center;"><i class="fa fa-download" aria-hidden="true"></i></td> -->
+                 
+                 </tr>
+                 
+                 </tbody>
+                 </table>
+  
+</div>

@@ -1,0 +1,74 @@
+<app-applicant></app-applicant>
+<div class="card">
+  <div class="container">
+    <div class="card-body">
+
+    <form [formGroup]="feedback" (ngSubmit)="feedBackForm(feedback)" class="mx-auto">
+        <!-- <div class="image text-right">
+            <img class="img-responsive" src="https://www.shinjiru.com.my/wp-content/themes/sj_child/assets/img/clients/micci.jpg"/>      
+        </div> -->
+        <ngx-spinner
+        bdOpacity = 0.9
+        bdColor = "rgba(0,0,0,0.5)"
+        size = "medium"
+        color = "#0e9948"
+        type = "ball-8bits"
+        [fullScreen] = "true"
+        >
+        <p style="color: white" > Loading... </p>
+      </ngx-spinner>   
+        <h2 class="text-center">FeedBack</h2>
+        <br>  
+        <div class="form-row col-sm-8 mx-auto">
+            <div class="col-md-4 form-group">
+              <label>First Name<span class="text-danger">*</span></label>
+              <input type="text" class="form-control" formControlName="firstName" placeholder="{{first_name}}"  required readonly/>
+              <!-- <div *ngIf="f.FirstName1.invalid && (f.FirstName1.dirty || f.FirstName1.touched)">
+                <p *ngIf="f.FirstName1.errors.required" class="text-danger">
+                  Provide First Name
+                </p>
+              </div> -->
+            </div>
+                                      
+                                      
+            <div class="col-md-4 form-group">
+              <label>Middle Name</label>
+              <input type="text" class="form-control" formControlName="middleName" placeholder="{{middle_name}}"  required readonly/>
+                </div>
+                                        
+            <div class="col-md-4 form-group">
+              <label>Last Name<span class="text-danger">*</span></label>
+              <input type="text" class="form-control" formControlName="lastName" placeholder="{{last_name}}"  required readonly/>
+               <!-- <div *ngIf="f.LastName1.invalid && (f.LastName1.dirty || f.LastName1.touched)">
+                <p *ngIf="f.LastName1.errors.required" class="text-danger">
+                  Provide Last Name
+                </p>
+              </div>  -->
+            </div>
+          </div>
+
+          <div class="form-group col-sm-8 mx-auto">
+            <label>Company Name<span class="text-danger">*</span></label>
+            <input type="text" class="form-control" formControlName="companyName" placeholder="{{company_name}}" required readonly/>
+        </div>
+        <div class="form-group col-sm-8 mx-auto">
+            <label>Comment</label>
+            <textarea class="form-control text-center" id="exampleFormControlTextarea5" rows="3" formControlName="comment" required></textarea>
+               <!-- <div *ngIf="f.issuedCapital.invalid && (f.issuedCapital.dirty || f.issuedCapital.touched)">
+                <p *ngIf="f.issuedCapital.errors.required" class="text-danger">
+                  Provide Issued Capital</p>
+              </div>  -->
+          </div>
+          <br>
+          
+          <div class="form-group text-center">
+           
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" style="margin-left: 50px;" routerLink="/app-applicant" class="btn btn-secondary">Cancel</button>
+          </div>
+        
+    
+    </form>
+</div>
+</div>
+</div>

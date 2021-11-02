@@ -1,0 +1,12 @@
+.content
+{
+    padding: 20px;
+}
+.container
+{
+    border: 2px solid;
+    text-align: center;
+    margin: 50px;
+    margin-left: 50px;
+    font-size: 20px;
+}

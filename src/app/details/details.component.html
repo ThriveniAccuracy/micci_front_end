@@ -1,0 +1,131 @@
+<app-applicant></app-applicant>
+<div class="card" style="margin-bottom: 0px;">
+    <div class="container">
+      <div class="card-body">
+  
+  <form [formGroup]="details" class="mx-auto">
+    <!-- <div class="image text-right">
+      <img class="img-responsive" src="https://www.shinjiru.com.my/wp-content/themes/sj_child/assets/img/clients/micci.jpg"/>      
+    </div> -->
+    <ngx-spinner
+    bdOpacity = 0.9
+    bdColor = "rgba(0,0,0,0.5)"
+    size = "medium"
+    color = "#0e9948"
+    type = "ball-8bits"
+    [fullScreen] = "true"
+    >
+    <p style="color: white" > Loading... </p>
+  </ngx-spinner>  
+    <h2 class="text-center">Details</h2>
+    <br>  
+      <div class="form-row col-sm-8 mx-auto">
+          <div class="col-md-4 form-group">
+            <label>First Name</label>
+            <input type="text" class="form-control" formControlName="FirstName1" name="FirstName1" required/>
+            <!-- <div *ngIf="f.FirstName1.invalid && (f.FirstName1.dirty || f.FirstName1.touched)">
+              <p *ngIf="f.FirstName1.errors.required" class="text-danger">
+                Provide First Name
+              </p>
+            </div> -->
+          </div>
+                                    
+                                    
+          <div class="col-md-4 form-group">
+            <label>Middle Name</label>
+            <input type="text" class="form-control" formControlName="MiddleName1" name="MiddleName1" required/>
+              </div>
+                                      
+          <div class="col-md-4 form-group">
+            <label>Last Name</label>
+            <input type="text" class="form-control" formControlName="LastName1" name="LastName1" required/>
+             <!-- <div *ngIf="f.LastName1.invalid && (f.LastName1.dirty || f.LastName1.touched)">
+              <p *ngIf="f.LastName1.errors.required" class="text-danger">
+                Provide Last Name
+              </p>
+            </div>  -->
+          </div>
+        </div>
+        <div class="form-row col-sm-8 mx-auto">
+          <!-- <div class="form-group col-md-6">
+            <label>Date Of Birth</label>
+              <input type="text" class="form-control" formControlName="Date" name="Date"
+                        bsDatepicker required>
+                  
+              </div> -->
+        
+        
+      
+      <div class="form-group col-md-12">
+          <label>Contact Number</label>
+          <input type="text" class="form-control" formControlName="contactNumber" name="number" required/>
+      </div>
+    </div>
+  
+      <div class="form-group col-sm-8 mx-auto">
+          <label>Company Name</label>
+          <input type="text" class="form-control" formControlName="companyName" name="companyName" required/>
+      </div>
+  
+      <div class="form-group col-sm-8 mx-auto">
+          <label>Email</label>
+          <input type="text" class="form-control" readonly formControlName="Email" name="Email" required/>
+            <!-- <div *ngIf="f.Email2.invalid && (f.Email2.dirty || f.Email2.touched)">
+            <p *ngIf="f.Email2.errors.required" class="text-danger">
+              Provide Email
+            </p>
+            </div>  -->
+      </div>
+      
+      <div class="form-row col-sm-8 mx-auto">
+      <!-- <div class="form-group col-md-6">
+        <label>Membership Status</label>
+        <input type="text" class="form-control" formControlName="status" name="status" required/>
+    </div> -->
+
+    <!-- <div class="form-group col-md-6"> -->
+        <label>Membership Status</label>
+        <input type="text" class="form-control" formControlName="status" name="status" required readonly/>
+    <!-- </div> -->
+      </div>
+
+    <div *ngIf="status === 'Active'">
+        <br>
+
+
+    <div class="form-group col-sm-8 mx-auto">
+        <label>Amount</label>
+        <input type="text" class="form-control" formControlName="amount" name="amount" required readonly/>
+    </div>
+
+    <div class="form-group col-sm-8 mx-auto">
+        <label>Invoice Number</label>
+        <input type="text" class="form-control" formControlName="invoiceNumber" name="invoiceNumber" required readonly/>
+    </div>
+    <div class="form-row col-sm-8 mx-auto">
+    <div class="form-group col-md-6">
+        <label>Receipt Number</label>
+        <input type="text" class="form-control" formControlName="receiptNumber" name="receiptNumber" required readonly/>
+    </div>
+
+    <div class="form-group col-md-6">
+        <label>Membership Certificate Number</label>
+        <input type="text" class="form-control" formControlName="certificateNumber" name="certificateNumber" required readonly/>
+    </div>
+    </div>
+
+    </div>
+
+      <br>
+      <!-- <div class="form-group text-center">
+        
+        <button type="submit" class="btn btn-primary">Edit Details</button>
+        <button type="submit" style="margin-left: 50px;" class="btn btn-secondary" routerLink="/app-applicant">Cancel</button>
+      </div> -->
+  
+    
+        </form>
+  </div>
+  </div>
+  </div>
+

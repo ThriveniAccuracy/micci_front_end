@@ -1,0 +1,36 @@
+
+.profileCard {
+  /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); */
+  /* max-width: 50%; */
+  margin: auto;
+  text-align: center;
+  font-family: arial;
+}
+
+.backGrcoundImage{
+  /* background: url(/assets/blue.jpg) no-repeat; */
+  /* background-repeat: no-repeat; */
+  background: rgb(155, 151, 151);
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+.avatar{
+  /* vertical-align: middle; */
+  width: 120px;
+  height: 140px;
+  border-radius: 50%;
+}
+
+.heading, h5{
+  font-weight: bolder;
+  color:#203761;
+  font-family: 'Muli', sans-serif;
+  float: left;
+  /* font-family: 'Quicksand', sans-serif; */
+}
+
+.Text{
+  font-family: 'Muli', sans-serif;
+  /* font-family: 'Quicksand', sans-serif; */
+}

@@ -1,0 +1,115 @@
+<!-- <app-applicant></app-applicant> -->
+<ngx-spinner
+  bdOpacity = 0.9
+  bdColor = "rgba(0,0,0,0.5)"
+  size = "medium"
+  color = "#0e9948"
+  type = "ball-8bits"
+  [fullScreen] = "true"
+  >
+  <p style="color: white" > Loading... </p>
+</ngx-spinner>
+<div class="card">
+    <div class="row pl-5 pt-5" style="width: 100%;">
+        <div class="inline justify-content-center" style="margin-bottom: 16px;">
+            <button class="btn btn-primary ml-5" routerLink="/app-notes">Back</button>
+            <button class="btn btn-success ml-3" (click)="downloadPdf()"><i class="fa fa-download"></i>Download</button>
+        </div>
+    </div>
+    <div id="downloadView">
+    <div class="container col-sm-offset-7">
+        <div class="card-body">
+            <div class="mx-auto text-center">
+                <div class="image" style="text-align: center;">
+                    <img class="img-responsive" height="100" src="https://www.shinjiru.com.my/wp-content/themes/sj_child/assets/img/clients/micci.jpg"/>
+                    <!-- <img class="img-responsive" height="63" width="150" src="../../assets/cma.jpeg" style="margin-bottom: 16px;"/> -->
+                    <!-- <img class="img-responsive"
+                        src="https://www.shinjiru.com.my/wp-content/themes/sj_child/assets/img/clients/micci.jpg" /> -->
+                </div>
+                <h4>MALAYSIAN INTERNATIONAL CHAMBER OF COMMERCE AND INDUSTRY (16841-V)</h4>
+                <h4>DEWAN PERNIAGAAN DAN PERINDUSTRIAN ANTARABANGSA MALAYSIA</h4>
+                <br><br><br>
+                <div *ngFor="let item of dataList"> 
+                <h3>Renewal Notice</h3>
+                    <div>
+                        <p style="text-align: right;">Renewal Notice ID: {{item.invoice_no}}</p>
+                        <p style="text-align: right;">Date: {{item.membership_expiry_date | date:'y-M-d'}}</p>
+                    </div>
+                    <div>
+                        <p class="text-left ml-5">Address1: {{item.address1}}<br>
+                            Address2: {{item.address2}}<br>
+                            City: {{item.city}}<br>
+                            State: {{item.member_state}}<br>
+                            Country: {{item.country}}<br>
+                            Pincode: {{item.pincode}}
+                        </p>
+                        <!-- <p class="text-left ml-5">CASA GLOBAL SDN BHD<br>
+                            NO 18, Jalan 14/2<br>
+                            46100 Petaling Jaya<br>
+                            Selangor Darul Ehsan
+                        </p> -->
+                    </div>
+
+
+                    <br>
+
+
+                    <div class="text-center">
+                        <table class="table" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Description</th>
+                                    <th scope="col">Amount(RM)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="text-align: center;">Being Subscription fee <br>
+                                        under MICCI membership {{item.y_m_category}}
+                                    </td>
+                                    <td style="text-align: center;">{{item.total_amount}}</td>
+                                </tr>
+
+
+                            </tbody>
+                        </table>
+                    </div>
+
+
+                    <div>
+
+                        <p style="text-align: center;">Thanking you in advance for your continued support</p>
+
+                        <br><br><br>
+                        <p style="text-align: left;">For Direct Remittance:<br>
+                            Account Name : Malaysian International Chamber of Commerce and industry<br>
+                            Co. Reg. No &nbsp;&nbsp;&nbsp;: &nbsp;016841-V<br>
+                            Bank &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
+                            &nbsp;United Oversea Bank(UOB)<br>
+                            Account No &nbsp;&nbsp;&nbsp;: &nbsp;14194-001-001-(MEMBERSHIP NO)<br>
+                            Swift Code &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;xxxxx
+                            <br><br><br>
+                            Cheques should be made payable to:<br>
+                            "MALAYSIAN INTERNATIONAL CHAMBER OF COMMERCE AND INDUSTRY" or "MICCI"<br>
+                            <br><br>
+                            Once Paid, Please email/fax to finance to finance@micci.com or 
+                            to upload the proof of payment<br>
+                            <br><br>
+                            Should you require an invoice, Please contact Siti/Afifah on 03-6201 7708
+                        </p>
+                        <br>
+                    </div>
+
+                    <div>
+                        <!-- <button type="submit" class="btn btn-primary">Request for invoice</button>
+                        <button type="submit" style="margin-left: 30px;" class="btn btn-primary">Cancel
+                            Membership</button> -->
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br><br><br>

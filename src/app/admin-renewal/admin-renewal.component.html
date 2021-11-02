@@ -1,0 +1,146 @@
+
+<app-admin-nav></app-admin-nav>
+<ngx-spinner
+  bdOpacity = 0.9
+  bdColor = "rgba(0,0,0,0.5)"
+  size = "medium"
+  color = "#0e9948"
+  type = "ball-8bits"
+  [fullScreen] = "true"
+  >
+  <p style="color: white" > Loading... </p>
+</ngx-spinner>
+<div class="card carder">
+    <div class="container"> 
+    <div class="card-body cardBody mx-auto" style="height: 600px;" >      
+         
+              <!-- <img class="img-responsive col-lg-4" width="100%" src="https://www.shinjiru.com.my/wp-content/themes/sj_child/assets/img/clients/micci.jpg"/> -->
+            
+  <button type="button" class="btn btn-primary" (click)="openModal(template)">
+                  Generate Renewal Notice
+  </button>
+
+<!-- Modal -->
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left"> Generate Renewal Notice</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="card">
+      <div class="card-body">       
+                               
+        <form [formGroup]="generateRenewal" (ngSubmit)="onGenerateRenewalNotice(generateRenewal)"> 
+          <div class="form-group mr-3">
+                
+              <label ><b>Membership Id: </b></label>
+              <input type="text" formControlName="membership_id" class="form-control">
+          </div>
+          <!-- <div class="form-group mr-3">
+             
+              <label ><b>Company Name: </b></label>
+              <input type="text" formControlName="company_name" class="form-control">
+            </div> -->
+
+            <!-- <div class="form-group mr-3">
+             
+              <label ><b>Name: </b></label>
+              <input type="text" formControlName="name" class="form-control">
+            </div> -->
+            <!-- <div class="form-group mr-3">
+              
+              <label ><b>Payment Method: </b></label>
+              <select class="form-control" formControlName="payment_method" (change)="payment($event.target.value)">
+                <option selected>Select Payment</option>
+                <option value="Check">Check</option>
+                <option value="Online Banking">Online Banking</option>
+                <option value="Credit Card">Credit Card</option>
+                <option value="Debit Card">Debit Card</option>
+                <option value="Others">Others</option>
+              </select>
+            </div> -->
+
+            <!-- <div class="form-group mr-3">
+             
+              <label ><b>Others </b></label>
+              <input type="text" formControlName="others" class="form-control">
+            </div> -->
+
+            
+
+            <div class="form-group mr-3">
+             
+              <label ><b>Amount </b></label>
+              <input type="text" formControlName="amount" class="form-control">
+            </div>
+
+            <button type="submit" class="btn btn-success" (click)="modalRef.hide()">submit</button>
+         </form>   
+       </div>
+   </div>
+  </div>
+</ng-template>
+<!-- Modal End -->  
+              
+      <!-- MEMBERSHIP RENEWAL NOTICE  -->
+              <h3>Membership Renewal Notice </h3>
+              <br>
+              <form [formGroup]="renewalNotice" (ngSubmit)="onNotice(renewalNotice)">
+                <div class="form-row col-sm-8 mx-auto">
+                  <div class="form-group col-sm-6">
+                      
+                  <label><b>Membership ID</b></label>
+                  <input type="text" formControlName="renewalId" class="form-control">
+                      
+                  </div>
+                  
+                    <div class="col-sm-6">
+                      <label for="">-</label><br>
+                      <button type="submit" class="btn btn-warning">Submit </button>
+                    </div>
+                  </div>
+                </form>
+              
+          <div *ngIf="tableList">       
+          <table class="table table-bordered" >
+                  <thead>
+                 <tr>
+                   <th scope="col"> Membership ID </th>
+                   <th scope="col"> Company Name </th>
+                   <th scope="col"> Branch </th>
+                   <th scope="col"> Issued date</th>
+                   <th scope="col"> Amount </th>
+                   <th scope="col"> Invoice Number </th>
+                   <!-- <th scope="col"> View </th>
+                   <th scope="col"> Download </th> -->
+                 </tr>
+               </thead>
+               <tbody *ngFor="let item of renewal">
+               <tr>
+               <td>{{item.membership_id}}</td>
+               <td>{{item.member_company_name}}</td>
+               <td>{{item.branch_name}}</td>
+               <td>{{item.creation_date | date:'y-M-d'}}</td>
+               <td>{{item.total_amount}}</td>
+               <td>{{item.invoice_no}}</td>
+               <!-- <td></td> -->
+               
+               </tr>
+               
+               </tbody>
+            </table>
+           </div>   
+                     
+      </div>
+    </div>
+</div>
+  
+  
+  
+              
+              
+              
+              
+              

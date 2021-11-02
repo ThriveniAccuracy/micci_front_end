@@ -1,0 +1,39 @@
+<div class="card">
+    <div class="container">
+      <div class="card-body">
+      <div class="image text-right">
+          <img class="img-responsive" src="https://www.shinjiru.com.my/wp-content/themes/sj_child/assets/img/clients/micci.jpg"/>      
+      </div>   
+    <h2 class="text-center">Password</h2>
+    <form [formGroup]="link" (ngSubmit)="onSubmit()">
+        <div class="form-group col-sm-8 mx-auto">
+            <label>New Password</label>
+              <input type="password" class="form-control" formControlName="newPassword" placeholder="password" [ngClass]="{ 'is-invalid': submitted && f.newPassword.errors }"/>
+                <div *ngIf="submitted && f.newPassword.errors" class="invalid-feedback">
+                  <div *ngIf="f.newPassword.errors.required">Password is required</div>
+                  <div *ngIf="f.newPassword.errors.minlength">
+                    Password must be atleast 6 characters</div>
+                  </div>
+          </div> 
+          
+   <div class="form-group col-sm-8 mx-auto">
+    <label>Confirm Password</label>
+      <input type="password" class="form-control" formControlName="confirmPassword" placeholder="password" [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }"/>
+        <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
+          <div *ngIf="f.confirmPassword.errors.required">Password is required</div>
+          <div *ngIf="f.confirmPassword.errors.minlength">
+            Password must be atleast 6 characters</div>
+          </div>
+  </div> 
+  
+    <div class="form-group text-center">
+       <button type="submit" class="btn btn-primary">Reset Password</button>  
+           <!-- <button type="submit" class="btn btn-primary">Sign In</button>  -->
+      <button type="submit" style="margin-left: 50px;" class="btn btn-secondary">Cancel</button>
+    </div>
+  
+              </form>
+          </div>
+      </div>
+  </div>
+  

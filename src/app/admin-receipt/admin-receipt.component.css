@@ -1,0 +1,9 @@
+input{
+    border: 1px solid black;
+}
+table,td,th,tr{
+    border: 1px solid black;
+}
+.card{
+    border: 1px solid black;
+}

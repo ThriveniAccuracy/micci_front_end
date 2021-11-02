@@ -1,0 +1,119 @@
+<app-applicant></app-applicant>
+
+<ngx-spinner
+            bdOpacity = 0.9
+            bdColor = "rgba(0,0,0,0.5)"
+            size = "medium"
+            color = "#0e9948"
+            type = "ball-8bits"
+            [fullScreen] = "true"
+            >
+            <p style="color: white" > Loading... </p>
+          </ngx-spinner> 
+
+<div class="container mx-auto">
+    <!-- <div class="image" style="text-align: right;">
+        <img class="img-responsive" src="https://www.shinjiru.com.my/wp-content/themes/sj_child/assets/img/clients/micci.jpg"/>
+    </div>
+    <h3 style="text-align: center;">Request for Membership Certificate</h3>     
+<br><br><br> -->
+<div class="row mt-3" style="padding-left:44px;padding-right: 44px;">
+    <div class="col">
+        <label for="validationCustom01">Membership Certificate ID (or) Company Name</label>
+        <input type="text" class="form-control" [(ngModel)]="membership_id_f" placeholder="Enter Membership Certificate ID (or) Company Name for Search"  required> 
+
+    </div>
+    <!-- <div class="col">
+        <label for="validationCustom01">Company Name</label>
+        <input type="text" class="form-control" [(ngModel)]="company_name_f" required> 
+
+    </div> -->
+    <!-- <div class="col">
+            <label>Filter by status</label>
+            <select class="form-control" (click)="applyFilter($event.target.value)" type="text">
+              <option value="null">All</option>
+              <option value="Pending">Pending</option>
+              <option value="Send to Manager">Send to Manager</option>
+              <option value="Approved">Approved By Manager/Approver</option>
+              <option value="Rejected">Rejected By Manager/Approver</option>
+      
+            </select>
+    </div> -->
+  <!-- <button type="button" class="btn btn-success ml-3" (click)="showModal()">
+    Search
+    </button>
+    <button type="button" class="btn btn-danger ml-3" (click)="getMemberships()" *ngIf="filterClearBtn">
+      Clear
+      </button> -->
+</div>
+<br>
+
+<table class="table table-bordered">
+                    <thead>
+                   <tr style="text-align: center;">
+                     <th scope="col"> Membership Certificate ID </th>
+                     <th scope="col"> Issued Date </th>
+                     <th scope="col"> Company Name </th>
+                     <th scope="col"> View </th>
+                     <!-- <th scope="col"> Download</th> -->
+                    
+                   </tr>
+                 </thead>
+                 <tbody>
+                 <!-- <tr style="text-align: center;"> -->
+                  <tr *ngFor="let item of membershipList | grdFilter : { certificate_no: membership_id_f, member_company_name: membership_id_f }">
+                 <td> {{item.certificate_no}} </td>
+                 <td> {{item.cert_issued_date | date:'d-M-y'}} </td>
+                 <td> {{item.member_company_name}} </td>
+                 <!-- <td><i class="fa fa-eye" (click)="view(item)"></i></td> -->
+                 <td style="text-align: center;"><a (click)="view(item)" style="cursor: pointer;">View</a></td>
+                 <!-- <td style="text-align: center;"><i class="far fa-download" aria-hidden="true"></i></td> -->
+                 
+                 </tr>
+                 
+                 </tbody>
+                 </table>
+
+                 <div *ngIf="downloadView" class="text-center mt-3">
+                 <button class="btn btn-primary" (click)="downloadPdf()" > Download</button>
+
+                 <div class="justify-content-center">
+                   
+                 <div id="downloadView" #content class="content certificate">
+  
+                  <div class="certificate--inner-wrap">
+                    <!-- <img class="img-responsive" width="150" height="63px" src="../../assets/MICCI.png" style="margin-bottom: 16px;" /> -->
+                    <!-- <img class="img-responsive" height="63" width="150" src="../../assets/cma.jpeg" style="margin-bottom: 16px;"/> -->
+                    <!-- <h1></h1> -->
+                    <!-- <br> -->
+                    <div class="image" style="text-align: center;">
+                        <img class="img-responsive" width="150" height="63px" src="../../assets/MICCI.png" style="margin-bottom: 16px;" />
+                        <!-- <img class="img-responsive" height="63" width="150" src="../../assets/cma.jpeg" style="margin-bottom: 16px;"/> -->
+                        <!-- <img class="img-responsive" height="100" src="https://www.shinjiru.com.my/wp-content/themes/sj_child/assets/img/clients/micci.jpg"/> -->
+                    </div>   
+                    
+                    <p><strong>SINGAPORE OVERSEAS CENTER OF COST ACCOUNTANT</strong></p>
+                    
+                    <span class="certificate--name h2">CERTIFICATE OF MEMBERSHIP</span>
+                    
+                    <p><strong>this is to certify that</strong></p>
+                    
+                    <span class="certificate--course h1">{{companyName}}</span>
+                    
+                    <!-- <p><strong>Firma del encargado</strong></p> -->
+                    
+                   <p><span class="certificate-Firma"><img src="https://restaurantemalahierba.com/wp-content/uploads/2018/08/firma-lester.png" alt="" /></span></p>
+                    
+                    <span class="certificate--date">{{issuedDate | date:'d-M-y'}}</span>
+                    
+                    <!-- <span class="certificate--from"><img src="https://www.shinjiru.com.my/wp-content/themes/sj_child/assets/img/clients/micci.jpg" alt="" /></span> -->
+                    
+                  </div>
+                  
+                </div></div>
+  </div>
+
+  <br><br>
+  <br><br>
+</div>
+

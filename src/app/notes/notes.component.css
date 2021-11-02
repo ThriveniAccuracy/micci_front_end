@@ -1,0 +1,6 @@
+table, th, thead, tr, td{
+    border: 1px solid;
+}
+table{
+padding-top: 100px;
+}

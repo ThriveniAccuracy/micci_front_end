@@ -1,0 +1,109 @@
+<app-admin-nav></app-admin-nav>
+
+<ngx-spinner bdOpacity=0.9 bdColor="rgba(0,0,0,0.5)" size="medium" color="#0e9948" type="ball-8bits"
+    [fullScreen]="true">
+    <p style="color: white"> Loading... </p>
+</ngx-spinner>
+<!-- <form [formGroup]="switchButton" (ngSubmit)="onSubmit(switchButton)">
+
+
+    <div class="col-12">
+
+        <div class="row">
+            <div class='col-md-2'>
+                <label>Switch1</label>
+            </div>
+            <div class='col-md-10'>
+                
+                <label class="c-switch-lg c-switch-3d c-switch-label c-switch-success">
+                    <input type="checkbox" class="c-switch-input" formControlName="switch1" checked>
+                    <span class="c-switch-slider" data-checked="true" data-unchecked="false"></span>
+                  </label>
+                 
+            </div>
+        </div>
+        <div class="row">
+            <div class='col-md-2'>
+                <label>Switch2</label>
+            </div>
+            <div class='col-md-10'>
+                <label class="c-switch-lg c-switch-3d c-switch-label c-switch-success">
+                    <input type="checkbox" class="c-switch-input" formControlName="switch2" checked>
+                    <span class="c-switch-slider" data-checked="true" data-unchecked="false"></span>
+                  </label>
+            </div>
+        </div>
+        <div class="row">
+            <div class='col-md-2'>
+                <label>Switch3</label>
+            </div>
+            <div class="col-md-10">
+                <label class="c-switch-lg c-switch-3d c-switch-label c-switch-success">
+                    <input type="checkbox" class="c-switch-input" formControlName="switch3" checked>
+                    <span class="c-switch-slider" data-checked="true" data-unchecked="false"></span>
+                  </label>
+            </div>
+        </div>
+    </div>
+
+    <button type="submit">submit</button>
+</form> -->
+<div class="container">
+    <div class="card mt-3">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-md-6">
+                    <h4>Meetings</h4>
+                </div>
+                <div class="col-md-6">
+                    <div class="float-right">
+                        <button class="btn btn-primary" (click)="showAddModal()">Add Event</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Event Name</th>
+                        <th>Description</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Venue</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody >
+                    <tr>
+                        <!-- <td>{{item.event_title}}</td>
+                        <td>{{item.event_description}}</td>
+                        <td>{{item.start_date | date:'d/M/yyyy, HH:mm:ss'}}</td>
+                        <td>{{item.end_date | date:'d/M/yyyy, HH:mm:ss'}}</td>
+                        <td>{{item.venue}}</td>
+                        <td>
+                            <button class="btn btn-primary"
+                                (click)="getDataPatch(item); showUpdateModal()">View/Edit</button>
+                            <button class="btn btn-danger" (click)="deleteEventOnRow(item.event_title)">Delete</button>
+                        </td> -->
+                        <td>1</td>
+                        <td>2</td>
+                        <td>3</td>
+                        <td>4</td>
+                        <td>5</td>
+                        <td>
+                            <button class="btn btn-primary"
+                                (click)="showUpdateModal()">View/Edit</button>
+                            <button class="btn btn-danger" >Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+</div>
+
+
+

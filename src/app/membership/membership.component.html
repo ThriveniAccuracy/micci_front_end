@@ -1,0 +1,839 @@
+<app-applicant></app-applicant>
+<div class="container mx-auto">
+  <div class="card">
+      <div class="card-body">
+
+<!-- <div class="image text-right">
+  <img class="img-responsive" src="https://www.shinjiru.com.my/wp-content/themes/sj_child/assets/img/clients/micci.jpg"/>      
+</div>   -->
+<ngx-spinner
+            bdOpacity = 0.9
+            bdColor = "rgba(0,0,0,0.5)"
+            size = "medium"
+            color = "#0e9948"
+            type = "ball-8bits"
+            [fullScreen] = "true"
+            >
+            <p style="color: white" > Loading... </p>
+          </ngx-spinner>   
+<div class="form-group text-center">
+  <h2 style="text-align: center;">E-Membership Application</h2> 
+  <br><br> 
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalScrollable">
+Membership Notes
+</button>
+</div>
+
+<form class="form-horizontal"
+    (submit)="submitMembershipForm()">
+
+    
+<div class="form-group col-sm-8 mx-auto">
+  <label>Company Name</label>
+  <input type="text" class="form-control" [(ngModel)]="form.company_name" name="company_name" placeholder="Company Name" required/>
+  
+</div>
+
+<div class="form-row col-sm-8 mx-auto">
+  <!-- <div class="col-md-2"></div> -->
+  <div class="col-md-6 form-group">
+      <label>Trade Name</label>
+      <input type="text" class="form-control" [(ngModel)]="form.trade_name" name="trade_name" placeholder="Trade Name" required/>
+     
+    </div>
+    
+    <div class="col-md-6 form-group">
+      <label>Branch<span class="text-danger">*</span></label>
+      <!-- <input type="text" class="form-control" [(ngModel)]="form.branch" name="branch" placeholder="Branch" required/> -->
+      
+      <select id="branch" class="form-control" [(ngModel)]="form.branch" name="branch">
+        
+        <option value="Kuala Lumpur">Kuala Lumpur</option>
+        <option value="Perak">Perak</option>
+        <option value="Penang">Penang</option>
+        <option value="Johor">Johor</option>
+        <option value="Sabah">Sabah</option>
+        
+      </select>
+    </div>
+    <!-- <div class="col-md-2"></div> -->
+</div>
+<br>
+
+    <div style="border: 1px solid #ced2d8;margin-top: 10px;margin-bottom: 16px;"></div>
+    <div class="form-group col-sm-8 mx-auto">
+        <legend class="ml-2">Business Address:</legend>
+    </div>
+  <div class="form-group col-sm-8 mx-auto">
+    <label>Address1<span class="text-danger">*</span></label>
+    <input type="text" class="form-control" [(ngModel)]="form.address1" name="address1" placeholder="Address" required/>
+       
+  </div>
+        
+  <div class="form-group col-sm-8 mx-auto">
+    <label> Address2<span class="text-danger">*</span></label>
+    <input type="text" class="form-control" [(ngModel)]="form.address2" name="address2" placeholder="Address" required/>
+   
+  </div>
+<div class="form-row col-sm-8 mx-auto">
+  <div class="col-md-6 form-group">
+    <label>City<span class="text-danger">*</span></label>
+      <input type="text" class="form-control" name="city" [(ngModel)]="form.city" placeholder="City" required/>
+         
+  </div>
+        
+  <div class="col-md-6 form-group">
+    <label>State<span class="text-danger">*</span></label>
+      <input type="text" class="form-control" placeholder="State" [(ngModel)]="form.state" name="state" required/>
+         
+  </div> 
+</div>
+
+
+  <div class="form-row col-sm-8 mx-auto">
+      <div class="col-md-6 form-group">
+          <label>Zip/Pincode<span class="text-danger">*</span></label>
+            <input type="text" class="form-control" name="pincode" [(ngModel)]="form.pincode" placeholder="Pincode" required/>
+               
+        </div>
+              
+        <div class="form-group col-md-6">
+          <label>Country<span class="text-danger">*</span></label>&nbsp;
+            <select class="form-control" [(ngModel)]="form.country" name="country" (change)="changeCountry($event.target.value)">
+              <option>....</option>
+              <option value="India">India</option>
+              <option value="Malaysia">Malaysia</option>
+              <option value="UK">UK</option>
+            </select>
+        </div>
+  </div>
+
+
+  <div class="form-row col-sm-8 mx-auto">
+    <div class="form-group col-md-6">
+        <label>Company Tel<span class="text-danger">*</span></label>&nbsp;
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">{{addon}}</span>
+          </div>
+          <input type="text" class="form-control" [(ngModel)]="form.company_tel" name="company_tel" maxlength="10" placeholder="Mobile Number"required/>
+        </div>
+    </div>
+    <div class="form-group col-md-6">
+        <label>Company Fax</label>&nbsp;
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon2">{{addon}}</span>
+          </div>
+            <input type="text" class="form-control" [(ngModel)]="form.company_fax" name="company_fax" placeholder="Fax Number" required/>
+        </div>
+    </div>
+
+  </div>
+          
+    <div class="form-group col-sm-8 mx-auto">
+      <label>Company Website</label>
+      <input type="text" class="form-control" [(ngModel)]="form.company_website" name="company_website" placeholder="Company Website" required/>
+    </div>
+
+
+
+<br>
+    
+    <div style="border: 1px solid #ced2d8;margin-top: 16px;margin-bottom: 16px;"></div>
+    <div class="form-group col-sm-8 mx-auto">
+        <legend class="ml-2">Mailing Address(If different from Business Address):</legend>
+    </div>  
+    <div class="form-group col-sm-8 mx-auto">
+        <label>Address1</label>
+        <input type="text" class="form-control" [(ngModel)]="form.ma_address1" name="ma_address1" placeholder="Address" required/>
+    </div>
+
+    <div class="form-group col-sm-8 mx-auto">
+        <label> Address2</label>
+        <input type="text" class="form-control" [(ngModel)]="form.ma_address2" name="ma_address2" placeholder="Address" required/>
+        
+    </div>
+      
+    <div class="form-row col-sm-8 mx-auto">
+        <div class="col-md-6 form-group">
+            <label>City</label>
+            <input type="text" class="form-control" [(ngModel)]="form.ma_city" name="ma_city" placeholder="City" required/>
+             
+        </div>
+            
+        <div class="col-md-6 form-group">
+            <label>State</label>
+            <input type="text" class="form-control" [(ngModel)]="form.ma_state" name="Address4" placeholder="State" required/>
+        
+        </div>
+            
+    </div>
+      
+      
+    <div class="form-row col-sm-8 mx-auto">
+          <div class="col-md-6 form-group">
+              <label>Zip/Pincode</label>
+              <input type="text" class="form-control" [(ngModel)]="form.ma_pincode" name="ma_pincode" placeholder="Pincode" required/>
+              
+            </div>
+            
+            <div class="form-group col-md-6">
+              <label>Country</label>&nbsp;
+                <select class="form-control" [(ngModel)]="form.ma_country" name="ma_country">
+                  <option>....</option>
+                  <option value="India">India</option>
+                  <option value="Malaysia">Malaysia</option>
+                  <option value="UK">UK</option>
+                </select>
+            </div>
+
+      </div>
+  
+      <div class="form-group col-sm-8 mx-auto">
+          <label> Type Of Company </label>&nbsp;
+            <select  id = "myList" class="form-control" [(ngModel)]="form.type_of_company" name="type_of_company" (change)="typeOthers($event.target.value)">
+              <option>....</option>
+              <option value="Public Limited">Public Limited</option>
+              <option value="Sole Proprietorship">Sole Proprietorship</option>
+              <option value="Private Limited">Private Limited</option>
+              <option value="Association or Society">Association or Society</option>
+              <option value="Non-Profit Organization">Non-Profit Organization</option>
+              <option value="Public University">Public University</option>
+              <option value="Registered outside Of Malaysia">Registered outside Of Malaysia</option>
+              <option value="Partnership">Partnership</option>
+              <option value="Others">Others</option>
+            </select>
+        </div>
+        <div class="form-group col-sm-8 mx-auto" *ngIf="otherInput">
+            <label>Others</label>
+            <input type="text" class="form-control" [(ngModel)]="form.others" name="others" />
+          </div>      
+    
+
+          <div class="form-group col-sm-8 mx-auto">
+              <label>Company Registration Date<span class="text-danger">*</span></label>
+                <div class=" form-group row mm-auto">
+                  <div class="col-md-8">
+                    <input type="text"
+                            placeholder="Date"
+                            class="form-control" [(ngModel)]="form.c_r_date" 
+                            name="c_r_date"
+                            bsDatepicker required>
+                      
+                  </div>
+            
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                    Notes
+                  </button>
+                </div>
+              </div> 
+
+
+              <div class="form-row col-sm-8 mx-auto">
+                  <div class="col-md-5 form-group">
+                    <label>Company Registration Number<span class="text-danger">*</span></label>
+                      <input type="text" class="form-control" [(ngModel)]="form.c_r_number" name="c_r_number" placeholder="Company/Business Registration Number" required/>
+                     
+                  </div>
+                                    
+                                    
+                  <div class="col-md-7 form-group">
+                    <label>New Company Register Number(Malaysia Only)</label>
+                    <input type="text" class="form-control" [(ngModel)]="form.n_c_r_number" name="n_c_r_number" placeholder="New Company Register Number" required/>
+                    
+                  </div>
+                </div>
+
+
+                <div class="form-row col-sm-8 mx-auto">
+                
+                    <label >Upload SSM Company Profile</label>
+                    <span><label ><input class="ml-3" #ussmcprofileRef name="u_ssm_c_profile" (change)="( form.u_ssm_c_profile = ussmcprofileRef.files)" type="file" (change)="( form.u_ssm_c_profile = ussmcprofileRef.files)"></label></span>
+                  </div>
+                  <div class="form-row col-sm-8 mx-auto">
+                
+                      <label >Upload Your Business Card Scan</label>
+                      <span><label ><input class="ml-3" #ubcardRef name="u_b_card" (change)="( form.u_b_card = ubcardRef.files)" type="file" (change)="( form.u_b_card = ubcardRef.files)"></label></span>
+                    </div>
+                
+                    <div class="form-group col-sm-8 mx-auto">
+                        <label>Authorized Capital(RM) or Equivalent if foreign owned<span class="text-danger">*</span></label>
+                        <textarea class="form-control text-center" id="exampleFormControlTextarea3" rows="3" [(ngModel)]="form.a_capital" name="a_capital" placeholder="As reported with the Companies Commision Of Malaysia" required></textarea>
+                         
+                      </div>
+                              
+                      <div class="form-group col-sm-8 mx-auto">
+                        <label>Issued Capital(RM) or Equivalent if foreign owned<span class="text-danger">*</span></label>
+                        <textarea class="form-control text-center" id="exampleFormControlTextarea4" rows="3" [(ngModel)]="form.i_capital" name="i_capital" placeholder="As reported with the Companies Commision Of Malaysia" required></textarea>
+                          
+                      </div>
+
+                      <div class="form-row col-sm-8 mx-auto">
+                        <div class="col-md-6 form-group">
+                        <label>Number of Full-Time Employees<span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" [(ngModel)]="form.n_of_full_t_employees" name="n_of_full_t_employees" placeholder="Number of Full-Time Employees" required/>
+                           
+                        </div>
+                              
+                        <div class="col-md-6 form-group">
+                        <label>Your Membership category</label>
+                        <!-- <input type="text" class="form-control" [(ngModel)]="form.y_m_category" name="y_m_category" placeholder="category" required/> -->
+                        <select class="form-control" [(ngModel)]="form.y_m_category" name="y_m_category" (change)="category($event.target.value)">
+                          <option>.....</option>
+                          <option value="Premier">Premier</option>
+                          <option value="Ordinary A">Ordinary A</option>
+                          <option value="Ordinary B">Ordinary B</option>
+                          <option value="Ordinary C">Ordinary C</option>
+                          <option value="Ordinary D">Ordinary D</option>
+                          <option value="Associate">Associate</option>
+                        </select>
+                        </div>
+                      </div>
+                      <div class="form-group col-sm-8 mx-auto">
+                        <label>Description of Principal Business Activities</label>
+                        <input type="text" class="form-control" [(ngModel)]="form.d_o_principal_b_activities" name="d_o_principal_b_activities" placeholder="Business Activities" required/>
+                      </div>
+                      
+                      <div class="form-row col-sm-8 mx-auto">
+                        <div class="form-group col-md-6">
+                            <label>Business Sector<span class="text-danger">*</span></label>&nbsp;
+                              <select id="myList" class="form-control" [(ngModel)]="form.business_sector" name="business_sector" (change)="typeOthers1($event.target.value)">
+                                <option>.....</option>
+                                <option value="Agriculture">Agriculture</option>
+                                <option value="Manufacturing">Manufacturing</option>
+                                <option value="Mining">Mining</option>
+                                <option value="Services">Services</option>
+                                <option value="Others1">Others</option>
+                              </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Business Sub-Sector<span class="text-danger">*</span></label>&nbsp;
+                              <select id="myList" class="form-control" [(ngModel)]="form.business_sub_sector" name="business_sub_sector" (change)="typeOthers2($event.target.value)">
+                                <option>.....</option>
+                                <option value="Accountancy/Financial">Accountancy/Financial</option>
+                                <option value="Agriculture/Plantations">Agriculture/Plantations</option>
+                                <option value="Automotive">Automotive</option>
+                                <option value="Banking/Insurance">Banking/Insurance</option>
+                                <option value="Consultancy/Business Services">Consultancy/Business Services</option>
+                                <option value="Chemicals/Minerals">Chemicals/Minerals</option>
+                                <option value="Construction/Engineering">Construction/Engineering</option>
+                                <option value="Education/Training">Education/Training</option>
+                                <option value="Electrical/Electronics">Electrical/Electronics</option>
+                                <option value="Energy/Utilities">Energy/Utilities</option>
+                                <option value="Food/Beverages">Food/Beverages</option>
+                                <option value="Hotels/Tourism">Hotels/Tourism</option>
+                                <option value="ICT/Communications">ICT/Communications</option>
+                                <option value="Legal">Legal</option>
+                                <option value="Machinery/Equipment">Machinery/Equipment</option>
+                                <option value="Media/Advertising">Media/Advertising</option>
+                                <option value="Metal Manufactures">Metal Manufacturers</option>
+                                <option value="Non Metallic Manufacturers">Non Metallic Manufacturers</option>
+                                <option value="oil/Gas/Petrochemicals">oil/Gas/Petrochemicals</option>
+                                <option value="Pharmaceuticals/Medical">Pharmaceuticals/Medical</option>
+                                <option value="Ports/Logistics">Ports/Logistics</option>
+                                <option value="Property/Real Estate">Property/Real Estate</option>
+                                <option value="Retail/Wholesale">Retail/Wholesale</option>
+                                <option value="Rubber/Wood Products">Rubber/Wood Products</option>
+                                <option value="Textiles/Garments">Textiles/Garments</option>
+                                <option value="Trading(Import/Export)">Trading(Import/Export)</option>
+                                <option value="Transport">Transport</option>
+                                <option value="Others2">Others</option>
+                              </select>
+                            </div>
+                      </div>
+                      
+                      <div class="form-row col-sm-8 mx-auto">     
+                        <div class="form-group col-md-6" *ngIf="otherInput1">
+                          <label>Others<span class="text-danger">*</span></label>
+                          <input type="text" class="form-control" [(ngModel)]="form.b_others" name="b_others"  />
+                        </div>
+                        <div class="form-group col-md-6 mx-auto" *ngIf="otherInput2">
+                            <label>Others<span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" name="others2"  />
+                          </div>
+                    </div>
+                                      
+
+  
+  <br>
+  
+<div style="border: 1px solid #ced2d8;margin-top: 10px;margin-bottom: 16px;"></div>
+<h3 class="text-center ml-5"> List Of Shareholders/Partners/Directors Holding 
+                    More than 5% Equity By Nationality & Equity Holding</h3>
+<br>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addMore">
+  Add List Of Shareholders
+  </button>    
+<!-- <div class="form-group col-sm-8 mx-auto">
+  <label>Name</label>
+  <input type="text" class="form-control" [(ngModel)]="form.name" name="name" placeholder="Name" required/>
+    
+</div>
+                    
+<div class="form-group col-sm-8 mx-auto">
+  <label>Nationality (if foreigner or incorporated overseas)</label>
+  <input type="text" class="form-control" [(ngModel)]="form.nationality" name="nationality" placeholder="Nationality" required/>
+    
+</div>
+<div class="form-group col-sm-8 mx-auto">
+  <label>Percentage (%) Equity Holding - above 5%</label>
+  <input type="text" class="form-control" [(ngModel)]="form.percentage" name="percentage" placeholder="EquityHolding" required/>
+   
+</div> -->
+<div class="form-group col-sm-8 mx-auto">
+  <legend class="ml-2">Proposed by:</legend>
+    <div class="form-group">
+    <label>Name</label>
+    <input type="text" class="form-control" [(ngModel)]="form.proposed_by" name="form.proposed_by" placeholder="Company Name of Member" required/>
+  
+    </div>
+</div>
+                      
+                      
+<div class="form-group col-sm-8 mx-auto">
+  <legend class="ml-2">Seconded by:</legend>
+  <div class="form-group">
+    <label>Name</label>
+    <input type="text" class="form-control" [(ngModel)]="form.seconded_by " name="form.seconded_by" placeholder="Company Name of Member" required/>
+      
+  </div>
+</div>
+<br>
+<h4 class="text-center"><b>
+
+    Names and Title Chief Executive in Malaysia(primary contact)
+</b>
+    <span class="text-danger">*</span></h4>
+<br>
+
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addPrimaryContacts">
+  Add Primary Contacts
+  </button> 
+
+<!-- 
+<div class="form-row col-sm-8 mx-auto">
+  <div class="col-md-4 form-group">
+    <label>First Name<span class="text-danger">*</span></label>
+    <input type="text" class="form-control" [(ngModel)]="form.f_name" name="f_name" placeholder="First Name" name="FirstName1" required/>
+    
+  </div>
+                            
+                            
+  <div class="col-md-4 form-group">
+    <label>Middle Name</label>
+    <input type="text" class="form-control" [(ngModel)]="form.m_name" name="m_name" placeholder="Middle Name" required/>
+      </div>
+                              
+  <div class="col-md-4 form-group">
+    <label>Last Name<span class="text-danger">*</span></label>
+    <input type="text" class="form-control" [(ngModel)]="form.l_name" name="l_name" placeholder="Last Name" required/>
+     
+  </div>
+</div>
+<div class="form-group col-sm-8 mx-auto">
+  <label>Designation</label>
+  <input type="text" class="form-control" [(ngModel)]="form.designation" name="designation" placeholder="Designation" required/>
+</div>
+<div class="form-group col-sm-8 mx-auto">
+  <label>Email<span class="text-danger">*</span></label>
+  <input type="text" class="form-control" [(ngModel)]="form.email" name="email" placeholder="Email" required/>
+   
+</div>
+                             
+                    
+<div class="form-group col-sm-8 mx-auto">
+  <label>Mobile No<span class="text-danger">*</span></label>&nbsp;
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon3">{{addon1}}</span>
+      </div>
+      <input type="text" class="form-control" [(ngModel)]="form.mobile_no" name="mobile_no" placeholder="Mobile Number" required/>
+    </div>
+                            
+</div>
+                          
+<div class="form-group col-sm-8 mx-auto">
+  <label>Company Tel<span class="text-danger">*</span></label>&nbsp;
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon4">{{addon1}}</span>
+      </div>
+      <input type="text" class="form-control" [(ngModel)]="form.m_company_tel" name="m_company_tel" placeholder="Mobile Number" required/>
+    </div>
+   
+</div>
+ -->
+
+
+
+
+
+      
+
+
+
+
+
+
+
+  <div class="form-group">
+    <div class="row card-body justify-content-center">
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+  </div>
+</form>
+
+
+</div>
+</div>
+</div>
+
+
+
+<!-- Button trigger modal -->
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Notes</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+          </div>
+          <div class="modal-body">
+            <div class="container">
+              <p style="text-align: justify;">(a). Date and number of certificate of incorporation in Malaysia under the Companies Act
+                        or in the case of an association or society, the date and number of certificate of
+                        registration under the Societies Act.OR
+                </p>
+                <p style="text-align: justify;">(b). Date and Number of certificate of registration as a foreign company, in Malaysia
+                    under the Companies Act.OR
+                </p>
+                <p style="text-align: justify;">(c). If a partnership or sole proprietorship, give date and number of certificate of registration in Malaysia 
+                    under the Registration of Businesses Ordinance or any other law applicable to the business of the applicant.
+                </p>
+            </div>
+          </div>
+    
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                  </div>
+              </div>
+    </div>
+
+    
+
+<!-- Membership Notes -->
+<div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalScrollableTitle">Membership Notes</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <span class='col-md-6'>
+              <div class="container">
+                   <p style="text-align: center;">There are three types of membership, Premier Membership, Ordinary Membership and Associate Membership</p>
+                     <h6><strong>ORDINARY MEMBERS</strong></h6>
+                    <P style="text-align: justify;">Any company registered and authorized to carry out bussiness in Malaysia. A company's Membership Catagory is based on its Issued
+                       Capital or NO.of Employees. Should a company quality for more than one membership category,the membership category with a higher annual subscription will apply.
+                    </P> 
+                     <h6><strong>ASSOCIATE MEMBERS</strong></h6>
+                    <p style="text-align: justify;">Any association,non-profit organization, public university, or company registered outside of Malaysia. An Associate Member shall
+                       have the like rights and duties of an Ordinary Member save that it shall not be entitled to vote at General Meeting of the Chamber
+                       nor be appointed or elected as a member of the General Committe. </p>
+                     <h6><strong>SUBSCRIPTION PAYMENTS</strong></h6> 
+                    <P style="text-align: justify;">The annual subscription fees shall be due and payable in advanced on the first day of January each year. A member newly elected 
+                       during the year shall pay subscription fees for the unexpired portion of such year, calculated from the first day of the month
+                       following the month in which the Member is elected. The MICCI Membership follows the calendar year commencing 1 Jan and expirind 31 Dec. 
+                    </P>  
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>Membership category</th>
+                          <th>Criteria for Qualification</th>
+                          <th>Annual Subscription</th>
+                        </tr>
+                       </thead>
+                       <tbody>
+                         <tr>
+                          <td>Premier</td>
+                          <td>Company that are keen to enjoy a life time membership with premier Benefits;</td>
+                          <td>RM40,000 (one time payment)</td>
+                         </tr>
+                         <tr>
+                           <td>Ordinary A</td>
+                           <td>Companies with issued Capital more than RM2.5 million or with more than 200 employees.</td>
+                           <td>RM3,600.00</td>
+                         </tr>
+                         <tr>
+                           <td>Ordinary B</td>
+                           <td>Companies with issued Capital from RM250,001 to RM2.5 million or with 51 - 200 employees</td>
+                           <td>RM2,680.00</td>
+                         </tr>
+                         <tr>
+                           <td>Ordinary C</td>
+                           <td>Campanies with issued Capital from RM100,001 to RM250,000 or with 11 - 50 employees</td>
+                           <td>RM1,960.00</td>
+                         </tr>
+                         <tr>
+                           <td>Ordinary D</td>
+                           <td>Companies with issued Capital up to RM100,000 or up to 10 employees</td>
+                           <td>RM1,350.00</td>
+                         </tr>
+                         <tr>
+                           <td rowspan="2">Associate</td>
+                           <td>Any Association, Non-Profit organization, public university, or</td>
+                           <td rowspan="2">RM1,300.00</td>
+                         </tr>
+                         <tr>
+                           <td>Company Registered outside of Malaysia</td>
+                         </tr>
+                         <tr>
+                           <td colspan="3" style=text-align:center;>Entrance Fee RM500.00(for the first year only)</td>
+                         </tr>
+                         <tr>
+                           
+                         </tr>
+                       </tbody>
+                     </table> 
+                   </div>
+              </span>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+  
+    
+
+<!-- Button trigger modal -->
+  <!-- Modal -->
+   <div class="modal fade bd-example-modal-lg" id="addMore" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">List of Shareholders</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+        </div>
+
+       
+        <form (ngSubmit)="addMoreSubmit()">
+        <div class="modal-body">
+          
+            
+                <div class="form-row" *ngFor="let obj of dataArray; let i=index">
+                   <div class="form-group col-md-3">
+                       <label>Name</label>
+                            <input type="text" class="form-control" name="name{{i}}"
+                                [(ngModel)]="obj.name">
+                    </div>
+                       <div class="form-group col-md-3">
+                       <label>Nationality</label>
+                            <input type="text" class="form-control" name="nationality{{i}}"
+                              [(ngModel)]="obj.nationality">
+                    </div>
+                     <div class="form-group col-md-2">
+                       <label>Percentage(%)</label>
+                            <input type="text" class="form-control" name="percentage{{i}}"
+                             [(ngModel)]="obj.percentage">
+                    </div>
+                      <div class="form-group col-md-2 mt-4 ml-3" >
+                        <span (click)="remove(i)" class="btn btn-danger" *ngIf="i!=0">-</span>
+                    
+      <span (click)="add()" class="btn btn-success">+</span></div></div>
+      
+               
+    
+        </div>
+  
+      <div class="modal-footer">
+        <button  type="submit" class="btn btn-primary">Submit</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                      </div>  </form>
+       
+        
+               </div>
+            </div>
+  </div> 
+
+  <!-- <div class="modal fade show bd-example-modal-lg backdrop" id="agreeDisagree" tabindex="-1" role="dialog" [ngStyle]="{'display':display}" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">I / We desire to become a member of the Malaysian International Chamber of Commerce and Industry. My / Our particulars are given on this application form. I / We undertake, if elected, to be bound by the Memorandum and Articles of Association and/or bylaws of the Chamber
+            		</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+        </div>
+        <div class="modal-body">
+          
+          <p style="text-align: justify;">"PDPA COMPLIANCE: Under the Personal Data Protection Act (PDPA) 2010, we are required to obtain your explicit consent when we
+            collect and process your personal data. We collect your personal data in order to assess your application and to administer the services that you
+            have signed up for and to respond to your enquiries and complaints, and to resolve issues related to the business offered. If you have any questions
+            regarding the processing of your personal data, please contact us at micci@micci.com."													
+                             
+            </p>
+         
+        </div>
+  
+        <div class="modal-footer mx-auto">
+          <button  type="button" (click)="aggree()" class="btn btn-primary">Agree</button>
+          <button type="button" class="btn btn-danger" (click)="reload()">Disagree</button>
+                        </div>
+       
+        
+               </div>
+            </div>
+  </div> -->
+
+
+  <!-- <div bsModal #bsModal="bs-modal" class="modal fade" tabindex="-1"
+  role="dialog" aria-labelledby="dialog-sizes-name1">
+  <div class="modal-dialog modal-lg">
+
+    <div class="modal-header">
+      <h5 class="modal-title pull-left">
+        I / We desire to become a member of the Malaysian International Chamber of Commerce and Industry. My / Our particulars are given on this application form. I / We undertake, if elected, to be bound by the Memorandum and Articles of Association and/or bylaws of the Chamber
+       </h5>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p style="text-align: justify;">"PDPA COMPLIANCE: Under the Personal Data Protection Act (PDPA) 2010, we are required to obtain your explicit consent when we
+        collect and process your personal data. We collect your personal data in order to assess your application and to administer the services that you
+        have signed up for and to respond to your enquiries and complaints, and to resolve issues related to the business offered. If you have any questions
+        regarding the processing of your personal data, please contact us at micci@micci.com."													
+                         
+        </p>
+    </div>
+    <div class="modal-footer mx-auto">
+      <button  type="button" (click)="aggree()" class="btn btn-primary">Agree</button>
+      <button type="button" class="btn btn-danger" (click)="reload()">Disagree</button>
+                    </div>
+                    </div>
+                    </div> -->
+
+
+                    <div *ngIf="isModalShown" [config]="{ show: true }" bsModal #autoShownModal="bs-modal"
+     class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-auto-name">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 id="dialog-auto-name" class="modal-title pull-left">
+            I / We desire to become a member of the Malaysian International Chamber of Commerce and Industry. My / Our particulars are given on this application form. I / We undertake, if elected, to be bound by the Memorandum and Articles of Association and/or bylaws of the Chamber
+          
+        </h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="hideModal()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p style="text-align: justify;">"PDPA COMPLIANCE: Under the Personal Data Protection Act (PDPA) 2010, we are required to obtain your explicit consent when we
+          collect and process your personal data. We collect your personal data in order to assess your application and to administer the services that you
+          have signed up for and to respond to your enquiries and complaints, and to resolve issues related to the business offered. If you have any questions
+          regarding the processing of your personal data, please contact us at micci@micci.com."													
+                           
+          </p>
+      </div>
+      <div class="modal-footer mx-auto">
+        <button  type="button" (click)="aggree()" class="btn btn-primary">Agree</button>
+        <button type="button" class="btn btn-danger" (click)="reload()">Disagree</button>
+                      </div>
+    </div>
+  </div>
+</div>
+  
+  
+
+ 
+  <div class="modal fade bd-example-modal-lg" id="addPrimaryContacts" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel1">Primary Contacts</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+        </div>
+
+       
+        <form (ngSubmit)="addPrimaryContactSubmit()">
+        <div class="modal-body">
+          
+            
+                <div class="form-row" *ngFor="let obj of primaryDataArray; let i=index">
+                   <div class="form-group col-md-3">
+                       <label>First Name</label>
+                            <input type="text" class="form-control" name="firstName{{i}}"
+                                [(ngModel)]="obj.firstName">
+                    </div>
+                       <div class="form-group col-md-3">
+                       <label>Middle Name</label>
+                            <input type="text" class="form-control" name="middleName{{i}}"
+                              [(ngModel)]="obj.middleName">
+                    </div>
+                     <div class="form-group col-md-3">
+                       <label>Last Name</label>
+                            <input type="text" class="form-control" name="lastName{{i}}"
+                             [(ngModel)]="obj.lastName">
+                    </div>
+                    <div class="row">
+                      <div class="form-group col-md-2">
+                        <label>Designation</label>
+                             <input type="text" class="form-control" name="designation{{i}}"
+                              [(ngModel)]="obj.designation">
+                     </div>
+                     <div class="form-group col-md-2">
+                      <label>Email</label>
+                           <input type="text" class="form-control" name="email{{i}}"
+                            [(ngModel)]="obj.email">
+                   </div>
+                   <div class="form-group col-md-2">
+                    <label>Mobile</label>
+                         <input type="text" class="form-control" name="mobileNo{{i}}"
+                          [(ngModel)]="obj.mobileNo">
+                 </div>
+                 <div class="form-group col-md-2">
+                  <label>Company Tel</label>
+                       <input type="text" class="form-control" name="companyTel{{i}}"
+                        [(ngModel)]="obj.companyTel">
+               </div>
+
+                      <div class="form-group col-md-2 mt-4 ml-3" >
+                        <span (click)="removePrimaryContacts(i)" class="btn btn-danger" *ngIf="i!=0">-</span>
+                    
+      <span (click)="addPrimaryBtn()" class="btn btn-success">+</span></div>
+
+                    </div>
+                      
+    
+    
+    </div>
+      
+               
+    
+        </div>
+  
+      <div class="modal-footer">
+        <button  type="submit" class="btn btn-primary">Submit</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                      </div>  </form>
+       
+        
+               </div>
+            </div>
+  </div>  

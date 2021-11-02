@@ -1,0 +1,52 @@
+<app-applicant></app-applicant>
+<ngx-spinner
+    bdOpacity = 0.9
+    bdColor = "rgba(0,0,0,0.5)"
+    size = "medium"
+    color = "#0e9948"
+    type = "ball-8bits"
+    [fullScreen] = "true"
+    >
+    <p style="color: white" > Loading... </p>
+</ngx-spinner>  
+<ol class="breadcrumb">
+    <li class="breadcrumb-item">
+        <a routerLink="/home">Events Dashboard</a>
+    </li>
+</ol>
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-body"> 
+        <div *ngIf="eventAttendList.length === 0">
+            <p class="text-center text-danger">No Events Found</p>
+        </div>     
+        <div class="row card-group" *ngIf="eventAttendList.length > 0">
+            
+            <!--   -->
+            <div class="col-4" *ngFor="let item of eventAttendList">
+                <div class="card" >
+                    <div class="card-header">
+                        <b>Event Name : </b><i class="text-success">{{item.event_name}}</i>
+                    </div>
+                   
+                    <div class="card-body" >
+                        
+                        <p><b>Start Date:</b> {{item.start_date | date:'y/M/d, h:mm a'}}</p>
+                        <p><b>End Date:</b> {{item.end_date | date:'y/M/d, h:mm a'}}</p>
+                        <p><b>Status:</b> {{item.status}}</p>
+                        <img class="card-img-top" src="{{item.upload_pic}}">
+    
+                    </div>
+                    
+                    <!-- <div class="card-footer">
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
+                         (click)="getSlectedEvent(item)">Click To Join</button>
+                    </div> -->
+                </div><br />
+            </div>
+            
+        </div>
+        </div>
+        </div>
+    
+</div>

@@ -1,0 +1,743 @@
+<app-admin-nav></app-admin-nav>
+
+<div class="container-fluid">  
+    <div class="card">      
+      
+        <ngx-spinner
+            bdOpacity = 0.9
+            bdColor = "rgba(0,0,0,0.5)"
+            size = "medium"
+            color = "#0e9948"
+            type = "ball-8bits"
+            [fullScreen] = "true"
+            >
+            <p style="color: white" > Loading... </p>
+        </ngx-spinner> 
+        <div class="container mx-auto">  
+            <div class="row" style="margin: 16px;">
+                <div class="col">
+                    <label for="validationCustom01">Membership ID (or) Company Name</label>
+                    <input type="text" class="form-control" [(ngModel)]="membership_id_f"  placeholder="Enter Membership ID (or) Company Name for Search"  required> 
+        
+                </div>
+                <!-- <div class="col">
+                    <label for="validationCustom01">Company Name</label>
+                    <input type="text" class="form-control" [(ngModel)]="company_name_f" required> 
+        
+                </div> -->
+                <div class="col">
+                        <label>Filter by Paid/Unpaid List</label>
+                        <select class="form-control" (click)="applyFilter($event.target.value)" type="text">
+                          <option value="null">All</option>
+                          <option value="Paid">Paid List</option>
+                          <option value="Unpaid">Unpaid List</option>
+                          <!-- <option value="Approved">Approved By Manager/Approver</option>
+                          <option value="Rejected">Rejected By Manager/Approver</option> -->
+                  
+                        </select>
+                </div>
+              <!-- <button type="button" class="btn btn-success ml-3" (click)="showModal()">
+                Search
+                </button>
+                <button type="button" class="btn btn-danger ml-3" (click)="getMemberships()" *ngIf="filterClearBtn">
+                  Clear
+                  </button> -->
+            </div>
+            <br>              
+            <table class="table table-bordered">
+            <thead>
+            <tr>
+            <th scope="row"> Applicant ID </th>
+            <th scope="row"> Company Name</th>
+            <th scope="row"> Application Status </th>
+            <th scope="row"> Branch </th>
+            <!-- <th scope="row" style="width: 5%;"> Category </th> -->
+            <!-- <th scope="row"> Amount </th> -->
+            <!-- <th scope="row"> Invoice No </th> -->
+            <th scope="row"> Payment Status </th>
+            <!-- <th scope="row"> Payment Mode </th> -->
+            <!-- <th scope="row"> Receipt No </th> -->
+            <!-- <th scope="row" style="width: 3%;"> Memebership Certificate </th> -->
+            <!-- <th scope="row"> Membership Date </th> -->
+            <th scope="row"> Approve Date </th>
+            <th scope="row"> Action </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of managerList | grdFilter : { membership_id: membership_id_f , company_name: membership_id_f }">
+                <td>{{item.user_id}}</td>
+            <td>{{item.member_company_name}}</td>
+            <td *ngIf="item.application_status === 'Send to Executive Director'">
+                Send by Membership sales
+                <!-- <button class="btn btn-sm btn-success" (click)="statusClick(item)"> -->
+                    <!-- {{item.application_status}} -->
+                    <!-- </button> -->
+            </td>
+            <td *ngIf="item.application_status != 'Send to Executive Director'">
+                {{item.application_status}}
+            </td>
+            <td>{{item.branch_name}}</td>
+            <!-- <td style="width: 5%;">{{item.y_m_category}}</td> -->
+            <!-- <td>{{item.amount}}</td> -->
+            <!-- <td>{{item.invoice_number}}</td> -->
+            <td> {{item.payment_status}}</td>
+            <!-- <td>{{item.payment_mode}}</td>  -->
+            <!-- <td>{{item.receipt_no}}</td> -->
+            <!-- <td style="width: 3%;">{{item.membership_cert_number}}</td> -->
+            <!-- <td>{{item.created_date | date:'d-M-y'}}</td> -->
+            <td *ngIf="item.approved_date != null; else approveD"> {{item.approved_date | date:'d-M-y'}}</td>
+            <ng-template #approveD>
+            <td>
+                  00/00/0000
+              </td>
+          </ng-template>
+            
+            <td>
+                <!-- <button class="btn btn-sm btn-success" (click)="showNotifyModal(item)">Notify</button> -->
+                    <!-- *ngIf="item.receipt_no != null" -->
+                <!-- <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#exampleModalapprover"
+                (click)="approveEventOnRow(item.user_id)">Send To Membership Sales</button> -->
+                <!-- data-toggle="modal" data-target="#exampleModalapprover" -->
+                
+                <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#exampleModalCenter" 
+                    (click)="getViewModal(item.user_id)" style="margin-right: 10px;">View</button>
+
+                <button type="button" class="btn btn-sm btn-success"
+                    (click)="showSendtoApproverModal(item)" >
+                    Approve Invoice
+                </button>
+                <!-- *ngIf="item.receipt_no != null" -->
+                <!-- <button type="button" class="btn btn-sm btn-danger" data-toggle="modal"
+                    data-target="#exampleModaluser" (click)="deleteEventOnRow(item.user_id)" 
+                    style="margin-top: 10px;">
+                    View Receipt
+                </button> -->
+            </td>
+
+        </tr>
+        
+        </tbody>
+                </table>
+        </div>
+  
+    </div>
+</div>
+
+    <!-- // Membership VIEW // -->
+    <div class="backdrop" [ngStyle]="{'display':sigdisplay2}"></div>
+    <div class="modal fade bd-example-modal-lg" id="exampleModalCenter" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true" [ngStyle]="{'display':sigdisplay2}">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content" style="width: 900px;">
+                <div class="modal-header" style="background-color: #39fc;">
+                    <h5 class="modal-title" style="color: white;"><b>Membership Details</b></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: white;"
+                        (click)="hideViewModal()">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <!-- <form [formGroup]="userDetails" (ngSubmit)="onSubmitApproverUpdate(userDetails)"> -->
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-3">
+    
+                            <div class="form-group">
+                                <label><b>Applicant Id</b> </label>
+                                <input type="email" class="form-control" placeholder="Applicant Id" 
+                                    value={{membership_id}} readonly>
+                            </div>
+                        </div>
+    
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label><b>Company Name</b></label>
+                                <input type="email" class="form-control" placeholder="Company Name" 
+                                    value={{company_name}} readonly>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label><b>Trade Name</b></label>
+                                <input type="email" class="form-control" value="{{trade_name}}"
+                                    placeholder="Trade Name" readonly>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label><b>Branch</b> </label>
+                                <input type="email" class="form-control" placeholder="Branch" 
+                                    value="{{branch}}" readonly>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label><b>Address1</b></label>
+                                <input type="email" class="form-control" placeholder="Address1" 
+                                    value={{address1}} readonly>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label><b>Address2</b></label>
+                                <input type="email" class="form-control" placeholder="Address2" 
+                                    value={{address2}} readonly>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label><b>City</b></label>
+                                <input type="email" class="form-control" placeholder="City" 
+                                    value={{city}} readonly>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label><b>State</b> </label>
+                                <input type="text" class="form-control" placeholder="State" 
+                                    value={{state}} readonly>
+                            </div>
+                        </div>
+                    
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label><b>Country</b></label>
+                                <input type="email" class="form-control" placeholder="Country" 
+                                    value={{country}} readonly>
+                            </div>
+                        </div>
+                    
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label><b>Zip/Pincode</b> </label>
+                                <input type="email" class="form-control" placeholder="Zip/Pincode" 
+                                    value={{pincode}} readonly>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label><b>Company Tel</b></label>
+                                <input type="email" class="form-control" placeholder="Company Tel" 
+                                    value={{company_tel}} readonly>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label><b>Company Fax</b> </label>
+                                <input type="email" class="form-control" placeholder="Company Fax" 
+                                    value={{company_fax}} readonly>
+                            </div>
+                        </div>
+                       
+                    </div>
+                    <div class="row">
+                    
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label><b>Company Website</b> </label>
+                                <input type="email" class="form-control" placeholder="Company Website" 
+                                    value={{company_website}} readonly>
+                            </div>
+                        </div>
+                            
+                        <div class="col-sm-3">
+                        </div>
+                        <div class="col-sm-3">
+                        </div>
+                    
+                    </div>
+    
+                    <div class="card-header">
+                        <p style="text-align: center;"> <b>Mailing Address</b></p>
+                    </div>
+                    <br>
+                    <div class="row">
+                    
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label><b>Address1</b> </label>
+                                <input type="email" class="form-control" placeholder="Address1" 
+                                    value={{ma_address1}} readonly>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label><b>Address2</b></label>
+                                <input type="email" class="form-control" placeholder="Address2" 
+                                    value={{ma_address2}} readonly>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label><b>Company Fax</b> </label>
+                                <input type="email" class="form-control" placeholder="Company Fax" 
+                                    value={{company_fax}} readonly>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label><b>City</b> </label>
+                                <input type="email" class="form-control" placeholder="City" 
+                                    value={{ma_city}} readonly>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                    
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label><b>State</b> </label>
+                                <input type="email" class="form-control" placeholder="State" 
+                                    value={{ma_state}} readonly>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label><b>Zip/Pincode</b></label>
+                                <input type="email" class="form-control" placeholder="Zip/Pincode" 
+                                    value={{ma_pincode}} readonly>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label><b>Country</b> </label>
+                                <input type="email" class="form-control" placeholder="Country" 
+                                    value={{ma_country}} readonly>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                           
+                        </div>
+                    </div>
+    
+                    <div class="card-header">
+                        <p style="text-align: center;"> <b>Company Details</b></p>
+                    </div>
+                    <br>
+                    <div class="row">
+                    
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label><b>Company Registration 
+                                    <p style="margin: 0px;">Date</p></b> </label>
+                                <input type="email" class="form-control" placeholder="Company Registration Date" 
+                                    value={{c_r_date}} readonly>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label><b>Type Of Company<p style="margin: 0px;">Type</p></b></label>
+                                <input type="email" class="form-control" placeholder="Type Of Company Type" 
+                                    value={{type_of_company}} readonly>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label><b>Company Registration <p style="margin: 0px;">Number</p></b> </label>
+                                <input type="email" class="form-control" placeholder="Company Registration Number" 
+                                    value={{c_r_number}} readonly>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label><b>New Company Registrater <p style="margin: 0px;">Number</p></b> </label>
+                                <input type="email" class="form-control" placeholder="New Company Registrater Number" 
+                                    value={{n_c_r_number}} readonly>
+                            </div>
+                           
+                        </div>
+                    </div>
+                    <div class="row">
+                    
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label><b>Authorized Capital(SG) or 
+                                    <p style="margin: 0px;">Equivalent if foreign</p>
+                                    <p style="margin: 0px;">owned</p>
+                                </b> </label>
+                                <input type="email" class="form-control" placeholder="Authorized Capital(SG) or Equivalent if foreign owned" 
+                                    value={{a_capital}} readonly>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label><b>Issued Capital(SG) or 
+                                    <p style="margin: 0px;">Equivalent if foreign</p>
+                                    <p style="margin: 0px;">owned</p>
+                                </b></label>
+                                <input type="email" class="form-control" placeholder="Issued Capital(SG) or Equivalent if foreign owned" 
+                                    value={{i_capital}} readonly>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label><b>Number of Full-Time <p style="margin: 0px;">Employees</p>
+                                    <br>
+                                    </b> </label>
+                                <input type="email" class="form-control" placeholder="Number of Full-Time Employees" 
+                                    value={{n_of_full_t_employees}} readonly>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label><b>Membership<p style="margin: 0px;">category</p><br></b> </label>
+                                <input type="email" class="form-control" placeholder="Membership category" 
+                                    value={{y_m_category}} readonly>
+                            </div>
+                           
+                        </div>
+                    </div>
+                    <div class="row">
+                    
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label><b>Description of Principal <p style="margin: 0px;">Business Activities</p>
+                                    </b> </label>
+                                <input type="email" class="form-control" placeholder="Description of Principal Business Activities" 
+                                    value={{d_o_principal_b_activities}} readonly>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label><b>Business <p style="margin: 0px;">Sector</p></b></label>
+                                <input type="email" class="form-control" placeholder="Business Sector" 
+                                    value={{business_sector}} readonly>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label><b>Business <p style="margin: 0px;">Sub-Sector</p>
+                                    </b> </label>
+                                <input type="email" class="form-control" placeholder="Business Sub-Sector" 
+                                    value={{business_sub_sector}} readonly>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                           
+                        </div>
+                    </div>
+    
+                    <div class="card-header">
+                        <p style="text-align: center;"> <b>Key Contacts</b></p>
+                    </div>
+                    <br>
+                    <div class="row">
+                    
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label><b>Proposed by</b> </label>
+                                <input type="email" class="form-control" placeholder="Proposed by" 
+                                    value={{proposed_by}} readonly>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label><b>Seconded by</b></label>
+                                <input type="email" class="form-control" placeholder="Seconded by" 
+                                    value={{seconded_by}} readonly>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                        </div>
+                        <div class="col-sm-3">
+                           
+                        </div>
+                    </div>
+    
+                    <div class="card-header">
+                        <p style="text-align: center;"> <b>Documents and Remarks</b></p>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label><b>Company Profile</b> </label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" placeholder="Company Profile"
+                                        aria-describedby="basic-addon2" readonly value="{{u_ssm_c_profile}}">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary" type="button" 
+                                            (click)="photoView(u_ssm_c_profile)">View
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label><b>Business Card</b> </label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" placeholder="Business Card"
+                                        aria-describedby="basic-addon2" readonly value="{{u_b_card}}">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary" type="button" 
+                                            (click)="photoView1(u_b_card)">View
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label><b>Approve Remark</b> </label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" placeholder="Approve Remark"
+                                        aria-describedby="basic-addon2" readonly value="{{remarks}}">
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <!-- </div> -->
+                    <!-- </div> -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" 
+                            (click)="hideViewModal()">Close
+                        </button>
+                    </div>
+                    <!-- </form> -->
+                </div>
+            </div>
+        </div>
+    
+    </div>
+
+
+<!-- // APPROVE Membership // -->
+<div class="backdrop" [ngStyle]="{'display':sigdisplay3}"></div>
+
+<div class="modal fade" id="exampleModalapprove" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true" [ngStyle]="{'display':sigdisplay3}">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: #39fc;">
+        <h5 class="modal-title" id="exampleModalLabel" style="color: white"><b>Approve Applicant</b></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="hideApproveModal()">
+          <span aria-hidden="true" style="color: white;">&times;</span>
+        </button>
+      </div>
+      <form [formGroup]="approve" (ngSubmit)="onSubmitApprove(approve)">
+        <div class="modal-body">
+            <h5>Are you sure want to APPROVE this Membership ?</h5>
+            <br>
+            <input type="text" formControlName="member_id" placeholder="Membership id" class="form-control" readonly required/>
+        <br>
+            <textarea type="text" formControlName="remarks" placeholder="Remarks" class="form-control" style="height: 100px;" required>
+            </textarea>
+       
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-info"> Yes</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close" (click)="hideApproveModal()">No</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div> 
+
+<!-- // REJECT Membership // -->
+<div class="backdrop" [ngStyle]="{'display':sigdisplay}"></div>
+<div class="modal fade bd-example-modal-lg" id="exampleModaluser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true" [ngStyle]="{'display':sigdisplay}">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: #39fc;">
+        <h5 class="modal-title" id="exampleModalLabel" style="color: white;"><b>View Receipt</b></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="hideDeleteModal()">
+          <span aria-hidden="true" style="color: white;">&times;</span>
+        </button>
+      </div>
+      <form [formGroup]="viewReceiptForm" (ngSubmit)="onSubmitViewReceipt(viewReceiptForm)">
+        <div class="modal-body" *ngFor="let item of viewReceipt">
+            <div class="card-header">
+                <p style="text-align: center;"> <b>Online Payment</b></p>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm-3">
+
+                    <div class="form-group">
+                        <label><b>Invoice No</b> </label>
+                        <input type="email" class="form-control" formControlName="invoiceNo" placeholder="Invoice No" 
+                            value={{item.invoice_no}} readonly>
+                    </div>
+                </div>
+
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label><b>Receipt No</b></label>
+                        <input type="email" class="form-control" placeholder="Receipt No" 
+                            value={{item.receipt_no}} readonly>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label><b>Creation Date</b></label>
+                        <input type="email" class="form-control" value="{{item.creation_date}}"
+                            placeholder="Creation Date" readonly>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label><b>Receipt Date</b> </label>
+                        <input type="email" class="form-control" placeholder="Receipt Date" 
+                            value="{{item.receipt_date}}" readonly>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label><b>Subscription Details</b></label>
+                        <input type="email" class="form-control" placeholder="Subscription Details" 
+                            value={{item.subscription_details}} readonly>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label><b>Subscription Fees</b></label>
+                        <input type="email" class="form-control" placeholder="Subscription Fees" 
+                            value={{item.subscription_fees}} readonly>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label><b>Discount Details</b></label>
+                        <input type="email" class="form-control" placeholder="Discount Details" 
+                            value={{item.discount_details}} readonly>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label><b>Discount Fees</b> </label>
+                        <input type="text" class="form-control" placeholder="Discount Fees" 
+                            value={{item.discount_fees}} readonly>
+                    </div>
+                </div>
+            
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label><b>Other Details</b></label>
+                        <input type="email" class="form-control" placeholder="Other Details" 
+                            value={{item.other_details}} readonly>
+                    </div>
+                </div>
+            
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label><b>Total Amount</b> </label>
+                        <input type="email" class="form-control" placeholder="Total Amount" 
+                            value={{item.total_amount}} readonly>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label><b>Payment Method</b></label>
+                        <input type="email" class="form-control" placeholder="Payment Method" 
+                            value={{item.payment_method}} readonly>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label><b>Payment Status</b> </label>
+                        <input type="email" class="form-control" placeholder="Payment Status" 
+                            value={{item.payment_status}} readonly>
+                    </div>
+                </div>
+               
+            </div>
+            <div class="row">
+            
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <!-- <label><b>userId</b> </label> -->
+                        <input type="email" class="form-control" placeholder="userId" formControlName="userId"
+                            hidden readonly>
+                    </div>
+                </div>
+                    
+                <div class="col-sm-3">
+                </div>
+                <div class="col-sm-3">
+                </div>
+            
+            </div>
+
+            <div class="card-header">
+                <p style="text-align: center;"> <b>Offline Payment</b></p>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label><b>Upload Receipt</b> </label>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="Company Profile"
+                                aria-describedby="basic-addon2" readonly value="{{item.upload_receipt}}">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="button" 
+                                    (click)="receiptView(item.upload_receipt)">View
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label><b>Paid/Unpaid</b> </label>
+                        <div class="input-group mb-3">
+                            <select placeholder="Paid/Unpaid" class="form-control" formControlName="status" [(ngModel)]="status">
+                                <option value="Paid">Paid</option>
+                                <option value="Unpaid">Unpaid</option>
+                            </select>
+                            <!-- <input type="text" class="form-control" placeholder="Paid/Unpaid"
+                                aria-describedby="basic-addon2" readonly value="{{remarks}}"> -->
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <!-- <input type="text" formControlName="member_id" placeholder="Membership id" class="form-control" readonly required/> -->
+          </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-info"> Submit</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close" (click)="hideDeleteModal()">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Send to Approver Modal-->
+<div class="backdrop" [ngStyle]="{'display':sigdisplay1}"></div>
+<div class="modal fade" id="exampleModalapprover" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true" [ngStyle]="{'display':sigdisplay1}">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: #39fc;">
+        <h5 class="modal-title" id="exampleModalLabel" style="color: white;"><b>Send to Membership Sales</b></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="hideapproverModal()">
+          <span aria-hidden="true" style="color: white;">&times;</span>
+        </button>
+      </div>
+      <form [formGroup]="sendtoapprover" (ngSubmit)="onSubmitapprover(sendtoapprover)">
+        <div class="modal-body">
+          <input type="hidden" formControlName="member_id" class="form-control" required>
+          <!-- <input type="hidden" formControlName="admin_name" class="form-control" required> -->
+          <h5>Are you sure want to Send to Membership Sales ?</h5>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-info"> Yes</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close" (click)="hideapproverModal()">No</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<br><br><br>

@@ -1,0 +1,102 @@
+<!-- <app-applicant></app-applicant> -->
+
+
+<ngx-spinner
+  bdOpacity = 0.9
+  bdColor = "rgba(0,0,0,0.5)"
+  size = "medium"
+  color = "#0e9948"
+  type = "ball-8bits"
+  [fullScreen] = "true"
+  >
+  <p style="color: white" > Loading... </p>
+</ngx-spinner>
+
+<div class="card">
+    <div class="row pl-5 pt-5" style="width: 100%;">
+    <div class="inline justify-content-center" style="margin-bottom: 16px;">
+        <button class="btn btn-primary ml-5" (click)="goBack()">Back</button>
+        <button class="btn btn-success ml-3" (click)="downloadPdf()"><i class="fa fa-download"></i> Download</button>
+    </div>
+    </div>
+    <div id="downloadView">
+        <div class="container col-sm-offset-7">
+    <div class="card-body">
+        <!-- <div class="container"> -->
+            <div class="mx-auto text-center">
+                <div class="image" style="text-align: center;">
+                    <!-- <img class="img-responsive" height="63" width="150" src="../../assets/cma.jpeg"/> -->
+                    <!-- <img class="img-responsive" height="63" width="150" src="../../assets/cma.jpeg" style="margin-bottom: 16px;"/> -->
+                    <img class="img-responsive" height="100" src="https://www.shinjiru.com.my/wp-content/themes/sj_child/assets/img/clients/micci.jpg"/>
+                </div>     
+                <h4>MALAYSIAN INTERNATIONAL CHAMBER OF COMMERCE AND INDUSTRY  (16841-V)</h4>
+                <p>C-8-8, 8th Floor, Block C, Plaza Mont' Kiara, 2 Jalan Kiara, 50480 Kuala Lumpur,Malaysia. Postal Address:P O Box 12921, 50792 KL.</p>
+                <!-- <p>{{addressData}}</p> -->
+                <p>Tel: 03-6201 7708 Fax: 03-6201 7705 Email: micci@micci.com Website: www.micci.com</p>
+                <h5>GST ID NO: 000799776768</h5> 
+                <br><br><br>
+            </div>    
+            <div *ngFor="let item of dataList">
+            <div class="form-row col-md-12 mx-auto">
+                <div class="form-group col-md-6 text-left">
+                    <h5>Received from:</h5>
+                    <br>
+                    <p>AZ PERFORMANCE COATING SDN BHD<br>
+                        No. 43, Jalan Bidara 2/5<br>
+                        Taman Bidara<br>
+                        68100 Batu Caves<br>
+                        Selangor Darul Ehsan
+                    </p> 
+                </div>
+                <div class="form-group col-md-6 text-right">
+                    <p>Receipt No: {{item.receipt_no}}</p>
+                    <p>Date: {{item.receipt_date | date:'d/M/y'}}</p>
+                </div>
+            </div>
+            <div class="col-md-12 mx-auto">
+                <div class="form-group">
+                    <table class="table table-bordered">
+                        <tbody>
+                             <tr>
+                                <th>Amount received:</th>
+                                <td>{{item.total_amount}}</td>
+                             </tr>
+                             <!-- <tr>
+                                <th>Ringgit Malaysia:</th>
+                                <td></td>
+                             </tr> -->
+                             <tr>
+                                <th>Payment Method:</th>
+                                <td>{{item.payment_method}}</td>
+                             </tr> 
+                             <tr>
+                                <th>Payment Particulars </th>
+                                <td></td>
+                             </tr>
+                        </tbody>
+                     </table>
+                 </div>
+            </div>
+            <br>
+            <div class="form-row col-md-12 mx-auto">
+                <div class="form-group col-md-3 text-left">
+                    <p style="text-decoration: underline;">Invoice No:</p>
+                    <p>{{item.invoice_no}}</p>
+                </div>
+                <div class="form-group col-md-6 text-center">
+                   <p style="text-decoration: underline;">Description:</p> 
+                   <p>Payment; AZ PERFORMANCE COATING SDN BHD</p>
+                </div>
+                <div class="form-group col-md-3 text-right">
+                    <p style="text-decoration: underline;">Amount:</p>
+                    <p>{{item.total_amount}}</p>
+                </div>
+            </div>
+        </div>
+    <!-- </div> -->
+    </div>
+    </div>
+</div>
+</div>
+
+<br><br><br>

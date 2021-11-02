@@ -1,0 +1,23 @@
+
+  .card{
+    background-image: linear-gradient(#031163,#1978a5,#05716c,#1fbfb8);
+    height: 700px;
+  }
+  
+  .card-body{
+      background: white;
+      border-radius: 5px;
+      border: 1px solid black;
+      
+  }
+  
+  input{
+      border: 1px solid black;
+  }
+
+  table,td,th,tr{
+      border: 1px solid black;
+  }
+
+
+  

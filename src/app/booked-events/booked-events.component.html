@@ -1,0 +1,169 @@
+<app-admin-nav></app-admin-nav>
+<ngx-spinner
+    bdOpacity = 0.9
+    bdColor = "rgba(0,0,0,0.5)"
+    size = "medium"
+    color = "#0e9948"
+    type = "ball-8bits"
+    [fullScreen] = "true"
+>
+<p style="color: white" > Loading... </p>
+</ngx-spinner>
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-md-6">
+                    <h4>Booked Events</h4>
+                </div>
+                <!-- <div class="col-md-6">
+                    <div class="float-right">
+                        <button class="btn btn-primary" (click)="openModal(template)">Add Event</button>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row" style="margin: 10px;">
+                <div class="col">
+                    <label for="validationCustom01">Event Name (or) Ticket Number</label>
+                    <input type="text" class="form-control" [(ngModel)]="membership_id_f"  placeholder="Enter Event Name (or) Ticket Number for Search"  required> 
+        
+                </div>
+                <!-- <div class="col">
+                    <label for="validationCustom01">Company Name</label>
+                    <input type="text" class="form-control" [(ngModel)]="company_name_f" required> 
+        
+                </div> -->
+                <!-- <div class="col">
+                        <label>Filter by status</label>
+                        <select class="form-control" (click)="applyFilter($event.target.value)" type="text">
+                          <option value="null">All</option>
+                          <option value="Pending">Pending</option>
+                          <option value="Send to Manager">Send to Manager</option>
+                          <option value="Approved">Approved By Manager/Approver</option>
+                          <option value="Rejected">Rejected By Manager/Approver</option>
+                  
+                        </select>
+                </div> -->
+              <!-- <button type="button" class="btn btn-success ml-3" (click)="showModal()">
+                Search
+                </button>
+                <button type="button" class="btn btn-danger ml-3" (click)="getMemberships()" *ngIf="filterClearBtn">
+                  Clear
+                  </button> -->
+            </div>
+            <br>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Booking Id</th>
+                        <th>Ticket Number</th>
+                        <th>Event Name</th>
+                        <th>Booked Date</th>
+                        <th>Number of tickets</th>
+                        <th>price</th>
+                        <!-- <th>Action</th> -->
+                    </tr>
+                </thead>
+                <tbody *ngFor="let item of eventList | grdFilter : { event_name: membership_id_f, ticket_no: membership_id_f }">
+                    <tr>
+                        <td>{{item.booking_id}}</td>
+                        <td>{{item.ticket_no}}</td>
+                        <td>{{item.event_name}}</td>
+                        <td>{{item.book_date | date:'d/M/yyyy, h:mm a'}}</td>
+                        <td>{{item.no_of_tickets}}</td>
+                        <td>{{item.price}}</td>
+                        <!-- <td>
+                            
+                            <button class="btn btn-danger" (click)="openModalDelete(template2); deleteEvent(item.event_title)">Delete</button>
+                        </td> -->
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<!-- <ng-template #template1>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Booked Event Details</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="card">
+            <div class="card-body">
+
+                <form [formGroup]="UpdateEvents" (ngSubmit)="onUpdateEventsSubmit(UpdateEvents)">
+                    <div class="form-group mr-3">
+
+                        <label><b>Event Id: </b></label>
+                        <input type="text" formControlName="eventId" class="form-control" required readonly>
+                    </div>
+
+                    <div class="form-group mr-3">
+
+                        <label><b>Event Name: </b></label>
+                        <input type="text" formControlName="eventTitle1" class="form-control" required>
+                    </div>
+                    <div class="form-group mr-3">
+
+                        <label><b>Event Description: </b></label>
+                        <input type="text" formControlName="description1" class="form-control">
+                    </div>
+
+                    <div class="form-group mr-3">
+
+                        <label><b>Start Date</b></label>
+                        <input type="text" 
+                        placeholder="Select Date" 
+                        formControlName="startDate1" 
+                        class="form-control" bsDatepicker
+                        [bsConfig]="{ adaptivePosition: true, dateInputFormat: 'DD/MM/YYYY h:mm:ss' }" required>
+                    </div>
+
+                
+                    <div class="form-group mr-3">
+
+                        <label><b>End Date</b></label>
+                        <input type="text" 
+                        placeholder="Select Date" 
+                        formControlName="endDate1" 
+                        class="form-control" bsDatepicker
+                        [bsConfig]="{ adaptivePosition: true, dateInputFormat: 'DD/MM/YYYY, h:mm:ss' }" required>
+                    </div>
+
+                    <div class="form-group mr-3">
+
+                        <label><b>Venue</b></label>
+                        <input type="text" formControlName="venue1" class="form-control">
+                        
+                    </div>
+
+                    <div class="form-group mr-3">
+
+                        <label><b>Tickets Available</b></label>
+                        <input type="number" formControlName="availableTickets1" class="form-control">
+                    </div>
+
+                    <div class="form-group mr-3">
+
+                        <label><b>Price</b></label>
+                        <input type="number" formControlName="price1" class="form-control">
+
+                    </div>
+                    <button type="submit" class="btn btn-success" (click)="modalRef.hide()">Update</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</ng-template> -->
+<!-- Modal End -->
+
+
+
+
+

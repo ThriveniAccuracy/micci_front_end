@@ -1,0 +1,249 @@
+<app-admin-nav></app-admin-nav>
+<ngx-spinner
+  bdOpacity = 0.9
+  bdColor = "rgba(0,0,0,0.5)"
+  size = "medium"
+  color = "#0e9948"
+  type = "ball-8bits"
+  [fullScreen] = "true"
+  >
+  <p style="color: white" > Loading... </p>
+</ngx-spinner>
+  <div class="container">
+    <div class="card" style="border: 1px solid black;">
+     
+         
+        <div class="card-body mx-auto ">
+                  <!-- <img class="img-responsive col-lg-4" width="100%" src="https://www.shinjiru.com.my/wp-content/themes/sj_child/assets/img/clients/micci.jpg"/>       -->
+     
+                  
+                     
+                    <button type="button" class="btn btn-primary" (click)="openModal(template)">
+                                
+                        Generate Invoice
+                    </button>
+                    <br>
+                    <br>
+                    
+                    <h3>Membership Invoice  </h3>
+                    <br>
+                    <form [formGroup]="membershipInvoice" 
+                    (ngSubmit)="onMembershipSubmit(membershipInvoice)">
+                    
+                    <div class="row col-md-10 mx-auto">
+                      <div class="col-md-4">
+                      <div class="form-group">
+                        <label><b>Membership ID</b></label>
+                        <input type="text" formControlName="membershipId4" class="form-control">
+                      </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label><b>Invoice No</b></label>
+                          <input type="text" formControlName="invoice_num" class="form-control">
+                        </div>
+                        </div>
+                      <div class="col-md-4">
+                      <label for="">-</label><br>
+                      <button type="submit" class="btn btn-warning">Submit </button>
+                      </div>
+                    </div>
+                      
+                    </form>
+                    <br>
+                    <br>
+                <div *ngIf="tableList1">  
+        <table class="table table-bordered">
+                        <thead>
+                       <tr>
+                         <th scope="col"> Membership ID </th>
+                         <th scope="col"> Company Name </th>
+                         <th scope="col"> Branch </th>
+                         <th scope="col"> Invoice No </th>
+                         <th scope="col"> Issued date</th>
+                         <th scope="col"> Amount </th>
+                         <th scope="col"> View </th>
+                         <!-- <th scope="col"> Download </th> -->
+                       </tr>
+                     </thead>
+                     <tbody *ngFor="let item of membershipList">
+                     <tr>
+                      <td>{{item.membership_id}}</td>
+                      <td>{{item.member_company_name}}</td>
+                      <td>{{item.branch_name}}</td>
+                      <td>{{item.invoice_no}}</td>
+                      <td>{{item.creation_date | date:'y-M-d'}}</td>
+                      <td>{{item.total_amount}}</td>
+                      <td style="text-align: center;" ><a [routerLink]="['/invoice', item.invoice_no || 'all']"> <i class="fa fa-eye" aria-hidden="true"></i></a></td>
+
+                     <!-- <td style="text-align: center;"><i class="fa fa-eye" aria-hidden="true"></i></td> -->
+                     <!-- <td style="text-align: center;" ><a [routerLink]="['/invoice', list.invoice_number]"> <i class="fa fa-eye" aria-hidden="true"></i></a></td> -->
+
+                     <!-- <td style="text-align: center;"><i class="fa fa-download" aria-hidden="true"></i></td> -->
+                     
+                     </tr>
+                     
+                     </tbody>
+                     </table>
+                 </div>    
+                     <!-- <br>
+                     <br>
+                     <h3>Request Invoice  </h3>
+                     <br> -->
+                     <!-- <form [formGroup]="requestInvoice" (ngSubmit)="onRequestSubmit(requestInvoice)">
+                     <div class="row col-sm-10 mx-auto">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label><b>Membership ID</b></label>
+                                <input type="text" formControlName="membershipId2" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="name"><b>Company Name</b></label>
+                                <input type="text" formControlName="companyName" class="form-control">
+                             </div>   
+                        </div>
+                        <div class="col-sm-4 ">
+                          <label for="">-</label><br>
+                          <button type="submit" class="btn btn-warning">Submit </button>
+                      </div>
+                    </div>
+                    </form> -->
+                  <!-- <br>
+                  <br> -->
+        
+                  
+      <!-- <div *ngIf="tableList2">            
+        <table class="table table-bordered">
+            <thead>
+           <tr>
+             <th scope="col"> Membership ID </th>
+             <th scope="col"> Company Name </th>
+             <th scope="col"> Branch </th>
+             <th scope="col"> Date</th>
+           </tr>
+         </thead>
+         <tbody *ngFor="let item of requestList">
+         <tr>
+         <td>{{item.membership_id}}</td>
+         <td>{{item.company_name}}</td>
+         <td>{{item.branch}}</td>
+         <td>{{item.created_date | date:'y-M-d'}}</td>
+         
+         </tr>
+         
+         </tbody>
+         </table>
+       </div>               -->
+        
+      </div>
+              
+  </div>
+</div> 
+    
+ 
+<!-- Modal Generate Invoice-->
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Generate Invoice</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="card">
+      <div class="card-body">       
+                               
+        <form [formGroup]="generateInvoice" (ngSubmit)="onGenerateInvoiceSubmit(generateInvoice)"> 
+          <div class="form-group mr-3">
+                
+              <label ><b>Membership Id: </b></label>
+              <input type="text" formControlName="membership_id" class="form-control">
+          </div>
+          <!-- <div class="form-group mr-3">
+             
+              <label ><b>Company Name: </b></label>
+              <input type="text" formControlName="company_name" class="form-control">
+            </div> -->
+
+            <!-- <div class="form-group mr-3">
+             
+              <label ><b>Name: </b></label>
+              <input type="text" formControlName="name" class="form-control">
+            </div> -->
+
+            <!-- <div class="form-group mr-3">
+             
+              <label ><b>Others </b></label>
+              <input type="text" formControlName="others" class="form-control">
+            </div> -->
+
+            
+
+            <div class="form-group mr-3">
+             
+              <label ><b>Amount </b></label>
+              <input type="text" formControlName="amount" class="form-control">
+            </div>
+
+            <button type="submit" class="btn btn-success" (click)="modalRef.hide()">submit</button>
+         </form>   
+       </div>
+   </div>
+  </div>
+</ng-template>
+<!-- Modal End -->  
+
+                    
+       
+        <!-- <div *ngIf="isModalShown" [config]="{ show: true }" bsModal #autoShownModal="bs-modal"
+              class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-auto-name"> -->
+
+                <!-- <div class="modal" id="Modalexample"  [style.display]="showModal ? 'block' : 'none'" > -->
+                  <!-- <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Invoice Generate Form </h5>
+                        <button type="button" class="close" (click)="hideModal()" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                          <div class="form-group mr-3">
+                              <br>
+                              <label ><b>Company Name: </b></label>
+                              <input type="text" class="form-control">
+                           </div>
+                           <div class="form-row" *ngFor="let obj of dataArray; let i=index">
+                            <div class="form-group col-md-3">
+                                <label>Name</label>
+                                     <input type="text" class="form-control" name="name{{i}}"
+                                         >
+                             </div>
+                                <div class="form-group col-md-3">
+                                <label>Amount</label>
+                                     <input type="text" class="form-control" name="amount{{i}}"
+                                       >
+                             </div>
+                             
+                               <div class="form-group col-md-2 mt-4 ml-3" >
+                                 <span (click)="remove(i)" class="btn btn-danger" *ngIf="i!=0">-</span>
+                             
+               <span (click)="add()" class="btn btn-success">+</span></div></div>
+               <div class="form-group mr-3">                             
+                <label ><b>Others: </b></label>
+                <input type="text" class="form-control">
+            </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button class="btn btn-primary" type="button" style="margin-right: 10px;" (click)="goToRenewal()">Submit</button>
+                        <button class="btn btn-warning" type="button" style="margin-right: 10px;" > Save</button>
+                        <button class="btn btn-warning" type="button" style="margin-right: 10px;"> Edit </button>
+              
+                      </div> 
+                    </div>
+                  </div>
+                </div> -->
+         
+     

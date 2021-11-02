@@ -1,0 +1,236 @@
+
+<ngx-spinner bdOpacity=0.9 bdColor="rgba(0,0,0,0.5)" size="medium" color="#0e9948" type="ball-8bits"
+[fullScreen]="true">
+<p style="color: white"> Loading... </p>
+</ngx-spinner>
+
+ <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-header">
+        <a class="navbar-brand" href="#">
+            <!-- <img width="400px" class="img-responsive text-left" height="63px"src="../../assets/MICCI.png"/> -->
+            <!-- <img class="img-responsive" height="63" width="150" src="../../assets/cma.jpeg"/> -->
+        </a>
+    </div>
+<div class="nav justify-content-end" id="navbarResponsive">
+   
+
+    <li class="nav-item">
+        <a class="nav-link" routerLink="/app-signIn"><strong>Login</strong></a>
+    </li>
+    </div>
+</nav>    
+
+
+<div class="container-fluid">
+    
+   <div class="card">
+    <div class="card-body"> 
+    <div *ngIf="viewList.length === 0">
+        <p class="text-center text-danger">No Events Found</p>
+    </div>     
+    <div class="row card-group" *ngIf="viewList.length > 0">
+        
+        <!--   -->
+        <div class="col-4" *ngFor="let item of viewList">
+            <div class="card" >
+                <div class="card-header">
+                    <b>Event Name : </b>{{item.event_title}}
+                </div>
+               
+                <div class="card-body" >
+                    <!-- <p><b>Start date : </b>{{item.start_date | date:'d/M/yyyy HH:mm:ss'}}</p>
+                    <p><b>End date : </b>{{item.end_date | date:'d/M/yyyy HH:mm:ss'}}</p>
+                    <p><b>Available tickets : </b>{{item.tickets_available}}</p>
+                    <p><b>Price : </b>{{item.price}}</p>
+                    <p><b>Venue : </b>{{item.venue}}</p>
+                    <p><b>Description : </b>{{item.event_description}}</p> -->
+                    <!-- <img class="card-img-top" src="/assets/cma.jpeg" alt="Card image cap"> -->
+
+                </div>
+                
+                <div class="card-footer">
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
+                     (click)="getSlectedEvent(item)">Click To Join</button>
+                </div>
+            </div><br />
+        </div>
+        
+    </div>
+    </div>
+    </div>
+</div>
+
+<!-- MODAL Start -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true" >
+    <div class="modal-dialog  modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Online Registration</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form [formGroup]="bookEvent" (ngSubmit)="onSubmit(bookEvent)">
+            <div class="modal-body">
+                
+                    <div class="row">
+                        <span class="col-md-6">
+                            <div class="form-group">
+
+                                <label><b>First Name: </b></label>
+                                <input type="text" formControlName="first_name" class="form-control" >
+                                <div *ngIf="f.first_name.invalid && (f.first_name.dirty || f.first_name.touched)">
+                                    <p *ngIf="f.first_name.errors.required" class="text-danger">
+                                     first name is necessary
+                                    </p>
+                                    <p *ngIf="f.first_name.errors.pattern" class="text-danger">
+                                      Only alphabets allowed
+                                     </p>
+                                </div>
+                            </div>
+                        </span>
+
+                        <span class="col-md-6">
+                            <div class="form-group">
+                                <label><b>Last Name: </b></label>
+                                <input type="text" formControlName="last_name" class="form-control">
+                                <div *ngIf="f.last_name.invalid && (f.last_name.dirty || f.last_name.touched)">
+                                    <p *ngIf="f.last_name.errors.required" class="text-danger">
+                                     last name is necessary
+                                    </p>
+                                    <p *ngIf="f.last_name.errors.pattern" class="text-danger">
+                                      Only alphabets allowed
+                                     </p>
+                                </div>
+                            </div>
+                        </span>
+                        
+                        <!-- <span class="col-md-6">
+                            <div class="form-group">
+                                <label><b>No of Tickets: </b></label>
+                                <input type="text" formControlName="Tickets" (keyup)="onKeyUpTicket($event.target.value)" class="form-control" required>
+                                <div *ngIf="f.Tickets.invalid && (f.Tickets.dirty || f.Tickets.touched)">
+                                    <p *ngIf="f.Tickets.errors.required" class="text-danger">
+                                        No of Tickets required
+                                    </p>
+                                </div>
+                            </div>
+                        </span> -->
+                    </div>
+
+                    <div class="row">
+                        <span class="col-md-6">
+                            <div class="form-group">
+
+                                <label><b>Email: </b></label>
+                                <input type="text" formControlName="email_address" class="form-control" >
+                                <div *ngIf="f.email_address.invalid && (f.email_address.dirty || f.email_address.touched)">
+                                    <p *ngIf="f.email_address.errors.required" class="text-danger">
+                                      Email is necessary
+                                    </p>
+                                    <p *ngIf="f.email_address.errors.email" class="text-danger">
+                                      Email must be a valid email address
+                                    </p>
+                                </div>
+                            </div>
+                        </span>
+                        <span class="col-md-6">
+                            <div class="form-group">
+                                <label><b>Company</b></label>
+                                <input type="text" class="form-control" formControlName="company_name"
+                                      required />
+                                      <div *ngIf="f.company_name.invalid && (f.company_name.dirty || f.company_name.touched)">
+                                        <p *ngIf="f.company_name.errors.required" class="text-danger">
+                                         company name is necessary
+                                        </p>
+                                        <p *ngIf="f.company_name.errors.pattern" class="text-danger">
+                                          Only alphabets allowed
+                                         </p>
+                                    </div>
+                                
+                            </div>  
+                        </span>
+                    </div>
+
+                    <div class="row">
+                        <span class="col-md-6">
+                            <div class="form-group">
+
+                                <label><b>Designation: </b></label>
+                                <input type="text" formControlName="designation" class="form-control" >
+                                <div *ngIf="f.designation.invalid && (f.designation.dirty || f.designation.touched)">
+                                    <p *ngIf="f.designation.errors.required" class="text-danger">
+                                     designation is necessary
+                                    </p>
+                                    <p *ngIf="f.designation.errors.pattern" class="text-danger">
+                                      Only alphabets allowed
+                                     </p>
+                                </div>
+                            </div>
+                        </span>
+                        <span class="col-md-6">
+                            <div class="form-group">
+                                <label><b>Mobile</b></label>
+                                <input type="text" class="form-control" formControlName="mobile_no"
+                                      required />
+                                      <div *ngIf="f.mobile_no.invalid && (f.mobile_no.dirty || f.mobile_no.touched)">
+                                        <p *ngIf="f.mobile_no.errors.required" class="text-danger">
+                                         mobile no is necessary
+                                        </p>
+                                    </div>
+                                
+                            </div>  
+                        </span>
+                    </div>
+
+                    <div class="row">
+                        <span class="col-md-6">
+                            <div class="form-group">
+
+                                <label><b>Event Name: </b></label>
+                                <input type="text" formControlName="event_name" class="form-control" readonly>
+
+                            </div>
+                        </span>
+                        <span class="col-md-6">
+                            <div class="form-group">
+                                <label><b>No of Tickets</b></label>
+                                <input type="text" formControlName="no_of_tickets" (keyup)="onKeyUpTicket($event.target.value)" class="form-control" required>
+
+ 
+                            </div>  
+                        </span>
+                    </div>
+
+
+                    <div class="row">
+                        <span class="col-md-6">
+                            <div class="form-group">
+
+                                <label><b>Price: </b></label>
+                                <input type="text" formControlName="Price" class="form-control" readonly>
+
+                            </div>
+                        </span>
+                        <span class="col-md-6">
+                            <div class="form-group">
+                                <label><b>Total Amount</b></label>
+                                <input type="text" class="form-control" formControlName="total"
+                                    placeholder="0" readonly required />
+
+                                
+                            </div>  
+                        </span>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" [disabled]="!bookEvent.valid" class="btn btn-success">Submit</button>
+                    </div>
+                
+            </div>
+        </form>
+        </div>
+    </div>
+</div>
+<!-- End MODAL -->

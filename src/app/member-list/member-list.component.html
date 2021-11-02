@@ -1,0 +1,173 @@
+<app-applicant></app-applicant>
+
+<div class="container-fluid">  
+    <div class="card">      
+      <!-- <img class="img-responsive col-lg-4" width="100%" src="https://www.shinjiru.com.my/wp-content/themes/sj_child/assets/img/clients/micci.jpg"/> -->
+              
+          
+                  <!-- <div class="form-group row">
+                    <label for="selectDate" class="col-sm-2 col-form-label col-form-label-sm"><strong>From Date:</strong></label>
+                    <div class="col-sm-2">
+                        <input type="text"
+                        placeholder="Select Date"
+                        class="form-control"
+                        bsDatepicker required>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="selectDate" class="col-sm-2 col-form-label col-form-label-sm"><strong>To Date:</strong></label>
+                    <div class="col-sm-2">
+                        <input type="text"
+                        placeholder="Select Date"
+                        class="form-control"
+                        bsDatepicker required>
+                    </div>
+                  </div> -->
+                  <ngx-spinner
+            bdOpacity = 0.9
+            bdColor = "rgba(0,0,0,0.5)"
+            size = "medium"
+            color = "#0e9948"
+            type = "ball-8bits"
+            [fullScreen] = "true"
+            >
+            <p style="color: white" > Loading... </p>
+          </ngx-spinner> 
+                <div class="row" style="margin-bottom: 16px;margin-top: 16px;">
+                  <button type="button" class="btn btn-success ml-3" (click)="showModal()">
+                    Search
+                    </button>
+                    <button type="button" class="btn btn-danger ml-3" (click)="getMemberships()" *ngIf="filterClearBtn">
+                      Clear
+                      </button>
+                </div>
+                
+       <div class="table table-bordered">
+      <thead>
+     <tr>
+       <th scope="row"> Membership ID </th>
+       <th scope="row"> Company Name</th>
+       <th scope="row"> Application Status </th>
+       <th scope="row"> Branch </th>
+       <th scope="row"> Category </th>
+       <!-- <th scope="row"> Amount </th> -->
+       <!-- <th scope="row"> Invoice No </th> -->
+       <!-- <th scope="row"> Payment Status </th> -->
+       <th scope="row"> City </th>
+       <th scope="row" style="width: 5%;"> State </th>
+       <th scope="row" style="width: 5%;"> Memebership Certificate </th>
+       <th scope="row"> Date </th>
+     </tr>
+   </thead>
+   <tbody>
+    <tr *ngFor="let item of membershipList">
+
+      <td><a [routerLink]="['/detail-sby-id', item.membership_id || 'all']">{{item.membership_id}}</a></td>
+      <td>{{item.company_name}}</td>
+      <td>{{item.application_status ? item.application_status : '-'}}</td>
+      <td>{{item.branch}}</td>
+      <td>{{item.y_m_category}}</td>
+      <!-- <td>{{item.amount}}</td> -->
+      <!-- <td>{{item.invoice_number}}</td> -->
+      <!-- <td> {{item.payment_status}}</td> -->
+      <td>{{item.city}}</td> 
+      <td style="width: 5%;">{{item.state}}</td>
+      <td style="width: 5%;">{{item.membership_cert_number}}</td>
+      <td>{{item.created_date | date:'d-M-y'}}</td>
+
+   </tr>
+   
+   </tbody>
+   </div>
+  
+  </div>
+  </div>
+
+
+
+
+  <div class="backdrop" [ngStyle]="{'display':sigdisplay}"></div>
+<!-- Button trigger modal -->
+  <!-- Modal -->
+  <div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':sigdisplay}">
+    <div class="modal-dialog modal-md" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Filter</h5>
+              <button type="button" class="close" (click)="hideModal()" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+        </div>
+
+       
+        <form [formGroup]="filter" (ngSubmit)="filterForm(filter)">
+          <input type="hidden" class="form-control" formControlName="invoice_no">
+          <input type="hidden" class="form-control" formControlName="reciept_no">
+        <div class="modal-body">
+           <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="validationCustom01">Membership ID</label>
+                <input type="text" class="form-control" formControlName="membership_id">
+               
+              </div>
+              <!-- <div class="col-md-6 mb-3">
+                <label for="validationCustom02">Invoice No</label>
+                <input type="text" class="form-control" formControlName="invoice_no">
+                
+              </div> -->
+              <div class="col-md-6 mb-3">
+                <label for="validationCustom03">Membership Certificate No</label>
+                <input type="text" class="form-control" formControlName="mem_cer_no" >
+                
+              </div>
+            </div>
+           
+            <!-- <div class="col-md-6 mb-3">
+                <label for="validationCustomUsername">Reciept No</label>                
+                 
+                  <input type="text" class="form-control" formControlName="reciept_no" >
+               
+              </div> -->
+            
+              
+             
+              <!-- <div class="col-md-4 mb-3">
+                <label for="validationCustom05">Date</label>
+                <input type="text"
+              placeholder="Select Date"
+              class="form-control" formControlName="date"
+              bsDatepicker
+              [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }"
+              >
+              </div> -->
+            
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                  <label for="validationCustomUsername">City</label>                
+                   
+                    <input type="text" class="form-control" formControlName="city" >
+                 
+                </div>
+              
+                <div class="col-md-6 mb-3">
+                  <label for="validationCustom03">State</label>
+                  <input type="text" class="form-control" formControlName="state" >
+                  
+                </div>
+             </div>  
+
+    
+        </div>
+  
+      <div class="modal-footer">
+        <button  type="submit" class="btn btn-primary">Submit</button>
+        <button type="button" class="btn btn-danger" (click)="hideModal()">Close</button>
+                      </div>  </form>
+       
+        
+               </div>
+            </div>
+  </div> 
+
+
+

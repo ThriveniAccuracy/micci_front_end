@@ -1,0 +1,236 @@
+<app-admin-nav></app-admin-nav>
+
+<ngx-spinner
+    bdOpacity = 0.9
+    bdColor = "rgba(0,0,0,0.5)"
+    size = "medium"
+    color = "#0e9948"
+    type = "ball-8bits"
+    [fullScreen] = "true">
+    <p style="color: white" > Loading... </p>
+</ngx-spinner> 
+
+<div class="container mx-auto">
+   
+    <table class="table table-bordered mt-3">
+        <thead>
+            <tr style="text-align: center;">
+                <th scope="col">User Id</th>
+                <th scope="col"> First Name </th>
+                <th scope="col"> Middle Name </th>
+                <th scope="col"> Last Name </th>
+                <th scope="col"> Email Id </th>
+                <th scope="col"> Contact No. </th>
+                <th scope="col"> View </th>     
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr *ngFor="let item of newUserList | paginate: { itemsPerPage: 10, currentPage: p }">
+                <td>{{item.user_id}}</td>
+                <td>{{item.first_name}}</td>
+                <td>{{item.middle_name}}</td>
+                <td>{{item.last_name}}</td>
+                <td>{{item.mail_id}}</td>
+                <td>{{item.contact_no}}</td>
+                <td style="text-align: center;">
+                    <button type="button" class="btn btn-sm btn-success" data-toggle="modal"
+                        data-target=".bd-example-modal-lg" (click)="getUserView(item.user_id)">
+                        View
+                    </button>
+                </td> 
+            </tr>
+        </tbody>
+    </table>
+    <div>
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    </div>
+
+    <br><br>
+
+
+    <!-- // USER VIEW // -->
+    <div class="backdrop" [ngStyle]="{'display':sigdisplay1}"></div>
+    <div class="modal fade bd-example-modal-lg" id="exampleModalCenter" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true" [ngStyle]="{'display':sigdisplay1}">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content" style="width: 900px;">
+                <div class="modal-header" style="background-color: #39fc;">
+                    <h5 class="modal-title" style="color: white;"><b>User Details</b></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: white;"
+                        (click)="hideUpdateModal()">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <!-- <form [formGroup]="userDetails" (ngSubmit)="onSubmitApproverUpdate(userDetails)"> -->
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label><b>User ID</b></label>
+                                <input type="email" class="form-control" placeholder="User ID" 
+                                    value={{userId}} readonly>
+                            </div>
+                        </div>
+                        <!-- <div class="col-sm-3">
+                            <div class="form-group">
+                                <label><b>Created Date</b> </label>
+                                <input type="text" class="form-control" placeholder="Created Date" value={{cdate}} readonly >
+                            </div>
+                        </div> -->
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label><b>User Type</b></label>
+                                <input type="email" class="form-control" value="{{userType}}"
+                                    placeholder="User Type" readonly>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label><b>First Name</b> </label>
+                                <input type="email" class="form-control" placeholder="First Name" 
+                                    value="{{firstName}}" readonly>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label><b>Middle Name</b></label>
+                                <input type="email" class="form-control" placeholder="Middle Name" 
+                                    value={{middleName}} readonly>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label><b>Last Name</b></label>
+                                <input type="email" class="form-control" placeholder="Last Name" 
+                                    value={{lastName}} readonly>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label><b>Email Id</b></label>
+                                <input type="email" class="form-control" placeholder="Email ID" 
+                                    value={{mailId}} readonly>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label><b>Contact Number</b> </label>
+                                <input type="text" class="form-control" placeholder="Contact Number" 
+                                    value={{contactNo}} readonly>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label><b>Mobile Number</b></label>
+                                <input type="email" class="form-control" placeholder="Mobile Number" 
+                                    value={{mobileNo}} readonly>
+                            </div>
+                        </div>
+                    
+                    </div>
+                    <div class="row">
+                    
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label><b>Company Name</b> </label>
+                                <input type="email" class="form-control" placeholder="Company Name" 
+                                    value={{companyName}} readonly>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label><b>Trade Name</b></label>
+                                <input type="email" class="form-control" placeholder="Trade Name" 
+                                    value={{tradeName}} readonly>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label><b>Designation</b> </label>
+                                <input type="email" class="form-control" placeholder="Designation" 
+                                    value={{designation}} readonly>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label><b>State</b> </label>
+                                <input type="text" class="form-control" placeholder="State" value={{state}} readonly >
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label><b>Applicant Status</b> </label>
+                                <input type="email" class="form-control" placeholder="Applicant Status" 
+                                    value={{applicantStatus}} readonly>
+                            </div>
+                        </div>
+                    
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label><b>Membership Id</b> </label>
+                                <input type="email" class="form-control" placeholder="Membership Id" 
+                                    value={{membershipId}} readonly>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label><b>Membership Status</b> </label>
+                                <input type="email" class="form-control"
+                                    placeholder="Membership Status" value={{membershipStatus}} readonly>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <!-- <div class="form-group">
+                                <label><b>Rental/Owned</b></label>
+                                <input type="email" class="form-control" formControlName="rental"
+                                placeholder="Rental/Owned" readonly>
+                            </div> -->
+                        </div>
+                    
+                    </div>
+
+                    <div class="card-header">
+                        <p style="text-align: center;"> <b>Profile Photo</b></p>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label><b></b> </label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" placeholder="Profile Photo"
+                                        aria-describedby="basic-addon2" readonly value="{{pphoto}}">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary" type="button" 
+                                            (click)="photoView(pphoto)">View
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <!-- </div> -->
+                    <!-- </div> -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" 
+                        (click)="memberNotify(userId)">Membership Notify
+                    </button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" 
+                            (click)="hideUpdateModal()">Close
+                        </button>
+                    </div>
+                    <!-- </form> -->
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+

@@ -1,0 +1,62 @@
+
+          <nav class="navbar navbar-inverse navbar-fixed-top" style="height: 100px;">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">
+                    <img width="400px" class="img-responsive text-left" width="150" height="63px"src="../../assets/MICCI.png"/>
+                    <!-- <img class="img-responsive" height="63" width="150" src="../../assets/cma.jpeg"/> -->
+                </a>
+            </div>
+        <div class="nav justify-content-end" id="navbarResponsive">
+            <li class="nav-item dropdown"> 
+                <a [ngClass]="activeLink ? 'my_class1' : 'my_class2'" class="nav-link" data-toggle="dropdown" href="" routerLink="/dashboard" role="button" aria-haspopup="true" aria-expanded="false"><strong>Dashboard</strong></a>
+          
+            </li>
+
+
+            <li class="nav-item dropdown">
+                <a [ngClass]="activeLink1 ? 'my_class1' : 'my_class2'" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><strong>Profile</strong></a>
+                <div class="dropdown-menu">
+                    <!-- <a class="dropdown-item" routerLink="/app-signIn"><strong>Sign In/Sign Up</strong></a> -->
+                    <a class="dropdown-item" routerLink="/app-profile"><strong>Profile</strong></a>
+                    <!-- <a class="dropdown-item" routerLink="/allMemberList"><strong>View Members</strong></a>
+                    <a class="dropdown-item" routerLink="/enquires"><strong>Contact Info</strong></a> -->
+
+                    <a class="dropdown-item" (click)="logout()"><strong>Sign Out</strong></a>
+                </div>
+            </li>
+
+            <li class="nav-item dropdown">
+            <a [ngClass]="activeLink2 ? 'my_class1' : 'my_class2'" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><strong>Membership </strong></a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" routerLink="/membership-module"><strong>Apply</strong></a>
+                    <a class="dropdown-item" routerLink="/app-details"><strong>View</strong></a>
+                    <a class="dropdown-item" routerLink="/certi-table"><strong> Certificate</strong></a>
+                </div>
+            </li>
+               
+            <li class="nav-item dropdown">
+            <a [ngClass]="activeLink3 ? 'my_class1' : 'my_class2'"  class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><strong>Account</strong></a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" routerLink="/app-notes"><strong>Renewal</strong></a>
+                    <a class="dropdown-item" routerLink="/invoice-table"><strong>Invoice</strong></a>
+                    <!-- <a class="dropdown-item" routerLink="/payment"><strong>Payment</strong></a> -->
+                    <a class="dropdown-item" routerLink="/receipt-table"><strong>Receipt</strong></a>
+                   
+                </div>
+            </li>
+
+            <li class="nav-item dropdown">
+                <a [ngClass]="activeLink4 ? 'my_class1' : 'my_class2'" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><strong>Events</strong></a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" routerLink="/book-event"><strong>Book event</strong></a>
+                    </div>
+                </li>
+
+            <li class="nav-item">
+                <a [ngClass]="activeLink5 ? 'my_class1' : 'my_class2'"  class="nav-link" routerLink="/app-feedback"><strong>Feedback</strong></a>
+            </li>
+            </div>
+        </nav>    
+       
+
+  

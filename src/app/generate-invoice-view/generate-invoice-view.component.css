@@ -1,0 +1,37 @@
+.container{
+    padding-left:10px;
+    padding-right: 10px;
+    margin: 0 auto;
+    max-width: 900px;
+    
+}
+
+h4, h3{
+    text-align: center;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: bold;
+
+}
+p{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 20px;
+}
+.card-body{
+    border: 2px solid;
+    /* height: 1800px; */
+    width: 1000px;
+}
+hr{
+    border: 1px solid;
+}
+/* table thead  {border-bottom:3px solid #008999} */
+ 
+
+
+/* table {
+    border-collapse: collapse;
+  } */
+  
+  table, th, td, thead {
+    border: 1px solid black;
+  }

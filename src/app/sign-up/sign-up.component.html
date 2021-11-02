@@ -1,0 +1,237 @@
+
+  
+<div class="card" >
+  <div class="container">
+    <div class="card-body">
+
+<form [formGroup]="signUp" (ngSubmit)="signUpForm(signUp)" class="mx-auto">
+  <div class="image text-left">
+    <img class="img-responsive" height="100px" src="../../assets/logo.png"/>  
+    <!-- <img class="img-responsive" height="90"  width="150" src="../../assets/cma.jpeg"/>       -->
+  </div>
+  <ngx-spinner
+            bdOpacity = 0.9
+            bdColor = "rgba(0,0,0,0.5)"
+            size = "medium"
+            color = "#0e9948"
+            type = "ball-8bits"
+            [fullScreen] = "true"
+            >
+            <p style="color: white" > Loading... </p>
+          </ngx-spinner>   
+  <h2 class="text-center" style="font-weight: 800; color: blue;"><svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-person-plus-fill" viewBox="0 0 16 16">
+    <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+    <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
+  </svg> Sign Up</h2>
+  <br>  
+    <div class="form-row col-sm-8 mx-auto" >
+        <div class="col-md-4 form-group">
+          <label style="font-size: 18px;">First Name<span class="text-danger">&nbsp;*</span></label>
+          <input type="text" class="form-control" formControlName="first_name" name="first_name" placeholder="First Name" required/>
+          <div *ngIf="f.first_name.invalid && (f.first_name.dirty || f.first_name.touched)">
+            <p *ngIf="f.first_name.errors.required" class="text-danger">
+             first name is necessary
+            </p>
+            <p *ngIf="f.first_name.errors.pattern" class="text-danger">
+              Only alphabets allowed
+             </p>
+        </div>
+        </div>
+                                  
+        <div class="col-md-4 form-group">
+          <label style="font-size: 18px;">Middle Name</label>
+          <input type="text" class="form-control" formControlName="middle_name" placeholder="Middle Name"/>
+          <div *ngIf="f.middle_name.invalid && (f.middle_name.dirty || f.middle_name.touched)">
+            <!-- <p *ngIf="f.middle_name.errors.required" class="text-danger">
+             middle name is necessary
+            </p> -->
+            <p *ngIf="f.middle_name.errors.pattern" class="text-danger">
+              Only alphabets allowed
+             </p>
+        </div>
+        </div>
+                                    
+        <div class="col-md-4 form-group">
+          <label style="font-size: 18px;">Last Name<span class="text-danger">&nbsp;*</span></label>
+          <input type="text" class="form-control" formControlName="last_name" name="last_name" placeholder="Last Name" required/>
+          <div *ngIf="f.last_name.invalid && (f.last_name.dirty || f.last_name.touched)">
+            <p *ngIf="f.last_name.errors.required" class="text-danger">
+             last name is necessary
+            </p>
+            <p *ngIf="f.last_name.errors.pattern" class="text-danger">
+              Only alphabets allowed
+             </p>
+        </div>   
+     </div>
+      </div>
+      <div class="form-row col-sm-8 mx-auto">
+        <div class="form-group col-md-6">
+          <label style="font-size: 18px;">Contact Number<span class="text-danger">&nbsp;*</span></label>
+          <input type="tel" class="form-control" formControlName="contact" placeholder="Contact Number" (keypress)="keyPress($event)" minlength=8 maxlength=10 required/>
+          <div *ngIf="f.contact.invalid && (f.contact.dirty || f.contact.touched)">
+            <p *ngIf="f.contact.errors.required" class="text-danger">
+             contact no is necessary
+            </p>
+        </div>
+        </div>
+
+      <div class="form-group col-md-6">
+        <label style="font-size: 18px;">Mobile No<span class="text-danger">&nbsp;*</span></label>
+        <input type="tel" class="form-control" formControlName="mobile" placeholder="Contact Number" (keypress)="keyPress($event)" minlength=8 maxlength=10 required/>
+        <div *ngIf="f.mobile.invalid && (f.mobile.dirty || f.mobile.touched)">
+          <p *ngIf="f.mobile.errors.required" class="text-danger">
+           mobile no is necessary
+          </p>
+      </div>
+    </div>
+  </div>
+
+    <div class="form-group col-sm-8 mx-auto">
+        <label style="font-size: 18px;">Company Name<span class="text-danger">&nbsp;*</span></label>
+        <input type="text" class="form-control" formControlName="companyName" placeholder="Company Name" required/>
+        <div *ngIf="f.companyName.invalid && (f.companyName.dirty || f.companyName.touched)">
+          <p *ngIf="f.companyName.errors.required" class="text-danger">
+           company name is necessary
+          </p>
+          <p *ngIf="f.companyName.errors.pattern" class="text-danger">
+            Only alphabets allowed
+           </p>
+      </div>
+    </div>
+
+      <div class="form-group col-sm-8 mx-auto">
+        <label style="font-size: 18px;">Trade Name(if any)</label>
+        <input type="text" class="form-control" formControlName="tradeName" placeholder="Trade Name"/>
+        <div *ngIf="f.tradeName.invalid && (f.tradeName.dirty || f.tradeName.touched)">
+          <!-- <p *ngIf="f.tradeName.errors.required" class="text-danger">
+           trade name is necessary
+          </p> -->
+          <p *ngIf="f.tradeName.errors.pattern" class="text-danger">
+            Only alphabets allowed
+           </p>
+      </div>
+      </div>
+
+      <div class="form-group col-sm-8 mx-auto">
+        <label style="font-size: 18px;">Designation<span class="text-danger">&nbsp;*</span></label>
+        <input type="text" class="form-control" formControlName="designation" placeholder="Designation" required/>
+        <div *ngIf="f.designation.invalid && (f.designation.dirty || f.designation.touched)">
+          <p *ngIf="f.designation.errors.required" class="text-danger">
+           designation is necessary
+          </p>
+          <p *ngIf="f.designation.errors.pattern" class="text-danger">
+            Only alphabets allowed
+           </p>
+      </div>
+      </div>
+
+    <div class="form-group col-sm-8 mx-auto">
+        <label style="font-size: 18px;">Email<span class="text-danger">&nbsp;*</span></label>
+        <input type="text" class="form-control" formControlName="email" name="email" placeholder="Email" required/>
+       
+      <div *ngIf="f.email.invalid && (f.email.dirty || f.email.touched)">
+        <p *ngIf="f.email.errors.required" class="text-danger">
+          Email is necessary
+        </p>
+        <p *ngIf="f.email.errors.email" class="text-danger">
+          Email must be a valid email address
+        </p>
+    </div>
+    </div>
+
+    <div class="form-group col-sm-8 mx-auto">
+        <label style="font-size: 18px;">State<span class="text-danger">&nbsp;*</span></label>
+
+        <select class="form-control" formControlName="state" name="state">
+                                                    
+            <option value="1">State 1</option>
+            <option value="2">State 2</option>
+            <option value="3">State 3</option>
+            <option value="4">State 4</option>
+            <option value="5">State 5</option>
+            
+        </select>  
+
+        <!-- <input type="text" class="form-control" formControlName="state" name="state" placeholder="State" required/> -->
+       
+      <div *ngIf="f.state.invalid && (f.state.dirty || f.state.touched)">
+        <p *ngIf="f.state.errors.required" class="text-danger">
+            State is necessary
+        </p>
+    </div>
+    </div>
+
+    <!-- <div class="form-group col-sm-8 mx-auto">
+      <div class="custom-file">
+        <input type="file" class="custom-file-input" id="customFile">
+        <label class="custom-file-label" for="customFile">Choose file</label>
+      </div>
+  </div> -->
+
+    <div class="form-row col-sm-8 mx-auto">
+    <div class="form-group col-md-6">
+      <label style="font-size: 18px;">Password<span class="text-danger">&nbsp;*</span></label>
+      <input type="password" class="form-control" formControlName="password" name="password" placeholder="password" required/>
+        <div *ngIf="f.password.invalid && (f.password.dirty || f.password.touched)">
+          <p *ngIf="f.password.errors.required" class="text-danger">
+            Password is necessary
+          </p>
+          <p *ngIf="f.password.errors.minlength" class="text-danger">
+            Password must be atleast 6 characters          </p>
+      </div>
+      </div>
+
+    <div class="form-group col-md-6">
+      <label style="font-size: 18px;">Confirm Password<span class="text-danger">&nbsp;*</span></label>
+      <input type="password" class="form-control" formControlName="confirmPassword" name="confirmPassword" placeholder="password" required/>
+      
+        <div *ngIf="f.confirmPassword.invalid && (f.confirmPassword.dirty || f.confirmPassword.touched)">
+          <p *ngIf="f.confirmPassword.errors.required" class="text-danger">
+            Password is necessary
+          </p>
+          <p *ngIf="f.confirmPassword.errors.mustMatch" class="text-danger">
+            Passwords must match
+          </p>
+      </div>
+    </div>
+    </div>
+    <br>
+    <div class="form-group text-center">
+      <button type="submit" class="btn" [disabled]="!signUp.valid" style="width: 200px;" [ngClass]="signUp.valid ? 'btn-success' : 'btn-warning'">Sign Up</button> 
+       <!-- <a type="submit" type="button" routerLink="/app-signIn" class="btn btn-primary">Sign Up</a>
+      [disabled]="signUp.controls['first_name' && 'last_name' && 'email' && 'password' && 'confirmPassword'].invalid" -->
+       
+   
+
+   
+ <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  Sign Up
+</button>-->
+
+<div class="modal fade show" id="exampleModal" tabindex="-1" [ngStyle]="{'display':display}" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Authentication</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        please authenticate your profile through the link which has been sent to your Mail.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" routerLink="/app-signIn" data-dismiss="modal">Ok</button>
+      </div>
+    </div>
+  </div>
+</div> 
+
+<button type="submit" style="margin-left: 50px;" routerLink="/app-signIn" class="btn btn-secondary" style="width: 200px; margin-left: 50px;">Cancel</button>
+
+    </div>
+
+  </form>
+</div>
+</div>
+</div>

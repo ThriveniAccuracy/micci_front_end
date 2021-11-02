@@ -1,0 +1,371 @@
+<app-applicant></app-applicant>
+<br>
+     
+<ngx-spinner
+    bdOpacity = 0.9
+    bdColor = "rgba(0,0,0,0.5)"
+    size = "medium"
+    color = "#0e9948"
+    type = "ball-8bits"
+    [fullScreen] = "true"
+    >
+    <p style="color: white" > Loading... </p>
+</ngx-spinner> 
+
+<div class="container-fluid">  
+    <div class="row">
+        <div class="col-md-7 col-lg-7 col-xl-7 col-sm-12">
+            <div class="card">
+                <div class="card-body shadow">
+                    <div class="row" style="margin: 16px;">
+                        <div class="col">
+                            <label for="validationCustom01">Membership ID (or) Company Name</label>
+                            <input type="text" class="form-control" [(ngModel)]="membership_id_f"  placeholder="Enter Membership ID (or) Company Name for Search"  required> 
+                
+                        </div>
+                    </div>
+                    <br>  
+                    <div class="tableFixHead">
+
+                        <table class="table table-bordered" style="margin-bottom: 0px;">
+                        <thead>
+                        <tr>
+                        <th scope="row"> Membership ID </th>
+                        <th scope="row"> Company Name</th>
+                        <!-- <th scope="row"> Application Status </th> -->
+                        <th scope="row"> Branch </th>
+                        <!-- <th scope="row" style="width: 5%;"> Category </th> -->
+                        <!-- <th scope="row"> Amsunt </th> -->
+                        <!-- <th scope="row"> Invoice No </th> -->
+                        <!-- <th scope="row"> Payment Status </th> -->
+                        <!-- <th scope="row"> Payment Mode </th> -->
+                        <!-- <th scope="row"> Receipt No </th> -->
+                        <!-- <th scope="row" style="width: 3%;"> Memebership Certificate </th> -->
+                        <th scope="row">Membership Date </th>
+                        <!-- <th scope="row">Approved Date</th> -->
+                        <th scope="row"> Action </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let item of membershipList | grdFilter : { membership_id: membership_id_f , company_name: membership_id_f }">
+                
+                        <td><a [routerLink]="['/membership-detail', item.membership_id || 'all']">{{item.membership_id}}</a></td>
+                        <td>{{item.company_name}}</td>
+                        <!-- <td>
+                                {{item.application_status}}
+                        </td> -->
+                        <td>{{item.branch}}</td>
+                        <!-- <td style="width: 5%;">{{item.y_m_category}}</td> -->
+                        <!-- <td>{{item.amount}}</td> -->
+                        <!-- <td>{{item.invoice_number}}</td> -->
+                        <!-- <td> {{item.payment_status}}</td> -->
+                        <!-- <td>{{item.payment_mode}}</td>  -->
+                        <!-- <td>{{item.receipt_number}}</td> -->
+                        <!-- <td style="width: 3%;">{{item.membership_cert_number}}</td> -->
+                        <td>{{item.created_date | date:'d-M-y'}}</td>
+                        <!-- <td *ngIf="item.approved_date != null; else approveD"> {{item.approved_date | date:'d-M-y'}}</td>
+                        <ng-template #approveD>
+                        <td>
+                            00/00/0000
+                        </td>
+                    </ng-template> -->
+                        <!-- <td>{{item.created_date | date:'d-M-y'}}</td> -->
+                        <td>
+                            <button class="btn btn-sm btn-primary" (click)="getViewModal(item.membership_id)">View</button>
+                            <br>
+                            <button class="btn btn-sm btn-success" (click)="showMsg(item.membership_id)" style="margin-top: 10px;">Message</button>
+                        </td>
+                
+                    </tr>
+                    
+                    </tbody>
+                        </table>
+                    </div>    
+                
+                        <!-- <br><br> -->
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5 col-lg-5 col-xl-5 col-sm-12">
+            <div class="card" id="withoutData" style="display: block;">
+                <div class="card-body shadow">
+                    <!-- <div *ngIf="u_ssm_c_profile === null; else profileimg;"> -->
+
+                        <div class="card-body-icon" style="text-align: center;" >
+                            <label for="fileInput">
+                            <!-- <div class="button"><a> View </a></div> -->
+                            <img src="assets/user.png" class="someimg" style="height: 128px;" />
+                            <!-- <input id="fileInput" type="file" (change)="onSelectFile($event)"> -->
+                            </label>
+                        </div>
+                    <!-- </div> -->
+                    <!-- <ng-template #profileimg>
+                        <div class="card-body-icon" style="text-align: center;" >
+                            <label for="fileInput">
+                                <div class="button" ><a> Upload Image </a></div>
+                                <img [src]="u_ssm_c_profile" class="someimg" style="height: 128px !important;width: 128px !important; border-radius: 50% !important;" />
+                                <input id="fileInput" type="file" (change)="onSelectFile($event)">
+                            </label>
+                        </div>
+
+                    </ng-template> -->
+
+                    <div class="row" style="text-align: center;">
+                        <div class="col">
+
+                            <h5><b>Company Name</b></h5>
+                            <p style="font-size: 14px; color: #8a93a2;margin-bottom: 0px;">Trade Name, Branch</p>
+                            <p style="font-size: 14px; color: #8a93a2;">www.website.com</p>
+                        </div>
+                    </div>
+                    <br>
+
+                    <div class="row" style="text-align: center;margin-bottom: 16px;">
+                        <div class="col" style="border-right: 1px solid #ebedef;">
+
+                            <h6>Address</h6>
+                            <p style="font-size: 14px; color: #8a93a2;margin-bottom: 0px;">This line is for address</p>
+                        </div>
+                        <div class="col">
+
+                            <h6>Membership category</h6>
+                            <p style="font-size: 14px; color: #8a93a2;margin-bottom: 0px;">category 1</p>
+                        </div>
+                    </div>
+                    <div class="row" style="text-align: center;margin-bottom: 16px;">
+                        <div class="col" style="border-right: 1px solid #ebedef;">
+
+                            <h6>Country</h6>
+                            <p style="font-size: 14px; color: #8a93a2;margin-bottom: 0px;">Country name</p>
+                        </div>
+                        <div class="col" style="border-right: 1px solid #ebedef;">
+
+                            <h6>State</h6>
+                            <p style="font-size: 14px; color: #8a93a2;margin-bottom: 0px;">state name</p>
+                        </div>
+                        <div class="col">
+
+                            <h6>City</h6>
+                            <p style="font-size: 14px; color: #8a93a2;margin-bottom: 0px;">city name</p>
+                        </div>
+                    </div>
+                    <div class="row" style="text-align: center;">
+                        <div class="col" style="border-right: 1px solid #ebedef;">
+
+                            <h6>Zip/Pincode</h6>
+                            <p style="font-size: 14px; color: #8a93a2;margin-bottom: 0px;">123456</p>
+                        </div>
+                        <div class="col" style="border-right: 1px solid #ebedef;">
+
+                            <h6>Company Tel</h6>
+                            <p style="font-size: 14px; color: #8a93a2;margin-bottom: 0px;">1234567890</p>
+                        </div>
+                        <div class="col">
+
+                            <h6>Company Fax</h6>
+                            <p style="font-size: 14px; color: #8a93a2;margin-bottom: 0px;">12345678</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" id="withData" style="display: none;">
+                <div class="card-body shadow">
+                    <div *ngIf="u_ssm_c_profile === null; else profileimg;">
+
+                        <div class="card-body-icon" style="text-align: center;" >
+                            <label for="fileInput">
+                            <!-- <div class="button"><a> View </a></div> -->
+                            <img src="assets/user.png" class="someimg" style="height: 128px;" />
+                            <!-- <input id="fileInput" type="file" (change)="onSelectFile($event)"> -->
+                            </label>
+                        </div>
+                    </div>
+                    <ng-template #profileimg>
+                        <div class="card-body-icon" style="text-align: center;" >
+                            <label for="fileInput">
+                                <div class="button" ><a (click)="photoView(u_ssm_c_profile)"> View </a></div>
+                                <img [src]="u_ssm_c_profile" class="someimg" style="height: 128px !important;width: 128px !important; border-radius: 50% !important;" />
+                                <input id="fileInput" type="file" (click)="photoView(u_ssm_c_profile)">
+                            </label>
+                        </div>
+
+                    </ng-template>
+
+                    <div class="row" style="text-align: center;">
+                        <div class="col">
+
+                            <h5><b>{{company_name}}</b></h5>
+                            <p style="font-size: 14px; color: #8a93a2;margin-bottom: 0px;">{{trade_name}}, {{branch}}</p>
+                            <p style="font-size: 14px; color: #8a93a2;">{{company_website}}</p>
+                        </div>
+                    </div>
+                    <br>
+
+                    <div class="row" style="text-align: center;margin-bottom: 16px;">
+                        <div class="col" style="border-right: 1px solid #ebedef;">
+
+                            <h6>Address</h6>
+                            <p style="font-size: 14px; color: #8a93a2;margin-bottom: 0px;">{{address1}}</p>
+                        </div>
+                        <div class="col">
+
+                            <h6>Membership category</h6>
+                            <p style="font-size: 14px; color: #8a93a2;margin-bottom: 0px;">{{y_m_category}}</p>
+                        </div>
+                    </div>
+                    <div class="row" style="text-align: center;margin-bottom: 16px;">
+                        <div class="col" style="border-right: 1px solid #ebedef;">
+
+                            <h6>Country</h6>
+                            <p style="font-size: 14px; color: #8a93a2;margin-bottom: 0px;">{{country}}</p>
+                        </div>
+                        <div class="col" style="border-right: 1px solid #ebedef;">
+
+                            <h6>State</h6>
+                            <p style="font-size: 14px; color: #8a93a2;margin-bottom: 0px;">{{state}}</p>
+                        </div>
+                        <div class="col">
+
+                            <h6>City</h6>
+                            <p style="font-size: 14px; color: #8a93a2;margin-bottom: 0px;">{{city}}</p>
+                        </div>
+                    </div>
+                    <div class="row" style="text-align: center;">
+                        <div class="col" style="border-right: 1px solid #ebedef;">
+
+                            <h6>Zip/Pincode</h6>
+                            <p style="font-size: 14px; color: #8a93a2;margin-bottom: 0px;">{{pincode}}</p>
+                        </div>
+                        <div class="col" style="border-right: 1px solid #ebedef;">
+
+                            <h6>Company Tel</h6>
+                            <p style="font-size: 14px; color: #8a93a2;margin-bottom: 0px;">{{company_tel}}</p>
+                        </div>
+                        <div class="col">
+
+                            <h6>Company Fax</h6>
+                            <p style="font-size: 14px; color: #8a93a2;margin-bottom: 0px;">{{company_fax}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body shadow" style="padding: 0px;">
+                    <!-- partial:index.partial.html -->
+                    <div class="row bootstrap snippets">
+                        <div class="col-md-12">
+                        <!-- DIRECT CHAT PRIMARY -->
+                        <div class="box box-primary direct-chat direct-chat-primary" style="margin-bottom: 2px;">
+                            <div class="box-header with-border">
+                            <h3 class="box-title">Chat Box</h3>
+                        
+                            <div class="box-tools pull-right">
+                                <!-- <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                </button>
+                                <button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="Contacts" data-widget="chat-pane-toggle">
+                                <i class="fa fa-comments"></i></button>
+                                <button type="button" class="btn btn-box-tool" data-widget="remove" (click)="hideMsgModal()"><i class="fa fa-times"></i></button> -->
+                            </div>
+                            </div>
+                            <!-- /.box-header -->
+                            <div class="box-body" >
+                            <!-- Conversations are loaded here -->
+                            <div class="direct-chat-messages" style="display: flex;flex-direction: column-reverse;">
+                                <!-- Message. Default to the left -->
+                                <div class="row" style="width: 100%;margin: 0px;" *ngFor="let messagedata of messageDatatomap">
+
+                                    <div class="direct-chat-msg col-6"  *ngIf="messagedata.senderId == reciverUserId; else recentUsermessageData">
+                                    <div class="direct-chat-info clearfix">
+                                        <span class="direct-chat-name pull-left">Member 1</span>
+                                        <span class="direct-chat-timestamp pull-right">23 Jan 2:00 pm</span>
+                                    </div>
+                                    <!-- /.direct-chat-info -->
+                                    <img class="direct-chat-img" src="https://bootdey.com/img/Content/user_1.jpg" alt="Message User Image"><!-- /.direct-chat-img -->
+                                    <div class="direct-chat-text">
+                                       {{messagedata.message}}
+                                    </div>
+                                    <!-- /.direct-chat-text -->
+                                
+                                    </div>
+
+                                    <ng-template #recentUsermessageData>
+
+                                        <div class="direct-chat-msg right col-6 offset-6">
+                                        <div class="direct-chat-info clearfix">
+                                            <span class="direct-chat-name pull-right">Member 2</span>
+                                            <span class="direct-chat-timestamp pull-left">23 Jan 2:05 pm</span>
+                                        </div>
+                                        <!-- /.direct-chat-info -->
+                                        <img class="direct-chat-img" src="https://bootdey.com/img/Content/user_2.jpg" alt="Message User Image"><!-- /.direct-chat-img -->
+                                        <div class="direct-chat-text">
+                                            {{messagedata.message}}
+                                        </div>
+                                        <!-- /.direct-chat-text -->
+                                        </div>
+                                    </ng-template>
+
+                                </div>
+                              
+                        
+                                <!-- Message to the right -->
+                 
+                                <!-- Message. Default to the left -->
+                      
+                                
+                                <!-- Message to the right -->
+                    
+                                <!-- /.direct-chat-msg -->
+                            </div>
+                            <!--/.direct-chat-messages-->
+                        
+                            
+                            </div>
+                            <!-- /.box-body -->
+                            <div class="box-footer">
+                            <form [formGroup]="messageSendingEvent" (ngSubmit)="messageSent(messageSendingEvent)">
+                                <div class="input-group">
+                                <input type="text" name="messagedetails" placeholder="Type Message ..." formControlName="messagedetails" class="form-control">
+
+                                <input type="hidden" name="reciverId" placeholder="Type Message ..." formControlName="reciverId" class="form-control">
+                                    <span class="input-group-btn">
+                                        <button type="submit" class="btn btn-primary btn-flat" data-dismiss="modal">Send</button>
+                                    </span>
+                                </div>
+                            </form>
+                            </div>
+                            <!-- /.box-footer-->
+                        </div>
+                        <!--/.direct-chat -->
+                        </div>
+                    <!-- DIRECT CHAT DANGER -->
+
+                    <!--/.direct-chat -->
+
+                    </div>
+                    <!-- partial -->
+                </div>
+            </div>
+
+        </div>
+    </div>  
+    <br><br><br>
+
+</div>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 07/MICCI/2021 -->

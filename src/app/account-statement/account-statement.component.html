@@ -1,0 +1,290 @@
+<app-admin-nav></app-admin-nav>
+<ngx-spinner
+  bdOpacity = 0.9
+  bdColor = "rgba(0,0,0,0.5)"
+  size = "medium"
+  color = "#0e9948"
+  type = "ball-8bits"
+  [fullScreen] = "true"
+  >
+  <p style="color: white" > Loading... </p>
+</ngx-spinner>
+<div class="card" >
+      
+        <div class="container " style="width: 1000px; "> 
+              <div class="card-body mx-auto" style="height: 700px; margin-top: 80px;">      
+                <!-- <img class="img-responsive col-lg-4" width="100%" src="https://www.shinjiru.com.my/wp-content/themes/sj_child/assets/img/clients/micci.jpg"/> -->
+              
+                    <h3>Statement of Account Filter </h3>
+                    <br>
+                    <form [formGroup]="acccountStatement" (ngSubmit)="onSubmit(acccountStatement)">
+                    <div class="form-row col-sm-8 mx-auto">
+                        <div class="form-group col-sm-3">
+                            
+                                <label><b>Membership ID</b></label>
+                                <input type="text" formControlName="membershipId" class="form-control">
+                            
+                        </div>
+                        <div class="form-group col-sm-3">
+                            
+                                <label for="name"><b>Receipt ID:</b></label>
+                                <input type="text" formControlName="receiptNumber" class="form-control">
+                            </div>
+                            
+                        <div class="form-group col-sm-3">
+                            
+                            <label for="name"><b>Invoice ID:</b></label>
+                            <input type="text" formControlName="invoiceNumber" class="form-control">
+                        </div>
+                        <div class="col-md-3">
+                          
+                          <label for="">-</label><br>
+                          <button type="submit" class="btn btn-warning">Submit </button>
+                        </div>
+                    </div>
+                    </form>
+                    <br>
+                    <br>
+                    <!-- <div class="btn-group" >
+                        <button type="button"  color="primary" class="dropdown-toggle "
+                          >
+                          Clickable
+                        </button>
+                      
+                        <div class="dropdown-menu dropdown-primary">
+                          <a class="dropdown-item" href="#">10</a>
+                          <a class="dropdown-item" href="#">20</a>
+                          <a class="dropdown-item" href="#">30</a>
+                          <a class="dropdown-item" href="#">40</a>
+                          <a class="dropdown-item" href="#">50</a>
+                        
+                      </div>
+                      </div> -->
+                      
+        
+        
+        
+                      
+         <!-- <div class="form-group col-sm-1 " style="float: right;">
+        
+            <select id="myList" class="form-control" name="element" (change)="changeCountry($event.target.value)" style="border: 1px solid black;">
+              <option value="10">10</option>
+              <option value="20 ">20</option>
+              <option value="30">30</option>
+              <option value="40">40</option>
+              <option value="50">50</option>
+            </select>
+        </div> -->
+        <div class="container" *ngIf="tableList">
+        <table class="scroll" style="text-align: center;">
+          <thead>
+              <tr>
+                  <th>Membership ID</th>
+                  <th>Company Name</th>
+                  <th>Branch</th>
+                  <th>Invoice ID </th>
+                  <th>Receipt ID</th>
+                  <th>Issued Date</th>
+                  <th>Amount</th>
+                  <th>View</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let item of statements">
+                  <td>{{item.membership_id}}</td>
+                  <td>{{item.member_company_name}}</td>
+                  <td>{{item.branch_name}}</td>
+                  <td>{{item.invoice_no}}</td>
+                  <td>{{item.receipt_no}}</td>
+                  <td>{{item.creation_date | date:'y-M-d'}}</td>
+                  <td>{{item.total_amount}}</td>
+                  <td (click)="view(item)"><i class="fa fa-eye" aria-hidden="true"></i></td>
+              </tr>
+   
+          </tbody>
+      </table>
+
+      </div>
+        <!-- <div class="container" *ngIf="tableList" style="height: 500px;">
+        <table class="table table-fixed">
+                <thead>
+                       <tr>
+                         <th scope="col"> Membership ID </th>
+                         <th scope="col"> Company Name </th>
+                         <th scope="col"> Branch </th>
+                         <th scope="col"> Invoice ID </th>
+                         <th scope="col"> Receipt ID</th>
+                         <th scope="col"> Issued Date</th>
+                         <th scope="col"> Amount </th>
+                         <th scope="col"> View </th>
+                       
+                       </tr>
+                </thead>
+                <tbody *ngFor="let item of statements">
+                     <tr >
+                         <td>{{item.membership_id}}</td>
+                         <td>{{item.company_name}}</td>
+                         <td>{{item.branch}}</td>
+                         <td>{{item.invoice_number}}</td>
+                         <td>{{item.receipt_number}}</td>
+                         <td>{{item.created_date | date:'y-M-d'}}</td>
+                         <td>{{item.amount}}</td>
+                         <td style="text-align: center;" (click)="view(item)"><i class="fa fa-eye" aria-hidden="true"></i></td>
+                       
+        
+                     
+                     </tr>
+                     
+                </tbody>
+        </table>
+        </div> -->
+        
+                     <!-- <button type="button" class="btn btn-warning" style="float: right;" (click)="goToAccount()">Submit </button> -->
+                    
+        
+          </div>
+    </div>
+</div>
+                    
+<div *ngIf="downloadView" class="text-center mt-3" style="position: absolute;
+z-index: 15;
+left: 25%;
+border: 2px solid;">
+  <!-- <button type="button" (click)="downloadPdf()" class="ml-3 btn btn-primary btn-sm"><i class="fa fa-download" aria-hidden="true"></i> Download</button> -->
+
+<div class="justify-content-center">
+     
+  <div id="downloadView" #content class="content">
+
+    <div style="margin: 36px;">
+
+      <div class="row" style="width: 100%;">
+      
+          <div class="col">
+      
+          </div>
+      
+          <div class="col pb-3" >
+            <img class="img-responsive" height="100" src="https://www.shinjiru.com.my/wp-content/themes/sj_child/assets/img/clients/micci.jpg"/>
+            <!-- <img class="img-responsive" height="63" width="150" src="../../assets/cma.jpeg" style="margin-bottom: 16px;"/> -->
+          </div>
+      
+          <div class="col"></div>
+      
+      </div>
+      <div class="row" style="width: 100%;">
+          <div class="col" style="text-align: center;">
+            
+                  <h5><b>MALAYSIAN INTERNATIONAL CHAMBER OF COMMERCE AND INDUSTRY </b>(16841-V)</h5>
+           
+              <p>C-8-8, 8th Floor, Block C, Plaza Mont' Kiara, 2 Jalan Kiara, 50480 Kuala Lumpur, Malaysia. Postal Address:P O Box 1291, 50792 KL.
+              <br>Tel: 03-6201 7708 Fax: 03-6201 7705 Email:micci@micci.com Website: www.micci.com
+              <br><b>GST ID No: 000799776768</b></p>
+          </div>
+      </div>
+  
+      <div class="row" style="width: 100%;margin-top: 24px;">
+          <div class="col" style="text-align: center;">
+              <h4><b>STATEMENT OF ACCOUNT				
+              </b></h4>
+          </div>
+  
+      </div>
+  
+      <div class="row" style="width: 100%;">
+          <div class="col" style="text-align: left;margin-top: 10px;">
+              <p>{{company_name}}<br>
+                  {{branch}}<br>
+                  Lorong Haji Yakob<br>
+                  53100 Kuala Lumpur	
+  
+  
+              </p>
+          </div>
+      </div>
+      <div class="row" style="width: 100%;">
+          <div class="col" style="text-align: right;margin-top: 10px;">
+              <p>STATEMENT AS AT<br>
+                  {{created_date | date: 'dd/MM/yy'}}<br>
+              </p>
+          </div>
+      </div>
+  
+      <div class="row" style="width: 100%;">
+          <div class="col" style="margin-top: 16px;">
+              <table class="table table-borderless" style="text-align: center;border: 1px solid;">
+                  <thead style="border: 1px solid;">
+                      <tr>
+                        <th scope="col">DATE</th>
+                        <th scope="col">INVOICE NO.</th>
+                        <th scope="col">DESCRIPTION</th>
+                        <th scope="col">CHARGES</th>
+                        <th scope="col">PAYMENT</th>
+                        <th scope="col">BALANCE</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td> {{created_date | date: 'dd/MM/yy'}}</td>
+                        <td>{{invoice_number}}</td>
+                        <td>Sale; {{company_name}}, {{branch}}</td>
+                        <td>0 </td>
+                        <td></td>
+                        <td>{{amount}}</td>
+                      </tr>
+                      <!-- <tr>
+                          <td>1/10/2018</td>
+                          <td>0218/18</td>
+                          <td>Sale; ABC Sdn Bhd</td>
+                          <td>MYR1,431.00 </td>
+                          <td></td>
+                          <td>MYR1,431.00</td>
+                      </tr> -->
+                      <!-- <tr>
+                          <td colspan="2">CURRENT</td>
+                          <td>30 DAYS	</td>
+                          <td>60 DAYS</td>
+                          <td>90 DAYS </td>
+                          <td>AMOUNT DUE</td>
+                          
+                      </tr> -->
+                      
+                        <tr>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td> </td>
+                          <td >{{amount}}</td>
+                          <td >{{amount}}</td>
+                          
+                        </tr>
+                      </tbody>
+                </table>
+          </div>
+      </div>
+  
+      <div class="row" style="width: 100%;">
+          <div class="col" style="text-align: left;margin-top: 24px;">
+              <p>The balances shown above will be considered correct unless<br>
+                  we are notified of any discrepancy within 7 days<br>
+              </p>
+          </div>
+      </div>
+  </div>
+   
+ </div>
+
+
+
+</div>
+</div>
+<br><br><br>
+<!--         AFTER CLICK VIEW ICON NEED  TO IMPLEMENT "admin-accform" code -->
+        
+
+          
+             
+                    
+                    
+                    
+        

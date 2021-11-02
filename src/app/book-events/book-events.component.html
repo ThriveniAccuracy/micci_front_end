@@ -1,0 +1,150 @@
+<app-applicant></app-applicant>
+<ngx-spinner
+    bdOpacity = 0.9
+    bdColor = "rgba(0,0,0,0.5)"
+    size = "medium"
+    color = "#0e9948"
+    type = "ball-8bits"
+    [fullScreen] = "true"
+>
+<p style="color: white" > Loading... </p>
+</ngx-spinner>
+<div class="container-fluid">
+    
+   <div class="card">
+    <div class="card-body"> 
+    <div *ngIf="viewList.length === 0">
+        <p class="text-center text-danger">No Events Found</p>
+    </div>     
+    <div class="row card-group" *ngIf="viewList.length > 0">
+        
+        <!--   -->
+        <div class="col-4" *ngFor="let item of viewList">
+            <div class="card" style="max-height: 500px;max-width: 400px;height: 500px;">
+                <div class="card-header">
+                    <b>Event Name : </b>{{item.event_title}}
+                </div>
+               
+                <div class="card-body" style="padding: 0px;max-height: 242px !important;max-width: 400px;height: 242px !important;width: 400px;">
+                    
+                <img src={{item.upload_pic}} style="max-height: 242px !important;max-width: 398px;height: 242px;width: 398px;"/>
+                </div>
+                
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col">
+                            <b>Start date : </b>{{item.start_date | date:'d/M/yyyy, HH:mm:ss'}}
+                        </div>
+                        <div class="col">
+                            <b>End date : </b>{{item.end_date | date:'d/M/yyyy, HH:mm:ss'}}
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <b>Available tickets : </b>{{item.tickets_available}}
+                        </div>
+                        <div class="col">
+                            <b>Price : </b>{{item.price}}
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col max-word" >
+                            <b>Venue : </b>{{item.venue}}
+                        </div>
+                        <!-- <div class="col">
+                            <b>Description : </b>{{item.event_description}}
+                        </div> -->
+
+                    </div>
+                    <div class="row">
+                        <!-- <div class="col">
+                            <b>Venue : </b>{{item.venue}}
+                        </div> -->
+                        <div class="col max-word">
+                            <b>Description : </b>{{item.event_description}}
+                        </div>
+
+                    </div>
+                    <br>
+                    <div style="text-align: center;">
+
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
+                         (click)="getEvents(item)" >Book Event</button>
+                    </div>
+                </div>
+            </div><br />
+        </div>
+        
+    </div>
+    </div>
+    </div>
+</div>
+
+<!-- MODAL Start -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Book Event</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form [formGroup]="bookEvent" (ngSubmit)="onSubmit(bookEvent)">
+            <div class="modal-body">
+                
+                    <div class="row">
+                        <span class="col-md-6">
+                            <div class="form-group">
+
+                                <label><b>Event Name: </b></label>
+                                <input type="text" formControlName="EventName" class="form-control" readonly>
+
+                            </div>
+                        </span>
+                        <span class="col-md-6">
+                            <div class="form-group">
+                                <label><b>No of Tickets: </b></label>
+                                <input type="text" formControlName="Tickets" (keyup)="onKeyUpTicket($event.target.value)" class="form-control" required>
+                                <div *ngIf="f.Tickets.invalid && (f.Tickets.dirty || f.Tickets.touched)">
+                                    <p *ngIf="f.Tickets.errors.required" class="text-danger">
+                                        No of Tickets required
+                                    </p>
+                                </div>
+                            </div>
+                        </span>
+                    </div>
+
+                    <div class="row">
+                        <span class="col-md-6">
+                            <div class="form-group">
+
+                                <label><b>Price: </b></label>
+                                <input type="text" formControlName="Price" class="form-control" readonly>
+
+                            </div>
+                        </span>
+                        <span class="col-md-6">
+                            <div class="form-group">
+                                <label>Total Amount</label>
+                                <input type="text" class="form-control" formControlName="total"
+                                    placeholder="0" readonly required />
+
+                                
+                            </div>  
+                        </span>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success">Submit</button>
+                    </div>
+                
+            </div>
+        </form>
+        </div>
+    </div>
+</div>
+<!-- End MODAL -->
